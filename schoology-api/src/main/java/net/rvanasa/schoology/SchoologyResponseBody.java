@@ -8,6 +8,6 @@ public interface SchoologyResponseBody
 	
 	default SchoologyNode parse()
 	{
-		return getContentType().getParser().parse(getRawData());
+		return getContentType().getParser().parseNode(getRawData());
 	}
 }

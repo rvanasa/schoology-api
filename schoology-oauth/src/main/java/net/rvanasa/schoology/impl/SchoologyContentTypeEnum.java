@@ -2,11 +2,11 @@ package net.rvanasa.schoology.impl;
 
 import net.rvanasa.schoology.SchoologyContentType;
 import net.rvanasa.schoology.SchoologyNodeParser;
-import net.rvanasa.schoology.impl.json.JsonSchoologyNodeParser;
+import net.rvanasa.schoology.impl.json.JsonSchoologyResponseHandler;
 
 public enum SchoologyContentTypeEnum implements SchoologyContentType
 {
-	JSON("application/json", "JSON", new JsonSchoologyNodeParser()),
+	JSON("application/json", "JSON", JsonSchoologyResponseHandler.DEFAULT),
 	XML("text/xml", "XML", null);
 	
 	private final String id;

@@ -3,30 +3,35 @@ package net.rvanasa.schoology.impl;
 import org.scribe.builder.api.DefaultApi10a;
 import org.scribe.model.Token;
 
-public class OauthSchoologyApi extends DefaultApi10a
+public class OAuthSchoologyApi extends DefaultApi10a
 {
-	private final String domain;
+	private final OAuthResourceLocator resourceLocator;
 	
-	public OauthSchoologyApi(String domain)
+	public OAuthSchoologyApi(OAuthResourceLocator resourceLocator)
 	{
-		this.domain = domain;
+		this.resourceLocator = resourceLocator;
+	}
+	
+	public OAuthResourceLocator getResourceLocator()
+	{
+		return resourceLocator;
 	}
 	
 	@Override
 	public String getRequestTokenEndpoint()
 	{
-		return "https://api.schoology.com/v1/oauth/request_token";
+		return getResourceLocator().getRequestUrl("oauth/request_token");
 	}
 	
 	@Override
 	public String getAccessTokenEndpoint()
 	{
-		return "https://api.schoology.com/v1/oauth/access_token";
+		return getResourceLocator().getRequestUrl("oauth/access_token");
 	}
 	
 	@Override
 	public String getAuthorizationUrl(Token token)
 	{
-		return "https://" + domain + ".schoology.com/oauth/authorize";
+		return getResourceLocator().getRequestUrl("oauth/authorize");
 	}
 }

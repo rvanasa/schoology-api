@@ -1,6 +1,6 @@
 package net.rvanasa.schoology;
 
-public interface SchoologyAccess
+public interface SchoologyRequestHandler
 {
 	public SchoologyResponse get(String resource);
 	

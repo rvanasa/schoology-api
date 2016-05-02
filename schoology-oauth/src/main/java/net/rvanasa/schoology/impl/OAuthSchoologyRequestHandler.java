@@ -8,42 +8,42 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
-import net.rvanasa.schoology.SchoologyAccess;
 import net.rvanasa.schoology.SchoologyContentType;
+import net.rvanasa.schoology.SchoologyRequestHandler;
 import net.rvanasa.schoology.SchoologyResponse;
 
-public class OAuthSchoologyAccess implements SchoologyAccess
+public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 {
-	private final String key;
-	private final String secret;
-	
-	private String resourceURL = "https://api.schoology.com/v1/";
-	
-	private SchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
-	
-	private final OAuthService service;
-	
-	public OAuthSchoologyAccess(String domain, String key, String secret)
+	public static OAuthService createService(OAuthResourceLocator locator, String key, String secret)
 	{
-		this.key = key;
-		this.secret = secret;
-		
-		this.service = new ServiceBuilder()
-				.provider(new OauthSchoologyApi(domain))
-				.apiKey(getClientKey())
-				.apiSecret(getClientSecret())
+		return new ServiceBuilder()
+				.provider(new OAuthSchoologyApi(locator))
+				.apiKey(key)
+				.apiSecret(secret)
 				.signatureType(SignatureType.Header)
 				.build();
 	}
 	
-	public String getClientKey()
+	private final OAuthResourceLocator resourceLocator;
+	
+	private final OAuthService service;
+	
+	private SchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
+	
+	public OAuthSchoologyRequestHandler(OAuthResourceLocator locator, String key, String secret)
 	{
-		return key;
+		this(locator, createService(locator, key, secret));
 	}
 	
-	public String getClientSecret()
+	public OAuthSchoologyRequestHandler(OAuthResourceLocator locator, OAuthService service)
 	{
-		return secret;
+		this.resourceLocator = locator;
+		this.service = service;
+	}
+	
+	public OAuthResourceLocator getResourceLocator()
+	{
+		return resourceLocator;
 	}
 	
 	public OAuthService getOAuthService()
@@ -51,31 +51,19 @@ public class OAuthSchoologyAccess implements SchoologyAccess
 		return service;
 	}
 	
-	public String getResourceURL()
-	{
-		return resourceURL;
-	}
-	
-	public OAuthSchoologyAccess setResourceURL(String resourceURL)
-	{
-		this.resourceURL = resourceURL;
-		return this;
-	}
-	
 	public SchoologyContentType getContentType()
 	{
 		return contentType;
 	}
 	
-	public OAuthSchoologyAccess setContentType(SchoologyContentType contentType)
+	public void setContentType(SchoologyContentType contentType)
 	{
 		this.contentType = contentType;
-		return this;
 	}
 	
 	public OAuthRequest prepareRequest(Verb verb, String resource)
 	{
-		OAuthRequest request = new OAuthRequest(Verb.GET, getResourceURL() + resource);
+		OAuthRequest request = new OAuthRequest(Verb.GET, getResourceLocator().getRequestUrl(resource));
 		getOAuthService().signRequest(Token.empty(), request);
 		request.addHeader("Accept", getContentType().getID());
 		
@@ -101,7 +89,7 @@ public class OAuthSchoologyAccess implements SchoologyAccess
 	@Override
 	public SchoologyResponse multiget(String... resources)
 	{
-		String payload = "<?xml version='1.0' encoding='utf-8' ?><requests>";
+		String payload = "<?xml version='1.0' encoding='utf-8'?><requests>";
 		for(String resource : resources)
 		{
 			payload += "<request>/v1/" + resource + "</request>";
