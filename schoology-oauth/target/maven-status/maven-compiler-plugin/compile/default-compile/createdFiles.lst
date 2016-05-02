@@ -1,0 +1,10 @@
+net\rvanasa\schoology\impl\json\JsonSchoologyNodeParser.class
+net\rvanasa\schoology\impl\OAuthSchoologyAccess.class
+net\rvanasa\schoology\impl\BasicSchoologyResponse.class
+net\rvanasa\schoology\impl\BasicSchoologyResponseBody.class
+net\rvanasa\schoology\impl\BasicSchoologyResponseStatus.class
+net\rvanasa\schoology\impl\OauthSchoologyApi.class
+net\rvanasa\schoology\impl\json\JsonSchoologyNode.class
+net\rvanasa\schoology\impl\SchoologyResponseStatusEnum.class
+net\rvanasa\schoology\exception\SchoologyException.class
+net\rvanasa\schoology\impl\SchoologyContentTypeEnum.class
