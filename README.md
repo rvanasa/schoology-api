@@ -21,4 +21,4 @@ System.out.println(json);
 
 You can generate and API key and secret by going to '[DISTRICT_PREFIX].schoology.com/api'
 
-By the way, this is way more straightforward than Schoology's official PHP SDK and only supports two-legged OAuth. If you need any additional features, feel free to send me an email. 
+By the way, this is way more straightforward than Schoology's official PHP SDK and only supports two-legged OAuth. If you need any additional features, feel free to send me an email with some info regarding your potential use case. 
