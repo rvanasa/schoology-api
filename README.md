@@ -11,7 +11,6 @@ Example usage:
 
 SchoologyRequestHandler schoology = new OAuthSchoologyRequestHandler(new BasicOAuthResourceLocator(DISTRICT_PREFIX), API_KEY, API_SECRET);
 
-
 SchoologyResponseBody response = schoology.get("sections/123456789").requireSuccess().getBody();
 
 System.out.println(response.getRawData()); // JSON string
