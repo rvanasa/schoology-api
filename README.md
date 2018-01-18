@@ -27,7 +27,7 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 #### 2-Legged Auth:
 
-You can generate a two-legged API key and secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
+You can generate a two-legged API key/secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
 
 ```java
 
