@@ -46,6 +46,6 @@ System.out.println(node.get("JSON_KEY").get(1).asString()); // index 1 of some J
 
 ```
 
-You can generate and API key and secret by going to https://{DISTRICT_PREFIX}.schoology.com/api'
+You can generate and API key and secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
 
 I have been making gradual improvements as people continue to use this API. If you need any additional features, feel free to send me an email with some info regarding your potential use case. 
