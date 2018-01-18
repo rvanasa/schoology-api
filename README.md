@@ -11,7 +11,7 @@ Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](htt
 
 ```java
 
-SchoologyFlow flow = new OAuthSchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK);
+SchoologyFlow flow = new OAuthSchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK_URL);
 
 SchoologyToken token = flow.createRequestToken();
 
