@@ -11,7 +11,7 @@ Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](htt
 
 ```java
 
-SchoologyFlow flow = new OAuthSchoologyFlow(DISTRICT, KEY, SECRET, CALLBACK);
+SchoologyFlow flow = new OAuthSchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK);
 
 SchoologyToken token = flow.createRequestToken();
 
@@ -29,7 +29,7 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 ```java
 
-SchoologyRequestHandler schoology = new OAuthSchoologyRequestHandler(new BasicOAuthResourceLocator(DISTRICT_PREFIX), API_KEY, API_SECRET);
+SchoologyRequestHandler schoology = new OAuthSchoologyRequestHandler(DISTRICT_PREFIX, API_KEY, API_SECRET);
 
 ```
 
@@ -46,6 +46,6 @@ System.out.println(node.get("JSON_KEY").get(1).asString()); // index 1 of some J
 
 ```
 
-You can generate and API key and secret by going to https://'[DISTRICT_PREFIX].schoology.com/api'
+You can generate and API key and secret by going to https://'{DISTRICT_PREFIX}.schoology.com/api'
 
-By the way, this is way more straightforward than Schoology's official PHP SDK and only supports two-legged OAuth. If you need any additional features, feel free to send me an email with some info regarding your potential use case. 
+I have been making gradual improvements as people continue to use this API. If you need any additional features, feel free to send me an email with some info regarding your potential use case. 
