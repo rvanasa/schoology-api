@@ -1,7 +1,7 @@
 # schoology-api
 Java API and implementation for Schoology (https://schoology.com)
 
-Behold, a straightforward 2- and 3-legged wrapper for the Schoology REST API. 
+Behold, a straightforward two- and three-legged authentication wrapper for the Schoology REST API. 
 
 Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](https://github.com/scribejava/scribejava)) implementation. 
  
