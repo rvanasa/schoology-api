@@ -17,7 +17,7 @@ SchoologyToken token = flow.createRequestToken();
 
 String authUrl = token.getAuthorizationUrl();
 
-// Redirect client...
+// redirect client...
 
 String verifier = "[Response from callback URL]";
 
