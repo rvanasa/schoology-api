@@ -12,7 +12,7 @@ import net.rvanasa.schoology.SchoologyContentType;
 import net.rvanasa.schoology.SchoologyRequestHandler;
 import net.rvanasa.schoology.SchoologyResponse;
 
-public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
+public class OAuthSchoologyFlow implements SchoologyRequestHandler
 {
 	public static OAuthService createService(OAuthResourceLocator locator, String key, String secret)
 	{
@@ -30,12 +30,12 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	
 	private SchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
 	
-	public OAuthSchoologyRequestHandler(OAuthResourceLocator locator, String key, String secret)
+	public OAuthSchoologyFlow(OAuthResourceLocator locator, String key, String secret)
 	{
 		this(locator, createService(locator, key, secret));
 	}
 	
-	public OAuthSchoologyRequestHandler(OAuthResourceLocator locator, OAuthService service)
+	public OAuthSchoologyFlow(OAuthResourceLocator locator, OAuthService service)
 	{
 		this.resourceLocator = locator;
 		this.service = service;
@@ -63,7 +63,7 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	
 	public OAuthRequest prepareRequest(Verb verb, String resource)
 	{
-		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(resource));
+		OAuthRequest request = new OAuthRequest(Verb.GET, getResourceLocator().getRequestUrl(resource));
 		getOAuthService().signRequest(Token.empty(), request);
 		request.addHeader("Accept", getContentType().getID());
 		

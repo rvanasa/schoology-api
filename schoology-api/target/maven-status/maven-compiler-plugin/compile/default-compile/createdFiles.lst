@@ -1,6 +1,10 @@
+net\rvanasa\schoology\SchoologyRequestHandler.class
+META-INF\maven\net.rvanasa\schoology-api\pom.xml
+META-INF\MANIFEST.MF
 net\rvanasa\schoology\SchoologyRealm.class
 net\rvanasa\schoology\SchoologyContentType.class
-net\rvanasa\schoology\SchoologyAccess.class
+META-INF\maven\net.rvanasa\schoology-api\pom.properties
+net\rvanasa\schoology\SchoologyResponseHandler.class
 net\rvanasa\schoology\SchoologyNodeParser.class
 net\rvanasa\schoology\SchoologyResponse.class
 net\rvanasa\schoology\SchoologyResponseBody.class
