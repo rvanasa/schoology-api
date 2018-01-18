@@ -14,7 +14,7 @@ import net.rvanasa.schoology.SchoologyResponse;
 
 public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 {
-	public static OAuthService createService(OAuthResourceLocator locator, String key, String secret)
+	public static OAuthService createService(SchoologyResourceLocator locator, String key, String secret)
 	{
 		return new ServiceBuilder()
 				.provider(new OAuthSchoologyApi(locator))
@@ -24,24 +24,31 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 				.build();
 	}
 	
-	private final OAuthResourceLocator resourceLocator;
+	private final SchoologyResourceLocator resourceLocator;
 	
 	private final OAuthService service;
 	
 	private SchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
 	
-	public OAuthSchoologyRequestHandler(OAuthResourceLocator locator, String key, String secret)
+	private Token accessToken;
+	
+	public OAuthSchoologyRequestHandler(SchoologyResourceLocator locator, String key, String secret)
 	{
 		this(locator, createService(locator, key, secret));
 	}
 	
-	public OAuthSchoologyRequestHandler(OAuthResourceLocator locator, OAuthService service)
+	public OAuthSchoologyRequestHandler(String domain, String key, String secret)
+	{
+		this(new SchoologyResourceLocator(domain), key, secret);
+	}
+	
+	public OAuthSchoologyRequestHandler(SchoologyResourceLocator locator, OAuthService service)
 	{
 		this.resourceLocator = locator;
 		this.service = service;
 	}
 	
-	public OAuthResourceLocator getResourceLocator()
+	public SchoologyResourceLocator getResourceLocator()
 	{
 		return resourceLocator;
 	}
@@ -61,12 +68,21 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		this.contentType = contentType;
 	}
 	
+	public Token getAccessToken()
+	{
+		return accessToken;
+	}
+	
+	public void setAccessToken(Token accessToken)
+	{
+		this.accessToken = accessToken;
+	}
+	
 	public OAuthRequest prepareRequest(Verb verb, String resource)
 	{
 		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(resource));
-		getOAuthService().signRequest(Token.empty(), request);
+		getOAuthService().signRequest(getAccessToken() != null ? getAccessToken() : Token.empty(), request);
 		request.addHeader("Accept", getContentType().getID());
-		
 		return request;
 	}
 	

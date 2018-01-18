@@ -1,8 +1,18 @@
 package net.rvanasa.schoology.impl;
 
-public abstract class OAuthResourceLocator
+public class SchoologyResourceLocator
 {
-	public abstract String getDomain();
+	private final String domain;
+	
+	public SchoologyResourceLocator(String domain)
+	{
+		this.domain = domain;
+	}
+	
+	public String getDomain()
+	{
+		return domain;
+	}
 	
 	public String getRequestUrlBase()
 	{
