@@ -8,5 +8,7 @@ public interface SchoologyRequestHandler
 	
 	public SchoologyResponse post(String resource, String body);
 	
+	public SchoologyResponse put(String resource, String body);
+	
 	public SchoologyResponse options(String resource);
 }

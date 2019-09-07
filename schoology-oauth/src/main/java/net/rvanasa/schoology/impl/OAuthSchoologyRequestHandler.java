@@ -133,6 +133,17 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	@Override
+	public SchoologyResponse put(String resource, String body)
+	{
+		OAuthRequest request = prepareRequest(Verb.PUT, resource);
+		request.addPayload(body);
+		
+		Response response = request.send();
+		
+		return prepareResponse(response);
+	}
+	
+	@Override
 	public SchoologyResponse options(String resource)
 	{
 		OAuthRequest request = prepareRequest(Verb.OPTIONS, resource);
