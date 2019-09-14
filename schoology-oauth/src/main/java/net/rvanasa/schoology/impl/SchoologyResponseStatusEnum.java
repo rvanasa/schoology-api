@@ -4,7 +4,10 @@ import net.rvanasa.schoology.SchoologyResponseStatus;
 
 public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 {
-	SUCCESS(200, "OK"),
+	SUCCESS_OK(200, "OK"),
+	SUCCESS_CREATED(201, "Create"),
+	SUCCESS_NO_CONTENT(204, "No content"),
+	
 	PERMISSION(403, "Insufficient permission level"),
 	NOT_FOUND(404, "Resource not found");
 	
@@ -32,7 +35,7 @@ public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 	@Override
 	public boolean isSuccess()
 	{
-		return this == SUCCESS;
+		return this.name().startsWith("SUCCESS");
 	}
 	
 	public static SchoologyResponseStatus getStatus(int code)
