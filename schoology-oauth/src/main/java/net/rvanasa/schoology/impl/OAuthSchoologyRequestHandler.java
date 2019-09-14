@@ -83,6 +83,7 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(resource));
 		getOAuthService().signRequest(getAccessToken() != null ? getAccessToken() : Token.empty(), request);
 		request.addHeader("Accept", getContentType().getID());
+		request.addHeader("Content-Type", getContentType().getID());
 		return request;
 	}
 	
