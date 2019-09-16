@@ -145,6 +145,16 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	@Override
+	public SchoologyResponse delete(String resource)
+	{
+		OAuthRequest request = prepareRequest(Verb.DELETE, resource);
+		
+		Response response = request.send();
+		
+		return prepareResponse(response);
+	}
+	
+	@Override
 	public SchoologyResponse options(String resource)
 	{
 		OAuthRequest request = prepareRequest(Verb.OPTIONS, resource);
