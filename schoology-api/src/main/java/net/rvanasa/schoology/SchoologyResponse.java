@@ -6,5 +6,7 @@ public interface SchoologyResponse
 	
 	public SchoologyResponseBody getBody();
 	
+	public SchoologyResponseHeaders getHeaders();
+	
 	public SchoologyResponse requireSuccess();
 }

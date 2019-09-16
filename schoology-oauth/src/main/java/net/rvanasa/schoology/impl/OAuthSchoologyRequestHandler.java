@@ -91,7 +91,8 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	{
 		return new BasicSchoologyResponse(
 				SchoologyResponseStatusEnum.getStatus(response.getCode()),
-				new BasicSchoologyResponseBody(getContentType(), response.getBody()));
+				new BasicSchoologyResponseBody(getContentType(), response.getBody()),
+				new BasicSchoologyResponseHeaders(response.getHeaders()));
 	}
 	
 	@Override
@@ -138,6 +139,16 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	{
 		OAuthRequest request = prepareRequest(Verb.PUT, resource);
 		request.addPayload(body);
+		
+		Response response = request.send();
+		
+		return prepareResponse(response);
+	}
+	
+	@Override
+	public SchoologyResponse delete(String resource)
+	{
+		OAuthRequest request = prepareRequest(Verb.DELETE, resource);
 		
 		Response response = request.send();
 		

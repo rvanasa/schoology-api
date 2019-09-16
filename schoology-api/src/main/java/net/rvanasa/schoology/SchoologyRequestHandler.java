@@ -10,5 +10,7 @@ public interface SchoologyRequestHandler
 	
 	public SchoologyResponse put(String resource, String body);
 	
+	public SchoologyResponse delete(String resource);
+	
 	public SchoologyResponse options(String resource);
 }
