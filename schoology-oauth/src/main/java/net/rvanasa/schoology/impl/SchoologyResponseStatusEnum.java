@@ -8,8 +8,10 @@ public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 	SUCCESS_CREATED(201, "Create"),
 	SUCCESS_NO_CONTENT(204, "No content"),
 	
+	UNAUTHORIZED(401, "Unauthorized"),
 	PERMISSION(403, "Insufficient permission level"),
-	NOT_FOUND(404, "Resource not found");
+	NOT_FOUND(404, "Resource not found"),
+	NOT_ALLOWED(405, "Method not allowed");
 	
 	private final int code;
 	private final String message;
