@@ -8,9 +8,19 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import net.rvanasa.schoology.SchoologyContentType;
 import net.rvanasa.schoology.SchoologyRequestHandler;
 import net.rvanasa.schoology.SchoologyResponse;
+import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
+import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
+import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
+import net.rvanasa.schoology.realms.courses.SchoologyCourseSubjectAreaEnum;
+import net.rvanasa.schoology.realms.courses.SchoologyGradeRangeEnum;
+import net.rvanasa.schoology.realms.groups.SchoologyGroup;
+import net.rvanasa.schoology.realms.users.SchoologyUser;
 
 public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 {
@@ -27,6 +37,8 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	private final SchoologyResourceLocator resourceLocator;
 	
 	private final OAuthService service;
+	
+	private Gson gson;
 	
 	private SchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
 	
@@ -46,6 +58,12 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	{
 		this.resourceLocator = locator;
 		this.service = service;
+		
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter());
+		builder.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter());
+		builder.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter());
+		gson = builder.create();
 	}
 	
 	public SchoologyResourceLocator getResourceLocator()
@@ -163,4 +181,26 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		
 		return prepareResponse(response);
 	}
+	
+	//TODO: relocate
+	public SchoologyUser getUser(String id) {
+		SchoologyResponse response = get("users/" + id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyUser.class);
+	}
+	
+	//TODO: relocate
+	public SchoologyGroup[] getGroups() {
+		SchoologyResponse response = get("groups").requireSuccess();
+				
+		return gson.fromJson(response.getBody().parse().get("group").asRawData(), SchoologyGroup[].class);
+	}
+		
+	//TODO: relocate
+	public SchoologyGroup getGroup(String id) {
+		SchoologyResponse response = get("groups/" + id).requireSuccess();
+			
+		return gson.fromJson(response.getBody().getRawData(), SchoologyGroup.class);
+	}
+	
 }
