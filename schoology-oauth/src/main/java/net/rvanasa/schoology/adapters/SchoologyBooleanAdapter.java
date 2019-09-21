@@ -7,7 +7,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-public class SchoologyBooleanAdapter implements JsonDeserializer<Boolean>{
+public class SchoologyBooleanAdapter implements JsonDeserializer<Boolean>
+{
 
 	@Override
 	public Boolean deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) 

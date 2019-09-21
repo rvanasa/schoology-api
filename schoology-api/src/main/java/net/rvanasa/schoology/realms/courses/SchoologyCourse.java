@@ -3,7 +3,8 @@ package net.rvanasa.schoology.realms.courses;
 import lombok.Getter;
 
 @Getter
-public class SchoologyCourse {
+public class SchoologyCourse
+{
 	
 	String id;
 	String building_id;

@@ -3,7 +3,8 @@ package net.rvanasa.schoology.realms.groups;
 import lombok.Getter;
 
 @Getter
-public class SchoologyGroup {
+public class SchoologyGroup
+{
 	
 	String id;
 	String title;
@@ -21,7 +22,8 @@ public class SchoologyGroup {
 }
 
 @Getter
-class SchoologyGroupOptions{
+class SchoologyGroupOptions
+{
 	
 	boolean invite_type;
 	boolean member_post;

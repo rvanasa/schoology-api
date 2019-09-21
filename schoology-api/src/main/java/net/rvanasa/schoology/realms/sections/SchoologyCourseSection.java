@@ -3,7 +3,8 @@ package net.rvanasa.schoology.realms.sections;
 import lombok.Getter;
 
 @Getter
-public class SchoologyCourseSection {
+public class SchoologyCourseSection
+{
 	
 	String id;
 	String course_title;
@@ -35,7 +36,8 @@ public class SchoologyCourseSection {
 }
 
 @Getter
-class SchoologyCourseSectionOptions{
+class SchoologyCourseSectionOptions
+{
 	
 	boolean weighted_grading_categories;
 	boolean upload_documents;

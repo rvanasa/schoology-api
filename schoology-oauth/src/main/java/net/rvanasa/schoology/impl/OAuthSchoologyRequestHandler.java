@@ -16,10 +16,16 @@ import net.rvanasa.schoology.SchoologyRequestHandler;
 import net.rvanasa.schoology.SchoologyResponse;
 import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
 import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
+import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
+import net.rvanasa.schoology.realms.courses.SchoologyCourse;
 import net.rvanasa.schoology.realms.courses.SchoologyCourseSubjectAreaEnum;
 import net.rvanasa.schoology.realms.courses.SchoologyGradeRangeEnum;
 import net.rvanasa.schoology.realms.groups.SchoologyGroup;
+import net.rvanasa.schoology.realms.schools.SchoologySchool;
+import net.rvanasa.schoology.realms.schools.buildings.SchoologyBuilding;
+import net.rvanasa.schoology.realms.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.realms.users.SchoologyGenderEnum;
 import net.rvanasa.schoology.realms.users.SchoologyUser;
 
 public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
@@ -59,10 +65,12 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		this.resourceLocator = locator;
 		this.service = service;
 		
+		//TODO: Reflection to auto register all classes from adapter package
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter());
 		builder.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter());
 		builder.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter());
+		builder.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter());
 		gson = builder.create();
 	}
 	
@@ -182,25 +190,93 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		return prepareResponse(response);
 	}
 	
-	//TODO: relocate
-	public SchoologyUser getUser(String id) {
-		SchoologyResponse response = get("users/" + id).requireSuccess();
+	/*
+	 * Java object implementations
+	 */
+	@Override
+	public SchoologyUser[] getUsers()
+	{
+		//TODO:
+		return null;
+	}
+	
+	@Override
+	public SchoologyUser getUser(String uid)
+	{
+		SchoologyResponse response = get("users/" + uid).requireSuccess();
 		
 		return gson.fromJson(response.getBody().getRawData(), SchoologyUser.class);
 	}
 	
-	//TODO: relocate
-	public SchoologyGroup[] getGroups() {
+	@Override
+	public SchoologyGroup[] getGroups()
+	{
 		SchoologyResponse response = get("groups").requireSuccess();
-				
+		
 		return gson.fromJson(response.getBody().parse().get("group").asRawData(), SchoologyGroup[].class);
 	}
-		
-	//TODO: relocate
-	public SchoologyGroup getGroup(String id) {
-		SchoologyResponse response = get("groups/" + id).requireSuccess();
 			
+	@Override
+	public SchoologyGroup getGroup(String group_id)
+	{
+		SchoologyResponse response = get("groups/" + group_id).requireSuccess();
+		
 		return gson.fromJson(response.getBody().getRawData(), SchoologyGroup.class);
+	}
+	
+	@Override
+	public SchoologyCourse[] getCourses()
+	{
+		SchoologyResponse response = get("courses").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("course").asRawData(), SchoologyCourse[].class);
+	}
+	
+	@Override
+	public SchoologyCourse getCourse(String course_id)
+	{
+		SchoologyResponse response = get("courses/" + course_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCourse.class);
+	}
+	
+	@Override
+	public SchoologyCourseSection[] getCourseSections(String course_id)
+	{
+		//TODO:
+		return null;
+	}
+	
+	@Override
+	public SchoologyCourseSection getCourseSection(String section_id)
+	{
+		SchoologyResponse response = get("sections/" + section_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCourseSection.class);
+	}
+	
+	@Override
+	public SchoologySchool[] getSchools()
+	{
+		SchoologyResponse response = get("schools").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("school").asRawData(), SchoologySchool[].class);
+	}
+	
+	@Override
+	public SchoologySchool getSchool(String school_id)
+	{
+		SchoologyResponse response = get("schools/" + school_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologySchool.class);
+	}
+	
+	@Override
+	public SchoologyBuilding[] getBuildings(String school_id)
+	{
+		SchoologyResponse response = get("schools/" + school_id + "/buildings").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("building").asRawData(), SchoologyBuilding[].class);
 	}
 	
 }

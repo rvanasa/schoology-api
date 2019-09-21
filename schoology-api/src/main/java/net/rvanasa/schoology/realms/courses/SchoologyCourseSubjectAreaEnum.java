@@ -2,7 +2,8 @@ package net.rvanasa.schoology.realms.courses;
 
 import lombok.Getter;
 
-public enum SchoologyCourseSubjectAreaEnum {
+public enum SchoologyCourseSubjectAreaEnum
+{
 	
 	OTHER(0, "Other"),
 	HEALTH_AND_PHYSICAL_EDU(1, "Health & Physical Education"),
@@ -20,12 +21,14 @@ public enum SchoologyCourseSubjectAreaEnum {
 	@Getter
 	private final String subjectArea;
 	
-	private SchoologyCourseSubjectAreaEnum(int apiValue, String subjectArea) {
+	private SchoologyCourseSubjectAreaEnum(int apiValue, String subjectArea)
+	{
 		this.apiVaule = apiValue;
 		this.subjectArea = subjectArea;
 	}
 	
-	public static SchoologyCourseSubjectAreaEnum getSubjectArea(int apiValue) {
+	public static SchoologyCourseSubjectAreaEnum getSubjectArea(int apiValue)
+	{
 		for(SchoologyCourseSubjectAreaEnum status : values()) if(status.getApiVaule() == apiValue) return status;
 		
 		return null;

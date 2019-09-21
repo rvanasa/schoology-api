@@ -2,7 +2,8 @@ package net.rvanasa.schoology.realms.courses;
 
 import lombok.Getter;
 
-public enum SchoologyGradeRangeEnum {
+public enum SchoologyGradeRangeEnum
+{
 	
 	NONE(0, "No grade level/remove grade level"),
 	PRE_K(1, "Pre-K"),
@@ -26,12 +27,14 @@ public enum SchoologyGradeRangeEnum {
 	@Getter
 	private final String gradeLevel;
 	
-	private SchoologyGradeRangeEnum(int apiValue, String subjectArea) {
+	private SchoologyGradeRangeEnum(int apiValue, String subjectArea)
+	{
 		this.apiVaule = apiValue;
 		this.gradeLevel = subjectArea;
 	}
 	
-	public static SchoologyGradeRangeEnum getGradeLevel(int apiValue) {
+	public static SchoologyGradeRangeEnum getGradeLevel(int apiValue)
+	{
 		for(SchoologyGradeRangeEnum status : values()) if(status.getApiVaule() == apiValue) return status;
 		
 		return null;

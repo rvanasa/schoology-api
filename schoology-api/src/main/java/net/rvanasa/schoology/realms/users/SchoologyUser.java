@@ -3,7 +3,8 @@ package net.rvanasa.schoology.realms.users;
 import lombok.Getter;
 
 @Getter
-public class SchoologyUser {
+public class SchoologyUser
+{
 	
 	//Same as uid
 	String id;
@@ -22,8 +23,7 @@ public class SchoologyUser {
 	String username;
 	String primary_email;
 	String position;
-	//M or F
-	String gender;
+	SchoologyGenderEnum gender;
 	int grad_year;
 	String birthday_date;
 	String password;
@@ -53,7 +53,8 @@ public class SchoologyUser {
 }
 
 @Getter
-class SchoologyProfileInfo{
+class SchoologyProfileInfo
+{
 	
 	//Teacher only
 	String subjects_taught;
@@ -71,4 +72,10 @@ class SchoologyProfileInfo{
 	String birthday_date;
 	String birthday;
 	
+}
+
+@Getter
+class SchoologyPermissions
+{
+	//TODO:
 }
