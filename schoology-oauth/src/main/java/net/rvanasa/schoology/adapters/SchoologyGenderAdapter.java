@@ -7,7 +7,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-import net.rvanasa.schoology.realms.users.SchoologyGenderEnum;
+import net.rvanasa.schoology.obj.users.SchoologyGenderEnum;
 
 public class SchoologyGenderAdapter implements JsonDeserializer<SchoologyGenderEnum>
 {

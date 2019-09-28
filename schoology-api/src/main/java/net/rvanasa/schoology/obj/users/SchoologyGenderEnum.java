@@ -1,4 +1,4 @@
-package net.rvanasa.schoology.realms.users;
+package net.rvanasa.schoology.obj.users;
 
 import lombok.Getter;
 

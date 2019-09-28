@@ -1,7 +1,10 @@
-package net.rvanasa.schoology.realms.groups;
+package net.rvanasa.schoology.obj.groups;
 
 import lombok.Getter;
 
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/group
+ */
 @Getter
 public class SchoologyGroup
 {

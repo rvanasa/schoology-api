@@ -1,7 +1,10 @@
-package net.rvanasa.schoology.realms.courses;
+package net.rvanasa.schoology.obj.courses;
 
 import lombok.Getter;
 
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/course#Grade-Range
+ */
 public enum SchoologyGradeRangeEnum
 {
 	

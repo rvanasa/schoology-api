@@ -7,7 +7,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-import net.rvanasa.schoology.realms.courses.SchoologyCourseSubjectAreaEnum;
+import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
 
 public class SchoologyCourseSubjectAreaAdapter implements JsonDeserializer<SchoologyCourseSubjectAreaEnum>
 {

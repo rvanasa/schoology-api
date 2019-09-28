@@ -1,7 +1,11 @@
-package net.rvanasa.schoology.realms.schools;
+package net.rvanasa.schoology.obj.schools;
 
 import lombok.Getter;
 
+/*
+ * As per API documentation, buildings and schools have the same fields:
+ * https://developers.schoology.com/api-documentation/rest-api-v1/building 
+ */
 @Getter
 public abstract class SchoologyInstitution
 {

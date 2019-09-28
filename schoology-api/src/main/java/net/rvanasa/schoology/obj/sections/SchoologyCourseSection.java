@@ -1,7 +1,10 @@
-package net.rvanasa.schoology.realms.sections;
+package net.rvanasa.schoology.obj.sections;
 
 import lombok.Getter;
 
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/course-section
+ */
 @Getter
 public class SchoologyCourseSection
 {

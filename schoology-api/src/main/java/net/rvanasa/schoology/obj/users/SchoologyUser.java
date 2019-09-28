@@ -1,7 +1,10 @@
-package net.rvanasa.schoology.realms.users;
+package net.rvanasa.schoology.obj.users;
 
 import lombok.Getter;
 
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/user
+ */
 @Getter
 public class SchoologyUser
 {

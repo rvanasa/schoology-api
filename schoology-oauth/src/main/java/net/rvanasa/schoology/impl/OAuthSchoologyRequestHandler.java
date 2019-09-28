@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.impl;
 
+import java.util.Date;
+
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
@@ -18,15 +20,16 @@ import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
 import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
-import net.rvanasa.schoology.realms.courses.SchoologyCourse;
-import net.rvanasa.schoology.realms.courses.SchoologyCourseSubjectAreaEnum;
-import net.rvanasa.schoology.realms.courses.SchoologyGradeRangeEnum;
-import net.rvanasa.schoology.realms.groups.SchoologyGroup;
-import net.rvanasa.schoology.realms.schools.SchoologySchool;
-import net.rvanasa.schoology.realms.schools.buildings.SchoologyBuilding;
-import net.rvanasa.schoology.realms.sections.SchoologyCourseSection;
-import net.rvanasa.schoology.realms.users.SchoologyGenderEnum;
-import net.rvanasa.schoology.realms.users.SchoologyUser;
+import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
+import net.rvanasa.schoology.obj.courses.SchoologyCourse;
+import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
+import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
+import net.rvanasa.schoology.obj.groups.SchoologyGroup;
+import net.rvanasa.schoology.obj.schools.SchoologySchool;
+import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
+import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.users.SchoologyGenderEnum;
+import net.rvanasa.schoology.obj.users.SchoologyUser;
 
 public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 {
@@ -65,12 +68,13 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		this.resourceLocator = locator;
 		this.service = service;
 		
-		//TODO: Reflection to auto register all classes from adapter package
+		//TODO: Reflection to auto register all classes from adapter package?
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter());
 		builder.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter());
 		builder.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter());
 		builder.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter());
+		builder.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter());
 		gson = builder.create();
 	}
 	

@@ -1,11 +1,11 @@
 package net.rvanasa.schoology;
 
-import net.rvanasa.schoology.realms.courses.SchoologyCourse;
-import net.rvanasa.schoology.realms.groups.SchoologyGroup;
-import net.rvanasa.schoology.realms.schools.SchoologySchool;
-import net.rvanasa.schoology.realms.schools.buildings.SchoologyBuilding;
-import net.rvanasa.schoology.realms.sections.SchoologyCourseSection;
-import net.rvanasa.schoology.realms.users.SchoologyUser;
+import net.rvanasa.schoology.obj.courses.SchoologyCourse;
+import net.rvanasa.schoology.obj.groups.SchoologyGroup;
+import net.rvanasa.schoology.obj.schools.SchoologySchool;
+import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
+import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.users.SchoologyUser;
 
 public interface SchoologyRequestHandler
 {
