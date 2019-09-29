@@ -1,4 +1,4 @@
-package net.rvanasa.schoology.obj;
+package net.rvanasa.schoology.obj.attachments;
 
 import lombok.Getter;
 

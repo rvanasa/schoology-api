@@ -1,6 +1,7 @@
 package net.rvanasa.schoology;
 
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
+import net.rvanasa.schoology.obj.events.SchoologyEvent;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
@@ -51,5 +52,17 @@ public interface SchoologyRequestHandler
 	public SchoologyUpdate[] getRecentUpdates();
 	
 	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update);
-
+	
+	public SchoologyEvent[] getEvents(String realm); 
+			
+	public SchoologyEvent[] getDistrictEvents(String district_id);
+	
+	public SchoologyEvent[] getSchoolEvent(String school_id);
+	
+	public SchoologyEvent[] getUserEvents(String user_id);
+	
+	public SchoologyEvent[] getSectionEvents(String section_id);
+	
+	public SchoologyEvent[] getGroupEvents(String group_id);
+	
 }

@@ -22,8 +22,10 @@ import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
 import net.rvanasa.schoology.adapters.SchoologyConvertedStatusAdapter;
 import net.rvanasa.schoology.adapters.SchoologyConvertedTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
+import net.rvanasa.schoology.adapters.SchoologyEventTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyRSVPTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyRealmEnumAdapter;
 import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachmentTypeEnum;
@@ -32,6 +34,9 @@ import net.rvanasa.schoology.obj.attachments.SchoologyConvertedTypeEnum;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
 import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
 import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
+import net.rvanasa.schoology.obj.events.SchoologyEvent;
+import net.rvanasa.schoology.obj.events.SchoologyEventType;
+import net.rvanasa.schoology.obj.events.SchoologyRSVPType;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
@@ -79,17 +84,19 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		this.service = service;
 		
 		//TODO: Reflection to auto register all classes from adapter package?
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter());
-		builder.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter());
-		builder.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter());
-		builder.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter());
-		builder.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter());
-		builder.registerTypeAdapter(SchoologyConvertedTypeEnum.class, new SchoologyConvertedTypeAdapter());
-		builder.registerTypeAdapter(SchoologyConvertedStatusEnum.class, new SchoologyConvertedStatusAdapter());
-		builder.registerTypeAdapter(SchoologyAttachmentTypeEnum.class, new SchoologyAttachmentTypeAdapter());
-		builder.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter());
-		gson = builder.create();
+		gson = new GsonBuilder()
+		.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter())
+		.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter())
+		.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter())
+		.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter())
+		.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter())
+		.registerTypeAdapter(SchoologyConvertedTypeEnum.class, new SchoologyConvertedTypeAdapter())
+		.registerTypeAdapter(SchoologyConvertedStatusEnum.class, new SchoologyConvertedStatusAdapter())
+		.registerTypeAdapter(SchoologyAttachmentTypeEnum.class, new SchoologyAttachmentTypeAdapter())
+		.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter())
+		.registerTypeAdapter(SchoologyEventType.class, new SchoologyEventTypeAdapter())
+		.registerTypeAdapter(SchoologyRSVPType.class, new SchoologyRSVPTypeAdapter())
+		.create();
 	}
 	
 	public SchoologyResourceLocator getResourceLocator()
@@ -317,13 +324,13 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		
 		switch (realm) {
 		case BUILDING:
-			endpoint += "schools/" + update.getBuilding_id() + "/buildings";
+			endpoint = "schools/" + update.getBuilding_id() + "/buildings";
 			break;
 		case COURSE_SECTION:
-			endpoint += "course/" + update.getSection_id();
+			endpoint = "course/" + update.getSection_id();
 			break;
 		case GROUP:
-			endpoint += "group/" + update.getGroup_id();
+			endpoint = "group/" + update.getGroup_id();
 			break;
 		default:
 			break;
@@ -333,5 +340,37 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		
 		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyUpdateComment[].class);
 	}
-	
+
+	@Override
+	public SchoologyEvent[] getEvents(String realm) {
+		SchoologyResponse response = get(realm + "/events").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEvent[].class);
+	}
+
+	@Override
+	public SchoologyEvent[] getDistrictEvents(String district_id) {
+		return getEvents("districts/" + district_id);
+	}
+
+	@Override
+	public SchoologyEvent[] getSchoolEvent(String school_id) {
+		return getEvents("schools/" + school_id);
+	}
+
+	@Override
+	public SchoologyEvent[] getUserEvents(String user_id) {
+		return getEvents("users/" + user_id);
+	}
+
+	@Override
+	public SchoologyEvent[] getSectionEvents(String section_id) {
+		return getEvents("sections/" + section_id);
+	}
+
+	@Override
+	public SchoologyEvent[] getGroupEvents(String group_id) {
+		return getEvents("groups/" + group_id);
+	}
+
 }
