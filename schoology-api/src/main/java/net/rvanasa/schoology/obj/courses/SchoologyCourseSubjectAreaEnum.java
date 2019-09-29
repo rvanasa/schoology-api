@@ -30,9 +30,9 @@ public enum SchoologyCourseSubjectAreaEnum
 		this.subjectArea = subjectArea;
 	}
 	
-	public static SchoologyCourseSubjectAreaEnum getSubjectArea(int apiValue)
+	public static SchoologyCourseSubjectAreaEnum getCourseSubjectArea(int apiValue)
 	{
-		for(SchoologyCourseSubjectAreaEnum status : values()) if(status.getApiVaule() == apiValue) return status;
+		for(SchoologyCourseSubjectAreaEnum subjectArea : values()) if(subjectArea.getApiVaule() == apiValue) return subjectArea;
 		
 		return null;
 	}

@@ -1,6 +1,7 @@
 package net.rvanasa.schoology.obj.schools;
 
 import lombok.Getter;
+import net.rvanasa.schoology.obj.SchoologyLinks;
 
 /*
  * As per API documentation, buildings and schools have the same fields:
@@ -22,5 +23,7 @@ public abstract class SchoologyInstitution
 	String phone;
 	String fax;
 	String picture_url;
+	
+	SchoologyLinks links;
 	
 }

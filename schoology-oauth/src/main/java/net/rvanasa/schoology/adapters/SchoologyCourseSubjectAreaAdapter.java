@@ -15,13 +15,7 @@ public class SchoologyCourseSubjectAreaAdapter implements JsonDeserializer<Schoo
 	@Override
 	public SchoologyCourseSubjectAreaEnum deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) 
 			throws JsonParseException {
-		SchoologyCourseSubjectAreaEnum[] scopes = SchoologyCourseSubjectAreaEnum.values();
-		
-		int apiValue = json.getAsInt();
-		
-		for(SchoologyCourseSubjectAreaEnum scope : scopes) if(scope.getApiVaule() == apiValue) return scope;
-		
-		return null;
+		return SchoologyCourseSubjectAreaEnum.getCourseSubjectArea(json.getAsInt());
 	}
 
 }

@@ -5,6 +5,8 @@ import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
+import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
 
 public interface SchoologyRequestHandler
@@ -45,5 +47,9 @@ public interface SchoologyRequestHandler
 	public SchoologySchool getSchool(String school_id);
 	
 	public SchoologyBuilding[] getBuildings(String school_id);
+	
+	public SchoologyUpdate[] getRecentUpdates();
+	
+	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update);
 
 }

@@ -2,6 +2,9 @@ package net.rvanasa.schoology.obj.users;
 
 import lombok.Getter;
 
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/user
+ */
 public enum SchoologyGenderEnum
 {
 	
@@ -21,7 +24,7 @@ public enum SchoologyGenderEnum
 	
 	public static SchoologyGenderEnum getGender(String apiValue)
 	{
-		for(SchoologyGenderEnum status : values()) if(status.apiVaule.equals(apiValue) || status.gender.equals(apiValue)) return status;
+		for(SchoologyGenderEnum gender : values()) if(gender.apiVaule.equalsIgnoreCase(apiValue) || gender.gender.equalsIgnoreCase(apiValue)) return gender;
 		
 		return null;
 	}

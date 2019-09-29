@@ -14,9 +14,16 @@ public class SchoologyBooleanAdapter implements JsonDeserializer<Boolean>
 	public Boolean deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) 
 			throws JsonParseException {
 		
-		byte value = json.getAsByte();
+		String value = json.getAsString();
 		
-        return value == 0 ? false : value == 1 ? true : null;
+		try {
+			int i = Integer.parseInt(value);
+			
+			return i == 0 ? false : i == 1 ? true : null;
+		} catch (Exception e) {
+			return value.equalsIgnoreCase("false") ? false : value.equalsIgnoreCase("true") ? true : null;
+		}
+        
 	}
 
 }

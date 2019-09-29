@@ -14,13 +14,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.rvanasa.schoology.SchoologyContentType;
+import net.rvanasa.schoology.SchoologyRealmEnum;
 import net.rvanasa.schoology.SchoologyRequestHandler;
 import net.rvanasa.schoology.SchoologyResponse;
+import net.rvanasa.schoology.adapters.SchoologyAttachmentTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
+import net.rvanasa.schoology.adapters.SchoologyConvertedStatusAdapter;
+import net.rvanasa.schoology.adapters.SchoologyConvertedTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyRealmEnumAdapter;
 import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
+import net.rvanasa.schoology.obj.attachments.SchoologyAttachmentTypeEnum;
+import net.rvanasa.schoology.obj.attachments.SchoologyConvertedStatusEnum;
+import net.rvanasa.schoology.obj.attachments.SchoologyConvertedTypeEnum;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
 import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
 import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
@@ -28,6 +36,8 @@ import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
+import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 import net.rvanasa.schoology.obj.users.SchoologyGenderEnum;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
 
@@ -75,6 +85,10 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		builder.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter());
 		builder.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter());
 		builder.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter());
+		builder.registerTypeAdapter(SchoologyConvertedTypeEnum.class, new SchoologyConvertedTypeAdapter());
+		builder.registerTypeAdapter(SchoologyConvertedStatusEnum.class, new SchoologyConvertedStatusAdapter());
+		builder.registerTypeAdapter(SchoologyAttachmentTypeEnum.class, new SchoologyAttachmentTypeAdapter());
+		builder.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter());
 		gson = builder.create();
 	}
 	
@@ -281,6 +295,43 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		SchoologyResponse response = get("schools/" + school_id + "/buildings").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("building").asRawData(), SchoologyBuilding[].class);
+	}
+	
+	//TODO: ?with_attachments=true
+	@Override
+	public SchoologyUpdate[] getRecentUpdates()
+	{
+		SchoologyResponse response = get("recent").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("update").asRawData(), SchoologyUpdate[].class);
+	}
+	
+	@Override
+	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update) {
+		
+		SchoologyRealmEnum realm = update.getRealm();
+		
+		if(realm == null) return new SchoologyUpdateComment[] {};
+		
+		String endpoint = "";
+		
+		switch (realm) {
+		case BUILDING:
+			endpoint += "schools/" + update.getBuilding_id() + "/buildings";
+			break;
+		case COURSE_SECTION:
+			endpoint += "course/" + update.getSection_id();
+			break;
+		case GROUP:
+			endpoint += "group/" + update.getGroup_id();
+			break;
+		default:
+			break;
+		}
+		
+		SchoologyResponse response = get(endpoint + "/updates/" + update.getId() + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyUpdateComment[].class);
 	}
 	
 }

@@ -15,13 +15,7 @@ public class SchoologyGradeRangeAdapter implements JsonDeserializer<SchoologyGra
 	@Override
 	public SchoologyGradeRangeEnum deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) 
 			throws JsonParseException {
-		SchoologyGradeRangeEnum[] scopes = SchoologyGradeRangeEnum.values();
-		
-		int apiValue = json.getAsInt();
-		
-		for(SchoologyGradeRangeEnum scope : scopes) if(scope.getApiVaule() == apiValue) return scope;
-		
-		return null;
+		return SchoologyGradeRangeEnum.getGradeLevel(json.getAsInt());
 	}
 
 }

@@ -1,6 +1,7 @@
 package net.rvanasa.schoology.obj.groups;
 
 import lombok.Getter;
+import net.rvanasa.schoology.obj.SchoologyLinks;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/group
@@ -21,6 +22,8 @@ public class SchoologyGroup
 	String picture_url;
 	String school_id;
 	String building_id;
+	
+	SchoologyLinks links;
 	
 }
 

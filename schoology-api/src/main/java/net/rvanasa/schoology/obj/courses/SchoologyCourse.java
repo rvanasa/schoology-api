@@ -1,6 +1,7 @@
 package net.rvanasa.schoology.obj.courses;
 
 import lombok.Getter;
+import net.rvanasa.schoology.obj.SchoologyLinks;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/course
@@ -20,5 +21,7 @@ public class SchoologyCourse
 	SchoologyGradeRangeEnum grade_level_range_start;
 	SchoologyGradeRangeEnum grade_level_range_end;
 	SchoologyCourseSubjectAreaEnum subject_area;
+	
+	SchoologyLinks links;
 	
 }

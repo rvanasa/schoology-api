@@ -15,13 +15,7 @@ public class SchoologyGenderAdapter implements JsonDeserializer<SchoologyGenderE
 	@Override
 	public SchoologyGenderEnum deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) 
 			throws JsonParseException {
-		SchoologyGenderEnum[] scopes = SchoologyGenderEnum.values();
-		
-		String apiValue = json.getAsString();
-		
-		for(SchoologyGenderEnum scope : scopes) if(scope.getApiVaule() == apiValue) return scope;
-		
-		return null;
+		return SchoologyGenderEnum.getGender(json.getAsString());
 	}
 
 }

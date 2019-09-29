@@ -38,7 +38,7 @@ public enum SchoologyGradeRangeEnum
 	
 	public static SchoologyGradeRangeEnum getGradeLevel(int apiValue)
 	{
-		for(SchoologyGradeRangeEnum status : values()) if(status.getApiVaule() == apiValue) return status;
+		for(SchoologyGradeRangeEnum gradeRange : values()) if(gradeRange.getApiVaule() == apiValue) return gradeRange;
 		
 		return null;
 	}

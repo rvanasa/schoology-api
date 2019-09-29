@@ -1,6 +1,7 @@
 package net.rvanasa.schoology.obj.users;
 
 import lombok.Getter;
+import net.rvanasa.schoology.obj.SchoologyLinks;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/user
@@ -53,8 +54,13 @@ public class SchoologyUser
 	boolean admin;
 	boolean status;
 	
+	SchoologyLinks links;
+	
 }
 
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/user
+ */
 @Getter
 class SchoologyProfileInfo
 {

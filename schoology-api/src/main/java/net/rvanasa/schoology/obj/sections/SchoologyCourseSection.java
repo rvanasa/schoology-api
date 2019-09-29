@@ -1,6 +1,7 @@
 package net.rvanasa.schoology.obj.sections;
 
 import lombok.Getter;
+import net.rvanasa.schoology.obj.SchoologyLinks;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/course-section
@@ -35,6 +36,8 @@ public class SchoologyCourseSection
 	String weight;
 	SchoologyCourseSectionOptions options;
 	int admin;
+	
+	SchoologyLinks links;
 	
 }
 
