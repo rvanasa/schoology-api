@@ -48,4 +48,4 @@ System.out.println(node.get("JSON_KEY").get(1).asString()); // index 1 of some J
 
 ```
 
-I have been making gradual improvements as people continue to use this API. If you need any additional features, feel free to send me an email with some info regarding your potential use case. 
+Big thanks to [@electro2560](https://github.com/electro2560) for taking this project to the next level. Contributions and feature requests are always welcome! 
