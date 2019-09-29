@@ -49,20 +49,55 @@ public interface SchoologyRequestHandler
 	
 	public SchoologyBuilding[] getBuildings(String school_id);
 	
-	public SchoologyUpdate[] getRecentUpdates();
+	public SchoologyUpdate[] getUpdates(String realm);
+	
+	default public SchoologyUpdate[] getRecentUpdates()
+	{
+		return getUpdates("recent");
+	}
+	
+	default public SchoologyUpdate[] getUserUpdates(String user_id)
+	{
+		return getUpdates("users/" + user_id);
+	}
+	
+	default public SchoologyUpdate[] getSectionUpdates(String section_id)
+	{
+		return getUpdates("sections/" + section_id);
+	}
+	
+	default public SchoologyUpdate[] getGroupUpdates(String group_id)
+	{
+		return getUpdates("groups/" + group_id);
+	}
 	
 	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update);
 	
 	public SchoologyEvent[] getEvents(String realm); 
 			
-	public SchoologyEvent[] getDistrictEvents(String district_id);
+	default public SchoologyEvent[] getDistrictEvents(String district_id)
+	{
+		return getEvents("districts/" + district_id);
+	}
 	
-	public SchoologyEvent[] getSchoolEvent(String school_id);
+	default public SchoologyEvent[] getSchoolEvent(String school_id)
+	{
+		return getEvents("schools/" + school_id);
+	}
 	
-	public SchoologyEvent[] getUserEvents(String user_id);
+	default public SchoologyEvent[] getUserEvents(String user_id)
+	{
+		return getEvents("users/" + user_id);
+	}
 	
-	public SchoologyEvent[] getSectionEvents(String section_id);
+	default public SchoologyEvent[] getSectionEvents(String section_id)
+	{
+		return getEvents("sections/" + section_id);
+	}
 	
-	public SchoologyEvent[] getGroupEvents(String group_id);
+	default public SchoologyEvent[] getGroupEvents(String group_id)
+	{
+		return getEvents("groups/" + group_id);
+	}
 	
 }

@@ -306,15 +306,18 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	
 	//TODO: ?with_attachments=true
 	@Override
-	public SchoologyUpdate[] getRecentUpdates()
+	public SchoologyUpdate[] getUpdates(String realm)
 	{
-		SchoologyResponse response = get("recent").requireSuccess();
+		if(!realm.equalsIgnoreCase("recent")) realm += "/updates";
+		
+		SchoologyResponse response = get(realm).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("update").asRawData(), SchoologyUpdate[].class);
 	}
 	
 	@Override
-	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update) {
+	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update)
+	{
 		
 		SchoologyRealmEnum realm = update.getRealm();
 		
@@ -342,35 +345,11 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 
 	@Override
-	public SchoologyEvent[] getEvents(String realm) {
+	public SchoologyEvent[] getEvents(String realm)
+	{
 		SchoologyResponse response = get(realm + "/events").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEvent[].class);
-	}
-
-	@Override
-	public SchoologyEvent[] getDistrictEvents(String district_id) {
-		return getEvents("districts/" + district_id);
-	}
-
-	@Override
-	public SchoologyEvent[] getSchoolEvent(String school_id) {
-		return getEvents("schools/" + school_id);
-	}
-
-	@Override
-	public SchoologyEvent[] getUserEvents(String user_id) {
-		return getEvents("users/" + user_id);
-	}
-
-	@Override
-	public SchoologyEvent[] getSectionEvents(String section_id) {
-		return getEvents("sections/" + section_id);
-	}
-
-	@Override
-	public SchoologyEvent[] getGroupEvents(String group_id) {
-		return getEvents("groups/" + group_id);
 	}
 
 }
