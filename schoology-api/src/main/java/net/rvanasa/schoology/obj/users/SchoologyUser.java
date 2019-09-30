@@ -30,24 +30,29 @@ public class SchoologyUser
 	SchoologyGenderEnum gender;
 	int grad_year;
 	String birthday_date;
+	//Must have 'Administer users' permission
 	String password;
+	//Must have 'Administer users' permission
 	int role_id;
 	boolean email_login_info;
 	String profile_url;
 	String tz_name;
-	//TODO:
-	String parents;
+	// 'View user parents' permission required from schoology API to access this information
+	SchoologyUser[] parents;
+	//TODO: comma-delimited list of integers
 	String parent_uids;
+	//TODO: comma-delimited list of integers
 	String advisor_uids;
+	//TODO: comma-delimited list of integers
 	String child_urls;
 	int send_message;
 	boolean synced;
 	int profile_picture_fid;
+	//TODO: comma-delimited list of integers
 	String additional_buildings;
 	
 	SchoologyProfileInfo profile_info;
 	
-	//TODO: from group request of user these three values appear
 	//Missing from API documentation on Schoology
 	boolean use_preferred_first_name;
 	//Missing from schoology documentation
@@ -60,6 +65,7 @@ public class SchoologyUser
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/user
+ * Must request extended user info to receive
  */
 @Getter
 class SchoologyProfileInfo
@@ -83,8 +89,14 @@ class SchoologyProfileInfo
 	
 }
 
+/*
+ * No documentation available
+ */
 @Getter
 class SchoologyPermissions
 {
-	//TODO:
+	
+	boolean is_directory_public;
+	boolean allow_connections;
+	
 }

@@ -218,6 +218,7 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	/*
 	 * Java object implementations
 	 */
+	//TODO: ?extended=true
 	@Override
 	public SchoologyUser[] getUsers()
 	{
@@ -225,6 +226,7 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		return null;
 	}
 	
+	//TODO: ?extended=true
 	@Override
 	public SchoologyUser getUser(String uid)
 	{

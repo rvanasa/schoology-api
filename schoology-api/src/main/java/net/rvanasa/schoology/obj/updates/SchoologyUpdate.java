@@ -31,16 +31,19 @@ public class SchoologyUpdate
 	
 	int num_comments;
 	
-	//TODO: ?with_attachments=true must be specified, but then info such as the realm will be missing
+	//TODO: ?with_attachments=true must be specified, but then info such as the realm will may be missing
 	SchoologyAttachments attachments;
 	
-	//TODO: Untested. Are these even included in update object?
+	//Polls are only included for update objects
 	SchoologyPoll polls;
 	
 	SchoologyLinks links;
 	
 }
-//TODO:
+
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/poll
+ */
 @Getter
 class SchoologyPoll
 {
@@ -48,11 +51,15 @@ class SchoologyPoll
 	SchoologyPollOptions[] poll;
 	
 }
-//TODO:
+
+/*
+ * https://developers.schoology.com/api-documentation/rest-api-v1/poll
+ */
 @Getter
 class SchoologyPollOptions
 {
 	
+	String id;
 	String title;
 	int count;
 	boolean selected;
