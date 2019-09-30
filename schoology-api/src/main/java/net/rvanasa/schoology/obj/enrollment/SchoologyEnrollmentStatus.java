@@ -27,7 +27,7 @@ public enum SchoologyEnrollmentStatus
 	
 	public static SchoologyEnrollmentStatus getEnrollmentStatus(int apiValue)
 	{
-		for(SchoologyEnrollmentStatus eventType : values()) if(eventType.getApiVaule() == apiValue) return eventType;
+		for(SchoologyEnrollmentStatus status : values()) if(status.getApiVaule() == apiValue) return status;
 		
 		return null;
 	}
