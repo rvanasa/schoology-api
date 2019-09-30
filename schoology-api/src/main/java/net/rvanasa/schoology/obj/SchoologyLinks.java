@@ -11,5 +11,7 @@ public class SchoologyLinks
 {
 	
 	String self;
+	//Optional URL if next is available
+	String next;
 	
 }

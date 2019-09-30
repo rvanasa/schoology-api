@@ -22,6 +22,7 @@ import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
 import net.rvanasa.schoology.adapters.SchoologyConvertedStatusAdapter;
 import net.rvanasa.schoology.adapters.SchoologyConvertedTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
+import net.rvanasa.schoology.adapters.SchoologyEnrollmentStatusAdapter;
 import net.rvanasa.schoology.adapters.SchoologyEventTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
 import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
@@ -31,9 +32,15 @@ import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachmentTypeEnum;
 import net.rvanasa.schoology.obj.attachments.SchoologyConvertedStatusEnum;
 import net.rvanasa.schoology.obj.attachments.SchoologyConvertedTypeEnum;
+import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
+import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
 import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
 import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionReply;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussions;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentStatus;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollments;
 import net.rvanasa.schoology.obj.events.SchoologyEvent;
 import net.rvanasa.schoology.obj.events.SchoologyEventType;
 import net.rvanasa.schoology.obj.events.SchoologyRSVPType;
@@ -96,6 +103,7 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter())
 		.registerTypeAdapter(SchoologyEventType.class, new SchoologyEventTypeAdapter())
 		.registerTypeAdapter(SchoologyRSVPType.class, new SchoologyRSVPTypeAdapter())
+		.registerTypeAdapter(SchoologyEnrollmentStatus.class, new SchoologyEnrollmentStatusAdapter())
 		.create();
 	}
 	
@@ -352,6 +360,45 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		SchoologyResponse response = get(realm + "/events").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEvent[].class);
+	}
+
+	@Override
+	public SchoologyEnrollments getEnrollments(String realm)
+	{
+		SchoologyResponse response = get(realm + "/enrollments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEnrollments.class);
+	}
+
+	@Override
+	public SchoologyBlogPost[] getBlogPosts(String realm)
+	{
+		SchoologyResponse response = get(realm + "/posts").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("post").asRawData(), SchoologyBlogPost[].class);
+	}
+
+	@Override
+	public SchoologyBlogPostComment[] getBlogPostComments(String realm, String post_id) {
+		SchoologyResponse response = get(realm + "/posts/" + post_id + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyBlogPostComment[].class);
+	}
+
+	@Override
+	public SchoologyDiscussions getDiscussions(String realm)
+	{
+		SchoologyResponse response = get(realm + "/discussions").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussions.class);
+	}
+	
+	@Override
+	public SchoologyDiscussionReply[] getDiscussionReplies(String realm, String discussion_id)
+	{
+		SchoologyResponse response = get(realm + "/discussions/" + discussion_id + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionReply[].class);
 	}
 
 }

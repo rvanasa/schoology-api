@@ -1,6 +1,11 @@
 package net.rvanasa.schoology;
 
+import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
+import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionReply;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussions;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollments;
 import net.rvanasa.schoology.obj.events.SchoologyEvent;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
@@ -100,4 +105,113 @@ public interface SchoologyRequestHandler
 		return getEvents("groups/" + group_id);
 	}
 	
+	public SchoologyEnrollments getEnrollments(String realm);
+	
+	default public SchoologyEnrollments getSectionEnrollments(String section_id)
+	{
+		return getEnrollments("sections/" + section_id);
+	}
+	
+	default public SchoologyEnrollments getGroupEnrollments(String group_id)
+	{
+		return getEnrollments("groups/" + group_id);
+	}
+	
+	public SchoologyBlogPost[] getBlogPosts(String realm);
+	
+	default public SchoologyBlogPost[] getDistrictBlogPosts(String district_id)
+	{
+		return getBlogPosts("districts/" + district_id);
+	}
+	
+	default public SchoologyBlogPost[] getSchoolBlogPosts(String school_id)
+	{
+		return getBlogPosts("schools/" + school_id);
+	}
+	
+	default public SchoologyBlogPost[] getUserBlogPosts(String user_id)
+	{
+		return getBlogPosts("users/" + user_id);
+	}
+	
+	default public SchoologyBlogPost[] getSectionBlogPosts(String section_id)
+	{
+		return getBlogPosts("sections/" + section_id);
+	}
+	
+	default public SchoologyBlogPost[] getGroupBlogPosts(String group_id)
+	{
+		return getBlogPosts("groups/" + group_id);
+	}
+	
+	public SchoologyBlogPostComment[] getBlogPostComments(String realm, String post_id);
+	
+	default public SchoologyBlogPostComment[] getDistrictBlogPostComments(String district_id, String post_id)
+	{
+		return getBlogPostComments("districts/" + district_id, post_id);
+	}
+	
+	default public SchoologyBlogPostComment[] getSchoolBlogPostComments(String school_id, String post_id)
+	{
+		return getBlogPostComments("schools/" + school_id, post_id);
+	}
+	
+	default public SchoologyBlogPostComment[] getUserBlogPostComments(String user_id, String post_id)
+	{
+		return getBlogPostComments("ysers/" + user_id, post_id);
+	}
+	
+	default public SchoologyBlogPostComment[] getSectionBlogPostComments(String section_id, String post_id)
+	{
+		return getBlogPostComments("sections/" + section_id, post_id);
+	}
+	
+	default public SchoologyBlogPostComment[] getGroupBlogPostComments(String group_id, String post_id)
+	{
+		return getBlogPostComments("groups/" + group_id, post_id);
+	}
+	
+	public SchoologyDiscussions getDiscussions(String realm);
+	
+	default public SchoologyDiscussions getDistrictDiscussion(String district_id)
+	{
+		return getDiscussions("districts/" + district_id);
+	}
+	
+	default public SchoologyDiscussions getSchoolDiscussion(String school_id)
+	{
+		return getDiscussions("schools/" + school_id);
+	}
+	
+	default public SchoologyDiscussions getSectionDiscussion(String section_id)
+	{
+		return getDiscussions("sections/" + section_id);
+	}
+	
+	default public SchoologyDiscussions getGroupDiscussion(String group_id)
+	{
+		return getDiscussions("groups/" + group_id);
+	}
+	
+	public SchoologyDiscussionReply[] getDiscussionReplies(String realm, String discussion_id);
+	
+	default public SchoologyDiscussionReply[] getDistrictDiscussionReplies(String district_id, String discussion_id)
+	{
+		return getDiscussionReplies("districts/" + district_id, discussion_id);
+	}
+	
+	default public SchoologyDiscussionReply[] getSchoolDiscussionReplies(String school_id, String discussion_id)
+	{
+		return getDiscussionReplies("schools/" + school_id, discussion_id);
+	}
+	
+	default public SchoologyDiscussionReply[] getSectionDiscussionReplies(String section_id, String discussion_id)
+	{
+		return getDiscussionReplies("sections/" + section_id, discussion_id);
+	}
+	
+	default public SchoologyDiscussionReply[] getGroupDiscussionReplies(String group_id, String discussion_id)
+	{
+		return getDiscussionReplies("groups/" + group_id, discussion_id);
+	}
 }
