@@ -56,10 +56,12 @@ import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.sections.SchoologyCourseSectionsPage;
 import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
 import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 import net.rvanasa.schoology.obj.users.SchoologyGenderEnum;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
+import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
 
 public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 {
@@ -264,12 +266,13 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	/*
 	 * Java object implementations
 	 */
-	//TODO: ?extended=true
+	//TODO: add query string options
 	@Override
-	public SchoologyUser[] getUsers()
+	public SchoologyUsersPage getUsersPage()
 	{
-		//TODO:
-		return null;
+		SchoologyResponse response = get("users").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyUsersPage.class);
 	}
 	
 	@Override
@@ -313,10 +316,11 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	@Override
-	public SchoologyCourseSection[] getCourseSections(String course_id)
+	public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id)
 	{
-		//TODO:
-		return null;
+		SchoologyResponse response = get("courses/" + course_id + "/sections").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCourseSectionsPage.class);
 	}
 	
 	@Override

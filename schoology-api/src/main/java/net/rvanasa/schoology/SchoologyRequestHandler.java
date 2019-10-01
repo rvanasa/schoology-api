@@ -14,9 +14,11 @@ import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.sections.SchoologyCourseSectionsPage;
 import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
 import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
+import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
 
 public interface SchoologyRequestHandler
 {
@@ -35,7 +37,7 @@ public interface SchoologyRequestHandler
 	/*
 	 * Java object implementations
 	 */
-	public SchoologyUser[] getUsers();
+	public SchoologyUsersPage getUsersPage();
 	
 	public SchoologyUser getUser(String uid);
 		
@@ -47,7 +49,7 @@ public interface SchoologyRequestHandler
 	
 	public SchoologyCourse getCourse(String course_id);
 	
-	public SchoologyCourseSection[] getCourseSections(String course_id);
+	public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id);
 	
 	public SchoologyCourseSection getCourseSection(String section_id);
 	
