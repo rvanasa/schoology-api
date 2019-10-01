@@ -1,6 +1,11 @@
 package net.rvanasa.schoology.impl;
 
+import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
@@ -93,7 +98,6 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		this.resourceLocator = locator;
 		this.service = service;
 		
-		//TODO: Reflection to auto register all classes from adapter package?
 		gson = new GsonBuilder()
 		.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter())
 		.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter())
@@ -141,8 +145,22 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	public OAuthRequest prepareRequest(Verb verb, String resource)
-	{
-		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(resource));
+	{	
+		String URL = resource;
+		String query = null;
+		
+		final int qIndex = URL.lastIndexOf('?');
+		
+		if(qIndex != -1)
+		{
+			query = URL.substring(qIndex + 1);
+			URL = URL.substring(0, qIndex);
+		}
+		
+		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(URL));
+		
+		if(query != null) for(Entry<String, String> e : splitQuery(query).entrySet()) request.addQuerystringParameter(e.getKey(), e.getValue());
+		
 		getOAuthService().signRequest(getAccessToken() != null ? getAccessToken() : Token.empty(), request);
 		request.addHeader("Accept", getContentType().getID());
 		request.addHeader("Content-Type", getContentType().getID());
@@ -155,6 +173,23 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 				SchoologyResponseStatusEnum.getStatus(response.getCode()),
 				new BasicSchoologyResponseBody(getContentType(), response.getBody()),
 				new BasicSchoologyResponseHeaders(response.getHeaders()));
+	}
+	
+	/*
+	 * Modified method of separating query parameters provided by https://stackoverflow.com/a/13592567
+	 */
+	private Map<String, String> splitQuery(String query)
+	{
+		return Arrays.stream(query.split("&"))
+	            .map(this::splitQueryParameter).collect(Collectors.toMap(SimpleImmutableEntry::getKey, SimpleImmutableEntry::getValue));
+	}
+
+	private SimpleImmutableEntry<String, String> splitQueryParameter(String it)
+	{
+	    final int idx = it.indexOf("=");
+	    final String key = idx > 0 ? it.substring(0, idx) : it;
+	    final String value = idx > 0 && it.length() > idx + 1 ? it.substring(idx + 1) : null;
+	    return new SimpleImmutableEntry<>(key, value);
 	}
 	
 	@Override
@@ -237,11 +272,10 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		return null;
 	}
 	
-	//TODO: ?extended=true
 	@Override
 	public SchoologyUser getUser(String uid)
 	{
-		SchoologyResponse response = get("users/" + uid).requireSuccess();
+		SchoologyResponse response = get("users/" + uid + "?extended=true").requireSuccess();
 		
 		return gson.fromJson(response.getBody().getRawData(), SchoologyUser.class);
 	}
@@ -317,13 +351,12 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		return gson.fromJson(response.getBody().parse().get("building").asRawData(), SchoologyBuilding[].class);
 	}
 	
-	//TODO: ?with_attachments=true
 	@Override
 	public SchoologyUpdate[] getUpdates(String realm)
 	{
 		if(!realm.equalsIgnoreCase("recent")) realm += "/updates";
 		
-		SchoologyResponse response = get(realm).requireSuccess();
+		SchoologyResponse response = get(realm + "?with_attachments=true").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("update").asRawData(), SchoologyUpdate[].class);
 	}
@@ -412,7 +445,7 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyMediaAlbums.class);
 	}
 	
-	//TODO: Fix: Use ?withcontent=1 header
+	//TODO: Schoology documentation says =1, but should it be =true?
 	@Override
 	public SchoologyMediaAlbumContent[] getMediaAlbumContent(String realm, String album_id)
 	{
