@@ -21,7 +21,7 @@ public class SchoologyCourseSection
 	String section_code;
 	String section_school_code;
 	String synced;
-	int active;
+	boolean active;
 	String description;
 	String subject_area;
 	int grade_level_range_start;
@@ -35,7 +35,7 @@ public class SchoologyCourseSection
 	String end_time;
 	String weight;
 	SchoologyCourseSectionOptions options;
-	int admin;
+	boolean admin;
 	
 	SchoologyLinks links;
 	
