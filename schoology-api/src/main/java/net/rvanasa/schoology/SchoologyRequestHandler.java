@@ -1,5 +1,8 @@
 package net.rvanasa.schoology;
 
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
+import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
@@ -214,4 +217,41 @@ public interface SchoologyRequestHandler
 	{
 		return getDiscussionReplies("groups/" + group_id, discussion_id);
 	}
+	
+	public SchoologyMediaAlbums getMediaAlbums(String realm);
+	
+	default public SchoologyMediaAlbums getSectionMediaAlbums(String section_id)
+	{
+		return getMediaAlbums("sections/" + section_id);
+	}
+	
+	default public SchoologyMediaAlbums getGroupMediaAlbums(String group_id)
+	{
+		return getMediaAlbums("groups/" + group_id);
+	}
+	
+	public SchoologyMediaAlbumContent[] getMediaAlbumContent(String realm, String album_id);
+	
+	default public SchoologyMediaAlbumContent[] getSectionMediaAlbumContent(String section_id, String album_id)
+	{
+		return getMediaAlbumContent("sections/" + section_id, album_id);
+	}
+	
+	default public SchoologyMediaAlbumContent[] getGroupMediaAlbumContent(String group_id, String album_id)
+	{
+		return getMediaAlbumContent("groups/" + group_id, album_id);
+	}
+	
+	public SchoologyMediaAlbumComment[] getMediaAlbumContentComment(String realm, String album_id, String content_id);
+	
+	default public SchoologyMediaAlbumComment[] getSectionMediaAlbumContentComment(String section_id, String album_id, String content_id)
+	{
+		return getMediaAlbumContentComment("sections/" + section_id, album_id, content_id);
+	}
+	
+	default public SchoologyMediaAlbumComment[] getGroupMediaAlbumContentComment(String group_id, String album_id, String content_id)
+	{
+		return getMediaAlbumContentComment("groups/" + group_id, album_id, content_id);
+	}
+	
 }

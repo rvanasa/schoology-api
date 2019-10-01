@@ -29,6 +29,9 @@ import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyRSVPTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyRealmEnumAdapter;
 import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
+import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachmentTypeEnum;
 import net.rvanasa.schoology.obj.attachments.SchoologyConvertedStatusEnum;
 import net.rvanasa.schoology.obj.attachments.SchoologyConvertedTypeEnum;
@@ -399,6 +402,31 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		SchoologyResponse response = get(realm + "/discussions/" + discussion_id + "/comments").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionReply[].class);
+	}
+
+	@Override
+	public SchoologyMediaAlbums getMediaAlbums(String realm)
+	{
+		SchoologyResponse response = get(realm + "/albums").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyMediaAlbums.class);
+	}
+	
+	//TODO: Fix: Use ?withcontent=1 header
+	@Override
+	public SchoologyMediaAlbumContent[] getMediaAlbumContent(String realm, String album_id)
+	{
+		SchoologyResponse response = get(realm + "/albums/" + album_id + "?withcontent=1").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("album").get("content").asRawData(), SchoologyMediaAlbumContent[].class);
+	}
+
+	@Override
+	public SchoologyMediaAlbumComment[] getMediaAlbumContentComment(String realm, String album_id, String content_id)
+	{
+		SchoologyResponse response = get(realm + "/albums/" + album_id + "/content/" + content_id + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyMediaAlbumComment[].class);
 	}
 
 }
