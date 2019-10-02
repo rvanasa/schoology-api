@@ -44,15 +44,17 @@ import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
 import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
+import net.rvanasa.schoology.obj.courses.SchoologyCoursesPage;
 import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
-import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionReply;
-import net.rvanasa.schoology.obj.discussions.SchoologyDiscussions;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionRepliesPage;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionsPage;
 import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentStatus;
-import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollments;
-import net.rvanasa.schoology.obj.events.SchoologyEvent;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentsPage;
 import net.rvanasa.schoology.obj.events.SchoologyEventType;
+import net.rvanasa.schoology.obj.events.SchoologyEventsPage;
 import net.rvanasa.schoology.obj.events.SchoologyRSVPType;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
+import net.rvanasa.schoology.obj.groups.SchoologyGroupsPage;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
@@ -284,11 +286,11 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	@Override
-	public SchoologyGroup[] getGroups()
+	public SchoologyGroupsPage getGroupsPage()
 	{
 		SchoologyResponse response = get("groups").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("group").asRawData(), SchoologyGroup[].class);
+		return gson.fromJson(response.getBody().getRawData(), SchoologyGroupsPage.class);
 	}
 			
 	@Override
@@ -300,11 +302,11 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	@Override
-	public SchoologyCourse[] getCourses()
+	public SchoologyCoursesPage getCoursesPage()
 	{
 		SchoologyResponse response = get("courses").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("course").asRawData(), SchoologyCourse[].class);
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCoursesPage.class);
 	}
 	
 	@Override
@@ -395,19 +397,19 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 
 	@Override
-	public SchoologyEvent[] getEvents(String realm)
+	public SchoologyEventsPage getEventsPage(String realm)
 	{
 		SchoologyResponse response = get(realm + "/events").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEvent[].class);
+		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEventsPage.class);
 	}
 
 	@Override
-	public SchoologyEnrollments getEnrollments(String realm)
+	public SchoologyEnrollmentsPage getEnrollmentsPage(String realm)
 	{
 		SchoologyResponse response = get(realm + "/enrollments").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEnrollments.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEnrollmentsPage.class);
 	}
 
 	@Override
@@ -426,19 +428,19 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 
 	@Override
-	public SchoologyDiscussions getDiscussions(String realm)
+	public SchoologyDiscussionsPage getDiscussionsPage(String realm)
 	{
 		SchoologyResponse response = get(realm + "/discussions").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussions.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussionsPage.class);
 	}
 	
 	@Override
-	public SchoologyDiscussionReply[] getDiscussionReplies(String realm, String discussion_id)
+	public SchoologyDiscussionRepliesPage getDiscussionRepliesPage(String realm, String discussion_id)
 	{
 		SchoologyResponse response = get(realm + "/discussions/" + discussion_id + "/comments").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionReply[].class);
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionRepliesPage.class);
 	}
 
 	@Override

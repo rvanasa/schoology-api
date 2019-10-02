@@ -6,11 +6,13 @@ import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
-import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionReply;
-import net.rvanasa.schoology.obj.discussions.SchoologyDiscussions;
-import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollments;
-import net.rvanasa.schoology.obj.events.SchoologyEvent;
+import net.rvanasa.schoology.obj.courses.SchoologyCoursesPage;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionRepliesPage;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionsPage;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentsPage;
+import net.rvanasa.schoology.obj.events.SchoologyEventsPage;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
+import net.rvanasa.schoology.obj.groups.SchoologyGroupsPage;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
@@ -41,11 +43,11 @@ public interface SchoologyRequestHandler
 	
 	public SchoologyUser getUser(String uid);
 		
-	public SchoologyGroup[] getGroups();
+	public SchoologyGroupsPage getGroupsPage();
 			
 	public SchoologyGroup getGroup(String group_id);
 	
-	public SchoologyCourse[] getCourses();
+	public SchoologyCoursesPage getCoursesPage();
 	
 	public SchoologyCourse getCourse(String course_id);
 	
@@ -83,43 +85,43 @@ public interface SchoologyRequestHandler
 	
 	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update);
 	
-	public SchoologyEvent[] getEvents(String realm); 
+	public SchoologyEventsPage getEventsPage(String realm); 
 			
-	default public SchoologyEvent[] getDistrictEvents(String district_id)
+	default public SchoologyEventsPage getDistrictEvents(String district_id)
 	{
-		return getEvents("districts/" + district_id);
+		return getEventsPage("districts/" + district_id);
 	}
 	
-	default public SchoologyEvent[] getSchoolEvent(String school_id)
+	default public SchoologyEventsPage getSchoolEvent(String school_id)
 	{
-		return getEvents("schools/" + school_id);
+		return getEventsPage("schools/" + school_id);
 	}
 	
-	default public SchoologyEvent[] getUserEvents(String user_id)
+	default public SchoologyEventsPage getUserEvents(String user_id)
 	{
-		return getEvents("users/" + user_id);
+		return getEventsPage("users/" + user_id);
 	}
 	
-	default public SchoologyEvent[] getSectionEvents(String section_id)
+	default public SchoologyEventsPage getSectionEvents(String section_id)
 	{
-		return getEvents("sections/" + section_id);
+		return getEventsPage("sections/" + section_id);
 	}
 	
-	default public SchoologyEvent[] getGroupEvents(String group_id)
+	default public SchoologyEventsPage getGroupEvents(String group_id)
 	{
-		return getEvents("groups/" + group_id);
+		return getEventsPage("groups/" + group_id);
 	}
 	
-	public SchoologyEnrollments getEnrollments(String realm);
+	public SchoologyEnrollmentsPage getEnrollmentsPage(String realm);
 	
-	default public SchoologyEnrollments getSectionEnrollments(String section_id)
+	default public SchoologyEnrollmentsPage getSectionEnrollmentsPage(String section_id)
 	{
-		return getEnrollments("sections/" + section_id);
+		return getEnrollmentsPage("sections/" + section_id);
 	}
 	
-	default public SchoologyEnrollments getGroupEnrollments(String group_id)
+	default public SchoologyEnrollmentsPage getGroupEnrollmentsPage(String group_id)
 	{
-		return getEnrollments("groups/" + group_id);
+		return getEnrollmentsPage("groups/" + group_id);
 	}
 	
 	public SchoologyBlogPost[] getBlogPosts(String realm);
@@ -176,48 +178,48 @@ public interface SchoologyRequestHandler
 		return getBlogPostComments("groups/" + group_id, post_id);
 	}
 	
-	public SchoologyDiscussions getDiscussions(String realm);
+	public SchoologyDiscussionsPage getDiscussionsPage(String realm);
 	
-	default public SchoologyDiscussions getDistrictDiscussion(String district_id)
+	default public SchoologyDiscussionsPage getDistrictDiscussionPage(String district_id)
 	{
-		return getDiscussions("districts/" + district_id);
+		return getDiscussionsPage("districts/" + district_id);
 	}
 	
-	default public SchoologyDiscussions getSchoolDiscussion(String school_id)
+	default public SchoologyDiscussionsPage getSchoolDiscussionPage(String school_id)
 	{
-		return getDiscussions("schools/" + school_id);
+		return getDiscussionsPage("schools/" + school_id);
 	}
 	
-	default public SchoologyDiscussions getSectionDiscussion(String section_id)
+	default public SchoologyDiscussionsPage getSectionDiscussionPage(String section_id)
 	{
-		return getDiscussions("sections/" + section_id);
+		return getDiscussionsPage("sections/" + section_id);
 	}
 	
-	default public SchoologyDiscussions getGroupDiscussion(String group_id)
+	default public SchoologyDiscussionsPage getGroupDiscussionPage(String group_id)
 	{
-		return getDiscussions("groups/" + group_id);
+		return getDiscussionsPage("groups/" + group_id);
 	}
 	
-	public SchoologyDiscussionReply[] getDiscussionReplies(String realm, String discussion_id);
+	public SchoologyDiscussionRepliesPage getDiscussionRepliesPage(String realm, String discussion_id);
 	
-	default public SchoologyDiscussionReply[] getDistrictDiscussionReplies(String district_id, String discussion_id)
+	default public SchoologyDiscussionRepliesPage getDistrictDiscussionRepliesPage(String district_id, String discussion_id)
 	{
-		return getDiscussionReplies("districts/" + district_id, discussion_id);
+		return getDiscussionRepliesPage("districts/" + district_id, discussion_id);
 	}
 	
-	default public SchoologyDiscussionReply[] getSchoolDiscussionReplies(String school_id, String discussion_id)
+	default public SchoologyDiscussionRepliesPage getSchoolDiscussionRepliesPage(String school_id, String discussion_id)
 	{
-		return getDiscussionReplies("schools/" + school_id, discussion_id);
+		return getDiscussionRepliesPage("schools/" + school_id, discussion_id);
 	}
 	
-	default public SchoologyDiscussionReply[] getSectionDiscussionReplies(String section_id, String discussion_id)
+	default public SchoologyDiscussionRepliesPage getSectionDiscussionRepliesPage(String section_id, String discussion_id)
 	{
-		return getDiscussionReplies("sections/" + section_id, discussion_id);
+		return getDiscussionRepliesPage("sections/" + section_id, discussion_id);
 	}
 	
-	default public SchoologyDiscussionReply[] getGroupDiscussionReplies(String group_id, String discussion_id)
+	default public SchoologyDiscussionRepliesPage getGroupDiscussionRepliesPage(String group_id, String discussion_id)
 	{
-		return getDiscussionReplies("groups/" + group_id, discussion_id);
+		return getDiscussionRepliesPage("groups/" + group_id, discussion_id);
 	}
 	
 	public SchoologyMediaAlbums getMediaAlbums(String realm);
