@@ -166,7 +166,7 @@ public interface ISchoologyRequestHandler
 	
 	default public SchoologyBlogPostComment[] getUserBlogPostComments(String user_id, String post_id)
 	{
-		return getBlogPostComments("ysers/" + user_id, post_id);
+		return getBlogPostComments("users/" + user_id, post_id);
 	}
 	
 	default public SchoologyBlogPostComment[] getSectionBlogPostComments(String section_id, String post_id)
