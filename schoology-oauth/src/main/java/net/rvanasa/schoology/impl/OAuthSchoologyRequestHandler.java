@@ -1,5 +1,12 @@
 package net.rvanasa.schoology.impl;
 
+import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
@@ -8,9 +15,55 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import net.rvanasa.schoology.SchoologyContentType;
+import net.rvanasa.schoology.SchoologyRealmEnum;
 import net.rvanasa.schoology.SchoologyRequestHandler;
 import net.rvanasa.schoology.SchoologyResponse;
+import net.rvanasa.schoology.adapters.SchoologyAttachmentTypeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
+import net.rvanasa.schoology.adapters.SchoologyConvertedStatusAdapter;
+import net.rvanasa.schoology.adapters.SchoologyConvertedTypeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
+import net.rvanasa.schoology.adapters.SchoologyEnrollmentStatusAdapter;
+import net.rvanasa.schoology.adapters.SchoologyEventTypeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
+import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyRSVPTypeAdapter;
+import net.rvanasa.schoology.adapters.SchoologyRealmEnumAdapter;
+import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
+import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
+import net.rvanasa.schoology.obj.attachments.SchoologyAttachmentTypeEnum;
+import net.rvanasa.schoology.obj.attachments.SchoologyConvertedStatusEnum;
+import net.rvanasa.schoology.obj.attachments.SchoologyConvertedTypeEnum;
+import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
+import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
+import net.rvanasa.schoology.obj.courses.SchoologyCourse;
+import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
+import net.rvanasa.schoology.obj.courses.SchoologyCoursesPage;
+import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionRepliesPage;
+import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionsPage;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentStatus;
+import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentsPage;
+import net.rvanasa.schoology.obj.events.SchoologyEventType;
+import net.rvanasa.schoology.obj.events.SchoologyEventsPage;
+import net.rvanasa.schoology.obj.events.SchoologyRSVPType;
+import net.rvanasa.schoology.obj.groups.SchoologyGroup;
+import net.rvanasa.schoology.obj.groups.SchoologyGroupsPage;
+import net.rvanasa.schoology.obj.schools.SchoologySchool;
+import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
+import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
+import net.rvanasa.schoology.obj.sections.SchoologyCourseSectionsPage;
+import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
+import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
+import net.rvanasa.schoology.obj.users.SchoologyGenderEnum;
+import net.rvanasa.schoology.obj.users.SchoologyUser;
+import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
 
 public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 {
@@ -27,6 +80,8 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	private final SchoologyResourceLocator resourceLocator;
 	
 	private final OAuthService service;
+	
+	private Gson gson;
 	
 	private SchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
 	
@@ -46,6 +101,21 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	{
 		this.resourceLocator = locator;
 		this.service = service;
+		
+		gson = new GsonBuilder()
+		.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter())
+		.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter())
+		.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter())
+		.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter())
+		.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter())
+		.registerTypeAdapter(SchoologyConvertedTypeEnum.class, new SchoologyConvertedTypeAdapter())
+		.registerTypeAdapter(SchoologyConvertedStatusEnum.class, new SchoologyConvertedStatusAdapter())
+		.registerTypeAdapter(SchoologyAttachmentTypeEnum.class, new SchoologyAttachmentTypeAdapter())
+		.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter())
+		.registerTypeAdapter(SchoologyEventType.class, new SchoologyEventTypeAdapter())
+		.registerTypeAdapter(SchoologyRSVPType.class, new SchoologyRSVPTypeAdapter())
+		.registerTypeAdapter(SchoologyEnrollmentStatus.class, new SchoologyEnrollmentStatusAdapter())
+		.create();
 	}
 	
 	public SchoologyResourceLocator getResourceLocator()
@@ -79,8 +149,22 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 	}
 	
 	public OAuthRequest prepareRequest(Verb verb, String resource)
-	{
-		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(resource));
+	{	
+		String URL = resource;
+		String query = null;
+		
+		final int qIndex = URL.lastIndexOf('?');
+		
+		if(qIndex != -1)
+		{
+			query = URL.substring(qIndex + 1);
+			URL = URL.substring(0, qIndex);
+		}
+		
+		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(URL));
+		
+		if(query != null) for(Entry<String, String> e : splitQuery(query).entrySet()) request.addQuerystringParameter(e.getKey(), e.getValue());
+		
 		getOAuthService().signRequest(getAccessToken() != null ? getAccessToken() : Token.empty(), request);
 		request.addHeader("Accept", getContentType().getID());
 		request.addHeader("Content-Type", getContentType().getID());
@@ -93,6 +177,23 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 				SchoologyResponseStatusEnum.getStatus(response.getCode()),
 				new BasicSchoologyResponseBody(getContentType(), response.getBody()),
 				new BasicSchoologyResponseHeaders(response.getHeaders()));
+	}
+	
+	/*
+	 * Modified method of separating query parameters provided by https://stackoverflow.com/a/13592567
+	 */
+	private Map<String, String> splitQuery(String query)
+	{
+		return Arrays.stream(query.split("&"))
+	            .map(this::splitQueryParameter).collect(Collectors.toMap(SimpleImmutableEntry::getKey, SimpleImmutableEntry::getValue));
+	}
+
+	private SimpleImmutableEntry<String, String> splitQueryParameter(String it)
+	{
+	    final int idx = it.indexOf("=");
+	    final String key = idx > 0 ? it.substring(0, idx) : it;
+	    final String value = idx > 0 && it.length() > idx + 1 ? it.substring(idx + 1) : null;
+	    return new SimpleImmutableEntry<>(key, value);
 	}
 	
 	@Override
@@ -163,4 +264,208 @@ public class OAuthSchoologyRequestHandler implements SchoologyRequestHandler
 		
 		return prepareResponse(response);
 	}
+	
+	/*
+	 * Java object implementations
+	 */
+	//TODO: add query string options
+	@Override
+	public SchoologyUsersPage getUsersPage()
+	{
+		SchoologyResponse response = get("users").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyUsersPage.class);
+	}
+	
+	@Override
+	public SchoologyUser getUser(String uid)
+	{
+		SchoologyResponse response = get("users/" + uid + "?extended=true").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyUser.class);
+	}
+	
+	@Override
+	public SchoologyGroupsPage getGroupsPage()
+	{
+		SchoologyResponse response = get("groups").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyGroupsPage.class);
+	}
+			
+	@Override
+	public SchoologyGroup getGroup(String group_id)
+	{
+		SchoologyResponse response = get("groups/" + group_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyGroup.class);
+	}
+	
+	@Override
+	public SchoologyCoursesPage getCoursesPage()
+	{
+		SchoologyResponse response = get("courses").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCoursesPage.class);
+	}
+	
+	@Override
+	public SchoologyCourse getCourse(String course_id)
+	{
+		SchoologyResponse response = get("courses/" + course_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCourse.class);
+	}
+	
+	@Override
+	public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id)
+	{
+		SchoologyResponse response = get("courses/" + course_id + "/sections").requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCourseSectionsPage.class);
+	}
+	
+	@Override
+	public SchoologyCourseSection getCourseSection(String section_id)
+	{
+		SchoologyResponse response = get("sections/" + section_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologyCourseSection.class);
+	}
+	
+	@Override
+	public SchoologySchool[] getSchools()
+	{
+		SchoologyResponse response = get("schools").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("school").asRawData(), SchoologySchool[].class);
+	}
+	
+	@Override
+	public SchoologySchool getSchool(String school_id)
+	{
+		SchoologyResponse response = get("schools/" + school_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().getRawData(), SchoologySchool.class);
+	}
+	
+	@Override
+	public SchoologyBuilding[] getBuildings(String school_id)
+	{
+		SchoologyResponse response = get("schools/" + school_id + "/buildings").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("building").asRawData(), SchoologyBuilding[].class);
+	}
+	
+	@Override
+	public SchoologyUpdate[] getUpdates(String realm)
+	{
+		if(!realm.equalsIgnoreCase("recent")) realm += "/updates";
+		
+		SchoologyResponse response = get(realm + "?with_attachments=true").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("update").asRawData(), SchoologyUpdate[].class);
+	}
+	
+	@Override
+	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update)
+	{
+		
+		SchoologyRealmEnum realm = update.getRealm();
+		
+		if(realm == null) return new SchoologyUpdateComment[] {};
+		
+		String endpoint = "";
+		
+		switch (realm) {
+		case BUILDING:
+			endpoint = "schools/" + update.getBuilding_id() + "/buildings";
+			break;
+		case COURSE_SECTION:
+			endpoint = "course/" + update.getSection_id();
+			break;
+		case GROUP:
+			endpoint = "group/" + update.getGroup_id();
+			break;
+		default:
+			break;
+		}
+		
+		SchoologyResponse response = get(endpoint + "/updates/" + update.getId() + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyUpdateComment[].class);
+	}
+
+	@Override
+	public SchoologyEventsPage getEventsPage(String realm)
+	{
+		SchoologyResponse response = get(realm + "/events").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEventsPage.class);
+	}
+
+	@Override
+	public SchoologyEnrollmentsPage getEnrollmentsPage(String realm)
+	{
+		SchoologyResponse response = get(realm + "/enrollments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEnrollmentsPage.class);
+	}
+
+	@Override
+	public SchoologyBlogPost[] getBlogPosts(String realm)
+	{
+		SchoologyResponse response = get(realm + "/posts").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("post").asRawData(), SchoologyBlogPost[].class);
+	}
+
+	@Override
+	public SchoologyBlogPostComment[] getBlogPostComments(String realm, String post_id) {
+		SchoologyResponse response = get(realm + "/posts/" + post_id + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyBlogPostComment[].class);
+	}
+
+	@Override
+	public SchoologyDiscussionsPage getDiscussionsPage(String realm)
+	{
+		SchoologyResponse response = get(realm + "/discussions").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussionsPage.class);
+	}
+	
+	@Override
+	public SchoologyDiscussionRepliesPage getDiscussionRepliesPage(String realm, String discussion_id)
+	{
+		SchoologyResponse response = get(realm + "/discussions/" + discussion_id + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionRepliesPage.class);
+	}
+
+	@Override
+	public SchoologyMediaAlbums getMediaAlbums(String realm)
+	{
+		SchoologyResponse response = get(realm + "/albums").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyMediaAlbums.class);
+	}
+	
+	//TODO: Schoology documentation says =1, but should it be =true?
+	@Override
+	public SchoologyMediaAlbumContent[] getMediaAlbumContent(String realm, String album_id)
+	{
+		SchoologyResponse response = get(realm + "/albums/" + album_id + "?withcontent=1").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("album").get("content").asRawData(), SchoologyMediaAlbumContent[].class);
+	}
+
+	@Override
+	public SchoologyMediaAlbumComment[] getMediaAlbumContentComment(String realm, String album_id, String content_id)
+	{
+		SchoologyResponse response = get(realm + "/albums/" + album_id + "/content/" + content_id + "/comments").requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyMediaAlbumComment[].class);
+	}
+
 }
