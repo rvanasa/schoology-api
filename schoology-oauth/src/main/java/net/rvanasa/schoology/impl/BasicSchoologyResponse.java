@@ -1,44 +1,37 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.ISchoologyResponse;
-import net.rvanasa.schoology.ISchoologyResponseBody;
-import net.rvanasa.schoology.ISchoologyResponseHeaders;
 import net.rvanasa.schoology.ISchoologyResponseStatus;
 import net.rvanasa.schoology.exception.SchoologyException;
 
-public class BasicSchoologyResponse implements ISchoologyResponse
+public class BasicSchoologyResponse
 {
 	private final ISchoologyResponseStatus status;
-	private final ISchoologyResponseBody body;
-	private final ISchoologyResponseHeaders headers;
+	private final BasicSchoologyResponseBody body;
+	private final BasicSchoologyResponseHeaders headers;
 	
-	public BasicSchoologyResponse(ISchoologyResponseStatus status, ISchoologyResponseBody body, ISchoologyResponseHeaders headers)
+	public BasicSchoologyResponse(ISchoologyResponseStatus status, BasicSchoologyResponseBody body, BasicSchoologyResponseHeaders headers)
 	{
 		this.status = status;
 		this.body = body;
 		this.headers = headers;
 	}
 	
-	@Override
 	public ISchoologyResponseStatus getStatus()
 	{
 		return status;
 	}
 	
-	@Override
-	public ISchoologyResponseBody getBody()
+	public BasicSchoologyResponseBody getBody()
 	{
 		return body;
 	}
 	
-	@Override
-	public ISchoologyResponseHeaders getHeaders()
+	public BasicSchoologyResponseHeaders getHeaders()
 	{
 		return headers;
 	}
 	
-	@Override
-	public ISchoologyResponse requireSuccess()
+	public BasicSchoologyResponse requireSuccess()
 	{
 		if(!getStatus().isSuccess())
 		{

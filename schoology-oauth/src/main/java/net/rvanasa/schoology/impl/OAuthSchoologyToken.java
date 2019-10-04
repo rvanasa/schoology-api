@@ -5,9 +5,8 @@ import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
 import net.rvanasa.schoology.ISchoologyRequestHandler;
-import net.rvanasa.schoology.ISchoologyToken;
 
-public class OAuthSchoologyToken implements ISchoologyToken
+public class OAuthSchoologyToken
 {
 	private final OAuthSchoologyFlow flow;
 	private final Token token;
@@ -33,13 +32,11 @@ public class OAuthSchoologyToken implements ISchoologyToken
 		return getFlow().getService();
 	}
 	
-	@Override
 	public String getAuthorizationUrl()
 	{
 		return getService().getAuthorizationUrl(getToken());
 	}
 	
-	@Override
 	public ISchoologyRequestHandler createRequestHandler(String verifier)
 	{
 		Token accessToken = getService().getAccessToken(getToken(), new Verifier(verifier));

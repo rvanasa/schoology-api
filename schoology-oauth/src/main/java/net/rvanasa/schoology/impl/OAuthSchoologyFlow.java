@@ -4,9 +4,7 @@ import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.SignatureType;
 import org.scribe.oauth.OAuthService;
 
-import net.rvanasa.schoology.ISchoologyFlow;
-
-public class OAuthSchoologyFlow implements ISchoologyFlow
+public class OAuthSchoologyFlow
 {
 	public static OAuthService createService(SchoologyResourceLocator locator, String key, String secret, String callbackUrl)
 	{
@@ -49,7 +47,6 @@ public class OAuthSchoologyFlow implements ISchoologyFlow
 		return service;
 	}
 	
-	@Override
 	public OAuthSchoologyToken createRequestToken()
 	{
 		return new OAuthSchoologyToken(this, getService().getRequestToken());

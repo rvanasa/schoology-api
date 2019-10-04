@@ -3,10 +3,9 @@ package net.rvanasa.schoology.impl.json;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import net.rvanasa.schoology.ISchoologyNode;
 import net.rvanasa.schoology.ISchoologyNodeParser;
-import net.rvanasa.schoology.ISchoologyResponse;
 import net.rvanasa.schoology.ISchoologyResponseHandler;
+import net.rvanasa.schoology.impl.BasicSchoologyResponse;
 
 public class JsonSchoologyResponseHandler implements ISchoologyResponseHandler<JsonElement>, ISchoologyNodeParser
 {
@@ -25,13 +24,13 @@ public class JsonSchoologyResponseHandler implements ISchoologyResponseHandler<J
 	}
 	
 	@Override
-	public JsonElement handleResponse(ISchoologyResponse response)
+	public JsonElement handleResponse(BasicSchoologyResponse response)
 	{
 		return getJsonParser().parse(response.getBody().getRawData());
 	}
 	
 	@Override
-	public ISchoologyNode parseNode(String input)
+	public JsonSchoologyNode parseNode(String input)
 	{
 		return new JsonSchoologyNode(getJsonParser().parse(input));
 	}
