@@ -22,7 +22,6 @@ Desktop.ini
 # Thumbnails
 ._*
 
-schoology-api/target/
 schoology-oauth/target/
 
 *.class

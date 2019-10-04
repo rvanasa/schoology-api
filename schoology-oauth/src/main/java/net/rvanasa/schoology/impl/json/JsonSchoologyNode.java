@@ -9,9 +9,9 @@ import java.util.Map.Entry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 
-import net.rvanasa.schoology.SchoologyNode;
+import net.rvanasa.schoology.ISchoologyNode;
 
-public class JsonSchoologyNode implements SchoologyNode
+public class JsonSchoologyNode implements ISchoologyNode
 {
 	public static final JsonSchoologyNode NULL = new JsonSchoologyNode(null);
 	
@@ -33,15 +33,15 @@ public class JsonSchoologyNode implements SchoologyNode
 	}
 	
 	@Override
-	public SchoologyNode get(String key)
+	public ISchoologyNode get(String key)
 	{
 		return asMapValue().getOrDefault(key, NULL);
 	}
 	
 	@Override
-	public SchoologyNode get(int index)
+	public ISchoologyNode get(int index)
 	{
-		SchoologyNode node = asListValue().get(index);
+		ISchoologyNode node = asListValue().get(index);
 		return node != null ? node : NULL;
 	}
 	
@@ -91,9 +91,9 @@ public class JsonSchoologyNode implements SchoologyNode
 	}
 	
 	@Override
-	public Map<String, SchoologyNode> asMapValue()
+	public Map<String, ISchoologyNode> asMapValue()
 	{
-		Map<String, SchoologyNode> map = new LinkedHashMap<>();
+		Map<String, ISchoologyNode> map = new LinkedHashMap<>();
 		
 		if(getElement().isJsonObject())
 		{
@@ -115,9 +115,9 @@ public class JsonSchoologyNode implements SchoologyNode
 	}
 	
 	@Override
-	public List<SchoologyNode> asListValue()
+	public List<ISchoologyNode> asListValue()
 	{
-		List<SchoologyNode> list = new ArrayList<>();
+		List<ISchoologyNode> list = new ArrayList<>();
 		
 		if(getElement().isJsonArray())
 		{

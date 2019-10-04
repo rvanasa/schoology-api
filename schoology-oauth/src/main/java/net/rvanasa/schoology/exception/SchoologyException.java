@@ -1,15 +1,15 @@
 package net.rvanasa.schoology.exception;
 
-import net.rvanasa.schoology.SchoologyResponseStatus;
+import net.rvanasa.schoology.ISchoologyResponseStatus;
 
 public class SchoologyException extends RuntimeException
 {
-	public SchoologyException(SchoologyResponseStatus status)
+	public SchoologyException(ISchoologyResponseStatus status)
 	{
 		this(status, status.getMessage());
 	}
 	
-	public SchoologyException(SchoologyResponseStatus status, String message)
+	public SchoologyException(ISchoologyResponseStatus status, String message)
 	{
 		this("Response code " + status.getCode() + ": " + message.replaceAll("\n+", " "));
 	}

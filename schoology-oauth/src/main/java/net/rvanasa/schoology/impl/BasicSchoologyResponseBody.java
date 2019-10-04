@@ -1,21 +1,21 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.SchoologyContentType;
-import net.rvanasa.schoology.SchoologyResponseBody;
+import net.rvanasa.schoology.ISchoologyContentType;
+import net.rvanasa.schoology.ISchoologyResponseBody;
 
-public class BasicSchoologyResponseBody implements SchoologyResponseBody
+public class BasicSchoologyResponseBody implements ISchoologyResponseBody
 {
-	private final SchoologyContentType contentType;
+	private final ISchoologyContentType contentType;
 	private final String rawData;
 
-	public BasicSchoologyResponseBody(SchoologyContentType contentType, String rawData)
+	public BasicSchoologyResponseBody(ISchoologyContentType contentType, String rawData)
 	{
 		this.contentType = contentType;
 		this.rawData = rawData;
 	}
 	
 	@Override
-	public SchoologyContentType getContentType()
+	public ISchoologyContentType getContentType()
 	{
 		return contentType;
 	}

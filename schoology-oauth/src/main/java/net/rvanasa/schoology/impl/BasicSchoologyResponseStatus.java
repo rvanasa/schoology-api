@@ -1,8 +1,8 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.SchoologyResponseStatus;
+import net.rvanasa.schoology.ISchoologyResponseStatus;
 
-public class BasicSchoologyResponseStatus implements SchoologyResponseStatus
+public class BasicSchoologyResponseStatus implements ISchoologyResponseStatus
 {
 	private final int code;
 	private final String message;

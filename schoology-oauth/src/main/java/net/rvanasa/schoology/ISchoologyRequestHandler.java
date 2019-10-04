@@ -22,19 +22,19 @@ import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
 import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
 
-public interface SchoologyRequestHandler
+public interface ISchoologyRequestHandler
 {
-	public SchoologyResponse get(String resource);
+	public ISchoologyResponse get(String resource);
 	
-	public SchoologyResponse multiget(String... resources);
+	public ISchoologyResponse multiget(String... resources);
 	
-	public SchoologyResponse post(String resource, String body);
+	public ISchoologyResponse post(String resource, String body);
 	
-	public SchoologyResponse put(String resource, String body);
+	public ISchoologyResponse put(String resource, String body);
 	
-	public SchoologyResponse delete(String resource);
+	public ISchoologyResponse delete(String resource);
 	
-	public SchoologyResponse options(String resource);
+	public ISchoologyResponse options(String resource);
 	
 	/*
 	 * Java object implementations

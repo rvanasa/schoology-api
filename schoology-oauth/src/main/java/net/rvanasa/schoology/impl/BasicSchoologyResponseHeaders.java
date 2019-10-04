@@ -2,9 +2,9 @@ package net.rvanasa.schoology.impl;
 
 import java.util.Map;
 
-import net.rvanasa.schoology.SchoologyResponseHeaders;
+import net.rvanasa.schoology.ISchoologyResponseHeaders;
 
-public class BasicSchoologyResponseHeaders implements SchoologyResponseHeaders
+public class BasicSchoologyResponseHeaders implements ISchoologyResponseHeaders
 {
 	private final Map<String, String> headers;
 

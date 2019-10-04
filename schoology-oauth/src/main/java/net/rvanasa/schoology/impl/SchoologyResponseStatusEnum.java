@@ -1,8 +1,8 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.SchoologyResponseStatus;
+import net.rvanasa.schoology.ISchoologyResponseStatus;
 
-public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
+public enum SchoologyResponseStatusEnum implements ISchoologyResponseStatus
 {
 	SUCCESS_OK(200, "OK"),
 	SUCCESS_CREATED(201, "Create"),
@@ -40,7 +40,7 @@ public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 		return this.name().startsWith("SUCCESS");
 	}
 	
-	public static SchoologyResponseStatus getStatus(int code)
+	public static ISchoologyResponseStatus getStatus(int code)
 	{
 		for(SchoologyResponseStatusEnum status : values())
 		{

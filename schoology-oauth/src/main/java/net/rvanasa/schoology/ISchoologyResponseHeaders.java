@@ -2,7 +2,7 @@ package net.rvanasa.schoology;
 
 import java.util.Map;
 
-public interface SchoologyResponseHeaders
+public interface ISchoologyResponseHeaders
 {
 	public Map<String, String> getHeaders();
 	

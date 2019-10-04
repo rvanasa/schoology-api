@@ -1,12 +1,12 @@
 package net.rvanasa.schoology;
 
-public interface SchoologyResponseBody
+public interface ISchoologyResponseBody
 {
-	public SchoologyContentType getContentType();
+	public ISchoologyContentType getContentType();
 	
 	public String getRawData();
 	
-	default SchoologyNode parse()
+	default ISchoologyNode parse()
 	{
 		return getContentType().getParser().parseNode(getRawData());
 	}

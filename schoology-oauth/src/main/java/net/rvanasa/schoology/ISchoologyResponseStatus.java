@@ -1,6 +1,6 @@
 package net.rvanasa.schoology;
 
-public interface SchoologyResponseStatus
+public interface ISchoologyResponseStatus
 {
 	public int getCode();
 	
