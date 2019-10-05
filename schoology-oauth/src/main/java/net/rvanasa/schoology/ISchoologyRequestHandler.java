@@ -1,6 +1,6 @@
 package net.rvanasa.schoology;
 
-import net.rvanasa.schoology.impl.BasicSchoologyResponse;
+import net.rvanasa.schoology.impl.SchoologyResponse;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
 import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
@@ -25,17 +25,17 @@ import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
 
 public interface ISchoologyRequestHandler
 {
-	public BasicSchoologyResponse get(String resource);
+	public SchoologyResponse get(String resource);
 	
-	public BasicSchoologyResponse multiget(String... resources);
+	public SchoologyResponse multiget(String... resources);
 	
-	public BasicSchoologyResponse post(String resource, String body);
+	public SchoologyResponse post(String resource, String body);
 	
-	public BasicSchoologyResponse put(String resource, String body);
+	public SchoologyResponse put(String resource, String body);
 	
-	public BasicSchoologyResponse delete(String resource);
+	public SchoologyResponse delete(String resource);
 	
-	public BasicSchoologyResponse options(String resource);
+	public SchoologyResponse options(String resource);
 	
 	/*
 	 * Java object implementations

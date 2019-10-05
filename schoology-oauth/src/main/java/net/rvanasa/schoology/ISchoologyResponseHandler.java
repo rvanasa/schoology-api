@@ -1,8 +1,8 @@
 package net.rvanasa.schoology;
 
-import net.rvanasa.schoology.impl.BasicSchoologyResponse;
+import net.rvanasa.schoology.impl.SchoologyResponse;
 
 public interface ISchoologyResponseHandler<T>
 {
-	public T handleResponse(BasicSchoologyResponse response);
+	public T handleResponse(SchoologyResponse response);
 }

@@ -2,13 +2,13 @@ package net.rvanasa.schoology.impl;
 
 import net.rvanasa.schoology.ISchoologyResponseStatus;
 
-public class BasicSchoologyResponseStatus implements ISchoologyResponseStatus
+public class SchoologyResponseStatus implements ISchoologyResponseStatus
 {
 	private final int code;
 	private final String message;
 	private final boolean success;
 	
-	public BasicSchoologyResponseStatus(int code, String message, boolean success)
+	public SchoologyResponseStatus(int code, String message, boolean success)
 	{
 		this.code = code;
 		this.message = message;

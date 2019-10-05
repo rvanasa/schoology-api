@@ -49,6 +49,6 @@ public enum SchoologyResponseStatusEnum implements ISchoologyResponseStatus
 				return status;
 			}
 		}
-		return new BasicSchoologyResponseStatus(code, "Unknown status", false);
+		return new SchoologyResponseStatus(code, "Unknown status", false);
 	}
 }

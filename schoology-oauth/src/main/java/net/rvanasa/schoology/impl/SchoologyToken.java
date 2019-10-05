@@ -6,18 +6,18 @@ import org.scribe.oauth.OAuthService;
 
 import net.rvanasa.schoology.ISchoologyRequestHandler;
 
-public class OAuthSchoologyToken
+public class SchoologyToken
 {
-	private final OAuthSchoologyFlow flow;
+	private final SchoologyFlow flow;
 	private final Token token;
 	
-	public OAuthSchoologyToken(OAuthSchoologyFlow flow, Token token)
+	public SchoologyToken(SchoologyFlow flow, Token token)
 	{
 		this.flow = flow;
 		this.token = token;
 	}
 	
-	public OAuthSchoologyFlow getFlow()
+	public SchoologyFlow getFlow()
 	{
 		return flow;
 	}
@@ -41,7 +41,7 @@ public class OAuthSchoologyToken
 	{
 		Token accessToken = getService().getAccessToken(getToken(), new Verifier(verifier));
 		
-		OAuthSchoologyRequestHandler handler = new OAuthSchoologyRequestHandler(getFlow().getResourceLocator(), getService());
+		SchoologyRequestHandler handler = new SchoologyRequestHandler(getFlow().getResourceLocator(), getService());
 		handler.setAccessToken(accessToken);
 		return handler;
 	}

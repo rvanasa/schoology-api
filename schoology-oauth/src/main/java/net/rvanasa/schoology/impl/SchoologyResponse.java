@@ -3,13 +3,13 @@ package net.rvanasa.schoology.impl;
 import net.rvanasa.schoology.ISchoologyResponseStatus;
 import net.rvanasa.schoology.exception.SchoologyException;
 
-public class BasicSchoologyResponse
+public class SchoologyResponse
 {
 	private final ISchoologyResponseStatus status;
-	private final BasicSchoologyResponseBody body;
-	private final BasicSchoologyResponseHeaders headers;
+	private final SchoologyResponseBody body;
+	private final SchoologyResponseHeaders headers;
 	
-	public BasicSchoologyResponse(ISchoologyResponseStatus status, BasicSchoologyResponseBody body, BasicSchoologyResponseHeaders headers)
+	public SchoologyResponse(ISchoologyResponseStatus status, SchoologyResponseBody body, SchoologyResponseHeaders headers)
 	{
 		this.status = status;
 		this.body = body;
@@ -21,17 +21,17 @@ public class BasicSchoologyResponse
 		return status;
 	}
 	
-	public BasicSchoologyResponseBody getBody()
+	public SchoologyResponseBody getBody()
 	{
 		return body;
 	}
 	
-	public BasicSchoologyResponseHeaders getHeaders()
+	public SchoologyResponseHeaders getHeaders()
 	{
 		return headers;
 	}
 	
-	public BasicSchoologyResponse requireSuccess()
+	public SchoologyResponse requireSuccess()
 	{
 		if(!getStatus().isSuccess())
 		{

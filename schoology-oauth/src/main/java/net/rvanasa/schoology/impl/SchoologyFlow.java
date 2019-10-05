@@ -4,7 +4,7 @@ import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.SignatureType;
 import org.scribe.oauth.OAuthService;
 
-public class OAuthSchoologyFlow
+public class SchoologyFlow
 {
 	public static OAuthService createService(SchoologyResourceLocator locator, String key, String secret, String callbackUrl)
 	{
@@ -21,17 +21,17 @@ public class OAuthSchoologyFlow
 	
 	private final OAuthService service;
 	
-	public OAuthSchoologyFlow(String domain, String key, String secret, String callbackUrl)
+	public SchoologyFlow(String domain, String key, String secret, String callbackUrl)
 	{
 		this(new SchoologyResourceLocator(domain), key, secret, callbackUrl);
 	}
 	
-	public OAuthSchoologyFlow(SchoologyResourceLocator locator, String key, String secret, String callbackUrl)
+	public SchoologyFlow(SchoologyResourceLocator locator, String key, String secret, String callbackUrl)
 	{
 		this(locator, createService(locator, key, secret, callbackUrl));
 	}
 	
-	public OAuthSchoologyFlow(SchoologyResourceLocator locator, OAuthService service)
+	public SchoologyFlow(SchoologyResourceLocator locator, OAuthService service)
 	{
 		this.resourceLocator = locator;
 		this.service = service;
@@ -47,8 +47,8 @@ public class OAuthSchoologyFlow
 		return service;
 	}
 	
-	public OAuthSchoologyToken createRequestToken()
+	public SchoologyToken createRequestToken()
 	{
-		return new OAuthSchoologyToken(this, getService().getRequestToken());
+		return new SchoologyToken(this, getService().getRequestToken());
 	}
 }

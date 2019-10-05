@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 
 import net.rvanasa.schoology.ISchoologyNodeParser;
 import net.rvanasa.schoology.ISchoologyResponseHandler;
-import net.rvanasa.schoology.impl.BasicSchoologyResponse;
+import net.rvanasa.schoology.impl.SchoologyResponse;
 
 public class JsonSchoologyResponseHandler implements ISchoologyResponseHandler<JsonElement>, ISchoologyNodeParser
 {
@@ -24,7 +24,7 @@ public class JsonSchoologyResponseHandler implements ISchoologyResponseHandler<J
 	}
 	
 	@Override
-	public JsonElement handleResponse(BasicSchoologyResponse response)
+	public JsonElement handleResponse(SchoologyResponse response)
 	{
 		return getJsonParser().parse(response.getBody().getRawData());
 	}

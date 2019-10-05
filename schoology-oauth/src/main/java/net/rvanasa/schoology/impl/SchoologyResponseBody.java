@@ -3,12 +3,12 @@ package net.rvanasa.schoology.impl;
 import net.rvanasa.schoology.ISchoologyContentType;
 import net.rvanasa.schoology.ISchoologyNode;
 
-public class BasicSchoologyResponseBody
+public class SchoologyResponseBody
 {
 	private final ISchoologyContentType contentType;
 	private final String rawData;
 
-	public BasicSchoologyResponseBody(ISchoologyContentType contentType, String rawData)
+	public SchoologyResponseBody(ISchoologyContentType contentType, String rawData)
 	{
 		this.contentType = contentType;
 		this.rawData = rawData;	

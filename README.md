@@ -7,11 +7,21 @@ Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](htt
  
 ## Example Usage:
 
+You can generate a user API key & secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
+
+#### 2-Legged Auth:
+
+```java
+
+SchoologyRequestHandler schoology = new SchoologyRequestHandler(DISTRICT_PREFIX, API_KEY, API_SECRET);
+
+```
+
 #### 3-Legged Auth:
 
 ```java
 
-SchoologyFlow flow = new OAuthSchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK_URL);
+SchoologyFlow flow = new SchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK_URL);
 
 SchoologyToken token = flow.createRequestToken();
 
@@ -25,16 +35,6 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 ```
 
-#### 2-Legged Auth:
-
-You can generate a user API key/secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
-
-```java
-
-SchoologyRequestHandler schoology = new OAuthSchoologyRequestHandler(DISTRICT_PREFIX, API_KEY, API_SECRET);
-
-```
-
 #### Sending a Request:
 
 ```java
@@ -43,7 +43,7 @@ SchoologyResponseBody response = schoology.get("sections/123456789").requireSucc
 
 System.out.println(response.getRawData()); // JSON string
 
-SchoologyNode node = response.parse();
+ISchoologyNode node = response.parse();
 System.out.println(node.get("JSON_KEY").get(1).asString()); // index 1 of some JSON_KEY property
 
 ```

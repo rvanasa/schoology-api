@@ -2,11 +2,11 @@ package net.rvanasa.schoology.impl;
 
 import java.util.Map;
 
-public class BasicSchoologyResponseHeaders
+public class SchoologyResponseHeaders
 {
 	private final Map<String, String> headers;
 
-	public BasicSchoologyResponseHeaders(Map<String, String> headers)
+	public SchoologyResponseHeaders(Map<String, String> headers)
 	{
 		this.headers = headers;
 	}
