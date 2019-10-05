@@ -1,6 +1,6 @@
 package net.rvanasa.schoology.impl;
 
-public class SchoologyResourceLocator
+class SchoologyResourceLocator
 {
 	private final String domain;
 	
