@@ -9,7 +9,7 @@ Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](htt
 
 You can generate a user API key & secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
 
-#### 2-Legged Auth:
+### 2-Legged Auth:
 
 ```java
 
@@ -17,7 +17,7 @@ SchoologyRequestHandler schoology = new SchoologyRequestHandler(DISTRICT_PREFIX,
 
 ```
 
-#### 3-Legged Auth:
+### 3-Legged Auth:
 
 ```java
 
@@ -35,11 +35,11 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 ```
 
-#### Sending a Request:
+### Sending a Request:
 
 Requests can be send and parsed manually, or by using the premade methods provided with the SchoologyRequestHandler.
 
-##### Manual
+#### Manually:
 ```java
 
 //{UID} represents the target user ID
@@ -52,7 +52,7 @@ System.out.println(node.get("name_display").asString()); // get display name of 
 
 ```
 
-##### Using premade methods & objects
+#### Using premade methods & objects:
 ```java
 
 //{UID} represents the target user ID
