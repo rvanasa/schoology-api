@@ -20,7 +20,6 @@ import com.google.gson.GsonBuilder;
 
 import net.rvanasa.schoology.ISchoologyContentType;
 import net.rvanasa.schoology.ISchoologyRequestHandler;
-import net.rvanasa.schoology.SchoologyRealmEnum;
 import net.rvanasa.schoology.adapters.SchoologyAttachmentTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
 import net.rvanasa.schoology.adapters.SchoologyConvertedStatusAdapter;

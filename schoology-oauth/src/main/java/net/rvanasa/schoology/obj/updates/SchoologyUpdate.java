@@ -3,7 +3,7 @@ package net.rvanasa.schoology.obj.updates;
 import java.util.Date;
 
 import lombok.Getter;
-import net.rvanasa.schoology.SchoologyRealmEnum;
+import net.rvanasa.schoology.impl.SchoologyRealmEnum;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachments;
 

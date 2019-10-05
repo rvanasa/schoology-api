@@ -1,4 +1,4 @@
-package net.rvanasa.schoology;
+package net.rvanasa.schoology.impl;
 
 import lombok.Getter;
 
