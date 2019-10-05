@@ -39,7 +39,7 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 Requests can be send and parsed manually, or by using the premade methods provided with the SchoologyRequestHandler.
 
-#####Manual
+##### Manual
 ```java
 
 //{UID} represents the target user ID
@@ -52,7 +52,7 @@ System.out.println(node.get("name_display").asString()); // get display name of 
 
 ```
 
-#####Using premade methods & objects
+##### Using premade methods & objects
 ```java
 
 //{UID} represents the target user ID
