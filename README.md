@@ -37,14 +37,28 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 #### Sending a Request:
 
+Requests can be send and parsed manually, or by using the premade methods provided with the SchoologyRequestHandler.
+
+#####Manual
 ```java
 
-SchoologyResponseBody response = schoology.get("sections/123456789").requireSuccess().getBody();
+//{UID} represents the target user ID
+SchoologyResponseBody response = schoology.get("users/{UID}?extended=true").requireSuccess().getBody();
 
-System.out.println(response.getRawData()); // JSON string
+System.out.println(response.getRawData()); // raw JSON string
 
 ISchoologyNode node = response.parse();
-System.out.println(node.get("JSON_KEY").get(1).asString()); // index 1 of some JSON_KEY property
+System.out.println(node.get("name_display").asString()); // get display name of user
+
+```
+
+#####Using premade methods & objects
+```java
+
+//{UID} represents the target user ID
+SchoologyUser user = schoology.getUser("{UID}");
+
+System.out.println(user.getNameDisplay()); // get display name of user
 
 ```
 
