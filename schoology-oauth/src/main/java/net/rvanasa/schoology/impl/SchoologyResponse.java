@@ -1,22 +1,21 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.ISchoologyResponseStatus;
 import net.rvanasa.schoology.exception.SchoologyException;
 
 public class SchoologyResponse
 {
-	private final ISchoologyResponseStatus status;
+	private final SchoologyResponseStatusEnum status;
 	private final SchoologyResponseBody body;
 	private final SchoologyResponseHeaders headers;
 	
-	public SchoologyResponse(ISchoologyResponseStatus status, SchoologyResponseBody body, SchoologyResponseHeaders headers)
+	public SchoologyResponse(SchoologyResponseStatusEnum status, SchoologyResponseBody body, SchoologyResponseHeaders headers)
 	{
 		this.status = status;
 		this.body = body;
 		this.headers = headers;
 	}
 	
-	public ISchoologyResponseStatus getStatus()
+	public SchoologyResponseStatusEnum getStatus()
 	{
 		return status;
 	}

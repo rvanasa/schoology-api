@@ -42,7 +42,7 @@ Requests can be send and parsed manually, or by using the premade methods provid
 #### Manually:
 ```java
 
-//{UID} represents the target user ID
+// {UID} represents the target user ID
 SchoologyResponseBody response = schoology.get("users/{UID}?extended=true").requireSuccess().getBody();
 
 System.out.println(response.getRawData()); // raw JSON string
@@ -55,7 +55,7 @@ System.out.println(node.get("name_display").asString()); // get display name of 
 #### Using premade methods & objects:
 ```java
 
-//{UID} represents the target user ID
+// {UID} represents the target user ID
 SchoologyUser user = schoology.getUser("{UID}");
 
 System.out.println(user.getNameDisplay()); // get display name of user

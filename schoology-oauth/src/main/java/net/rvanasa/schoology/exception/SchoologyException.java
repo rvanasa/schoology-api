@@ -1,15 +1,16 @@
 package net.rvanasa.schoology.exception;
 
-import net.rvanasa.schoology.ISchoologyResponseStatus;
+import net.rvanasa.schoology.impl.SchoologyResponseStatusEnum;
 
+@SuppressWarnings("serial")
 public class SchoologyException extends RuntimeException
 {
-	public SchoologyException(ISchoologyResponseStatus status)
+	public SchoologyException(SchoologyResponseStatusEnum status)
 	{
 		this(status, status.getMessage());
 	}
 	
-	public SchoologyException(ISchoologyResponseStatus status, String message)
+	public SchoologyException(SchoologyResponseStatusEnum status, String message)
 	{
 		this("Response code " + status.getCode() + ": " + message.replaceAll("\n+", " "));
 	}
