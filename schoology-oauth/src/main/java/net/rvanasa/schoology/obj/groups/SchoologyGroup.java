@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.groups;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -10,18 +12,25 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyGroup
 {
 	
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String title;
 	String description;
 	String website;
-	String access_code;
+	@SerializedName(value="access_code")
+	String accessCode;
 	String category;
 	SchoologyGroupOptions options;
-	String group_code;
-	String privacy_level;
-	String picture_url;
-	String school_id;
-	String building_id;
+	@SerializedName(value="group_code")
+	String groupCode;
+	@SerializedName(value="privacy_level")
+	String privacyLevel;
+	@SerializedName(value="picture_url")
+	String pictureURL;
+	@SerializedName(value="school_id")
+	String schoolID;
+	@SerializedName(value="building_id")
+	String buildingID;
 	
 	SchoologyLinks links;
 	
@@ -31,10 +40,15 @@ public class SchoologyGroup
 class SchoologyGroupOptions
 {
 	
-	boolean invite_type;
-	boolean member_post;
-	boolean member_post_comment;
-	boolean create_discussion;
-	boolean create_files;
+	@SerializedName(value="invite_type")
+	boolean inviteType;
+	@SerializedName(value="member_post")
+	boolean memberPost;
+	@SerializedName(value="member_post_comment")
+	boolean memberPostComment;
+	@SerializedName(value="create_discussion")
+	boolean createDiscussion;
+	@SerializedName(value="create_files")
+	boolean createFiles;
 	
 }

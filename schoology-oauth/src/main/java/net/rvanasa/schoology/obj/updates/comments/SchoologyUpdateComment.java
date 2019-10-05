@@ -2,6 +2,8 @@ package net.rvanasa.schoology.obj.updates.comments;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -12,14 +14,18 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyUpdateComment
 {
 	
-	String id;
-	String uid;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="uid")
+	String userID;
 	String comment;
 	Date created;
-	String parent_id;
+	@SerializedName(value="parent_id")
+	String parentID;
 	boolean status;
 	int likes;
-	boolean user_like_action;
+	@SerializedName(value="user_like_action")
+	boolean userLikeAction;
 	
 	SchoologyLinks links;
 	

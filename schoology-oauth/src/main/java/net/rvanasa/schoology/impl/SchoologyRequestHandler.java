@@ -377,19 +377,19 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		
 		switch (realm) {
 		case BUILDING:
-			endpoint = "schools/" + update.getBuilding_id() + "/buildings";
+			endpoint = "schools/" + update.getBuildingID() + "/buildings";
 			break;
 		case COURSE_SECTION:
-			endpoint = "course/" + update.getSection_id();
+			endpoint = "course/" + update.getSectionID();
 			break;
 		case GROUP:
-			endpoint = "group/" + update.getGroup_id();
+			endpoint = "group/" + update.getGroupID();
 			break;
 		default:
 			break;
 		}
 		
-		SchoologyResponse response = get(endpoint + "/updates/" + update.getId() + "/comments").requireSuccess();
+		SchoologyResponse response = get(endpoint + "/updates/" + update.getID() + "/comments").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyUpdateComment[].class);
 	}

@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.attachments.attachment;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,7 +10,9 @@ import lombok.Getter;
 @Getter
 public class SchoologyEmbed
 {
-	String id;
-	String embed_code;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="embed_code")
+	String embedCode;
 	
 }

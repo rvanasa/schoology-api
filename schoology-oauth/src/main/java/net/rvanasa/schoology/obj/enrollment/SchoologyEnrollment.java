@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.enrollment;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -10,23 +12,37 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyEnrollment
 {
 	
-	String id;
-	String uid;
-	String school_uid;
-	String name_title;
-	boolean name_title_show;
-	String name_first;
-	String name_first_preferred;
-	boolean use_preferred_first_name;
-	String name_middle;
-	boolean name_middle_show;
-	String name_last;
-	String name_display;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="uid")
+	String userID;
+	@SerializedName(value="school_uid")
+	String schoolUID;
+	@SerializedName(value="name_title")
+	String nameTitle;
+	@SerializedName(value="name_title_show")
+	boolean nameTitleShow;
+	@SerializedName(value="name_first")
+	String nameFirst;
+	@SerializedName(value="name_first_preferred")
+	String nameFirstPreferred;
+	@SerializedName(value="use_preferred_first_name")
+	boolean usePreferredFirstName;
+	@SerializedName(value="name_middle")
+	String nameMiddle;
+	@SerializedName(value="name_middle_show")
+	boolean nameMiddleShow;
+	@SerializedName(value="name_last")
+	String nameLast;
+	@SerializedName(value="name_display")
+	String nameDisplay;
 	boolean admin;
 	SchoologyEnrollmentStatus status;
-	String picture_url;
+	@SerializedName(value="picture_url")
+	String pictureURL;
 	//Documentation missing
-	int enrollment_source;
+	@SerializedName(value="enrollment_source")
+	int enrollmentSource;
 	
 	SchoologyLinks links;
 	

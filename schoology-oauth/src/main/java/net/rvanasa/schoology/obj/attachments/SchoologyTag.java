@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.attachments;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -11,7 +13,9 @@ public class SchoologyTag
 	
 	String title;
 	String description;
-	String id;
-	String vid;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="vid")
+	String VID;
 	
 }

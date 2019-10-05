@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.courses;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -10,17 +12,23 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyCourse
 {
 	
-	String id;
-	String building_id;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="building_id")
+	String buildingID;
 	String title;
-	String course_code;
+	@SerializedName(value="course_code")
+	String courseCode;
 	String department;
 	String description;
 	double credits;
 	boolean synced;
-	SchoologyGradeRangeEnum grade_level_range_start;
-	SchoologyGradeRangeEnum grade_level_range_end;
-	SchoologyCourseSubjectAreaEnum subject_area;
+	@SerializedName(value="grade_level_range_start")
+	SchoologyGradeRangeEnum gradeLevelRangeStart;
+	@SerializedName(value="grade_level_range_end")
+	SchoologyGradeRangeEnum gradeLevelRangeEnd;
+	@SerializedName(value="subject_area")
+	SchoologyCourseSubjectAreaEnum subjectArea;
 	
 	SchoologyLinks links;
 	

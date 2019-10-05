@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.users;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -11,50 +13,78 @@ public class SchoologyUser
 {
 	
 	//Same as uid
-	String id;
-	String uid;
-	String school_id;
-	String building_id;
-	String school_uid;
-	String name_title;
-	boolean name_title_show;
-	String name_first;
-	String name_first_preferred;
-	String name_middle;
-	String name_middle_show;
-	String name_last;
-	String name_display;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="uid")
+	String userID;
+	@SerializedName(value="school_id")
+	String schoolID;
+	@SerializedName(value="building_id")
+	String buildingID;
+	@SerializedName(value="school_uid")
+	String schoolUID;
+	@SerializedName(value="name_title")
+	String nameTitle;
+	@SerializedName(value="name_title_show")
+	boolean nameTitleShow;
+	@SerializedName(value="name_first")
+	String nameFirst;
+	@SerializedName(value="name_first_preferred")
+	String nameFirstPreferred;
+	@SerializedName(value="name_middle")
+	String nameMiddle;
+	@SerializedName(value="name_middle_show")
+	String nameMiddleShow;
+	@SerializedName(value="name_last")
+	String nameLast;
+	@SerializedName(value="name_display")
+	String nameDisplay;
 	String username;
-	String primary_email;
+	@SerializedName(value="primary_email")
+	String primaryEmail;
 	String position;
 	SchoologyGenderEnum gender;
-	int grad_year;
-	String birthday_date;
+	@SerializedName(value="grad_year")
+	int gradYear;
+	@SerializedName(value="birthday_date")
+	String birthdayDate;
 	//Must have 'Administer users' permission
 	String password;
 	//Must have 'Administer users' permission
-	int role_id;
-	boolean email_login_info;
-	String profile_url;
-	String tz_name;
+	@SerializedName(value="role_id")
+	int roleID;
+	@SerializedName(value="email_login_info")
+	boolean emailLoginInfo;
+	@SerializedName(value="profile_url")
+	String profileURL;
+	@SerializedName(value="tz_name")
+	String tzName;
 	// 'View user parents' permission required from schoology API to access this information
 	SchoologyUser[] parents;
 	//TODO: comma-delimited list of integers
-	String parent_uids;
+	@SerializedName(value="parent_uids")
+	String parentUIDs;
 	//TODO: comma-delimited list of integers
-	String advisor_uids;
+	@SerializedName(value="advisor_uids")
+	String advisorUIDs;
 	//TODO: comma-delimited list of integers
-	String child_urls;
-	int send_message;
+	@SerializedName(value="child_urls")
+	String childURLs;
+	@SerializedName(value="send_message")
+	int sendMessage;
 	boolean synced;
-	int profile_picture_fid;
+	@SerializedName(value="profile_picture_fid")
+	int profilePictureFID;
 	//TODO: comma-delimited list of integers
-	String additional_buildings;
+	@SerializedName(value="additional_buildings")
+	String additionalBuildings;
 	
-	SchoologyProfileInfo profile_info;
+	@SerializedName(value="profile_info")
+	SchoologyProfileInfo profileInfo;
 	
 	//Missing from API documentation on Schoology
-	boolean use_preferred_first_name;
+	@SerializedName(value="use_preferred_first_name")
+	boolean usePreferredFirstName;
 	//Missing from schoology documentation
 	boolean admin;
 	boolean status;
@@ -72,8 +102,10 @@ class SchoologyProfileInfo
 {
 	
 	//Teacher only
-	String subjects_taught;
-	String grades_taught;
+	@SerializedName(value="subjects_taught")
+	String subjectsTaught;
+	@SerializedName(value="grades_taught")
+	String gradesTaught;
 	String position;
 	String department;
 	
@@ -83,8 +115,9 @@ class SchoologyProfileInfo
 	String website;
 	String address;
 	String interests;
-	String acivities;
-	String birthday_date;
+	String activities;
+	@SerializedName(value="birthday_date")
+	String birthdayDate;
 	String birthday;
 	
 }
@@ -95,8 +128,10 @@ class SchoologyProfileInfo
 @Getter
 class SchoologyPermissions
 {
-	
-	boolean is_directory_public;
-	boolean allow_connections;
+
+	@SerializedName(value="is_directory_public")
+	boolean isDirectoryPublic;
+	@SerializedName(value="allow_connections")
+	boolean allowConnection;
 	
 }

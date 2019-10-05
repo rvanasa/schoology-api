@@ -2,6 +2,8 @@ package net.rvanasa.schoology.obj.discussions;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -12,23 +14,33 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyDiscussionThread
 {
 	
-	String id;
-	String uid;
+	@SerializedName(value="id")
+	String ID;
+	@SerializedName(value="uid")
+	String userID;
 	String title;
 	String body;
 	boolean graded;
 	Date due;
-	int grade_item_id;
-	int grading_scale;
-	int grading_period;
-	int grading_cateogry;
-	float max_points;
+	@SerializedName(value="grade_item_id")
+	int gradeItemID;
+	@SerializedName(value="grading_scale")
+	int gradingScale;
+	@SerializedName(value="grading_period")
+	int gradingPeriod;
+	@SerializedName(value="grading_category")
+	int gradingCateogry;
+	@SerializedName(value="max_points")
+	float maxPoints;
 	float factor;
-	boolean is_final;
+	@SerializedName(value="is_final")
+	boolean isFinal;
 	boolean published;
-	boolean require_initial_post;
+	@SerializedName(value="require_initial_post")
+	boolean requireInitialPost;
 	//No documentation available
-	boolean completion_status;
+	@SerializedName(value="completion_status")
+	boolean completionStatus;
 	
 	SchoologyLinks links;
 	

@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.attachments.attachment;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,9 +10,11 @@ import lombok.Getter;
 @Getter
 public class SchoologyVideo
 {
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String title;
-	String url;
+	@SerializedName(value="url")
+	String URL;
 	String favicon;
 	String thumbnail;
 	

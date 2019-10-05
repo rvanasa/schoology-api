@@ -2,6 +2,8 @@ package net.rvanasa.schoology.obj.blog;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -12,7 +14,8 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyBlogPost
 {
 	
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String title;
 	String body;
 	Date created;

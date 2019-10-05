@@ -2,6 +2,8 @@ package net.rvanasa.schoology.obj.albums;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -12,21 +14,29 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyMediaAlbum
 {
 	
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String title;
 	String description;
-	boolean setting_comments;
-	boolean setting_member_post;
+	@SerializedName(value="setting_comments")
+	boolean settingComments;
+	@SerializedName(value="setting_member_post")
+	boolean settingMemberPost;
 	boolean published;
-	int photo_count;
-	int video_count;
-	int audio_count;
-	String cover_image_url;
+	@SerializedName(value="photo_count")
+	int photoCount;
+	@SerializedName(value="video_count")
+	int videoCount;
+	@SerializedName(value="audio_count")
+	int audioCount;
+	@SerializedName(value="cover_image_url")
+	String coverImageURL;
 	Date created;
 	boolean available;
 	boolean completed;
 	//No documentation available
-	String completion_status;
+	@SerializedName(value="completion_status")
+	String completionStatus;
 	
 	SchoologyLinks links;
 	

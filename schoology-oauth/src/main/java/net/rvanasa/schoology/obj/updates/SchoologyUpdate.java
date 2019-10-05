@@ -2,6 +2,8 @@ package net.rvanasa.schoology.obj.updates;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.impl.SchoologyRealmEnum;
 import net.rvanasa.schoology.obj.SchoologyLinks;
@@ -14,22 +16,32 @@ import net.rvanasa.schoology.obj.attachments.SchoologyAttachments;
 public class SchoologyUpdate
 {
 	
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String body;
-	String uid;
+	//Should be same as userID if this is for a user realm
+	@SerializedName(value="uid")
+	String userID;
 	Date created;
-	Date last_updated;
+	@SerializedName(value="last_updated")
+	Date lastUpdated;
 	SchoologyRealmEnum realm;
 	int likes;
-	boolean user_like_action;
+	@SerializedName(value="user_like_action")
+	boolean userLikeAction;
 	
 	//Only one of these variables will be used depending on the realm
-	String user_id;
-	String section_id;
-	String building_id;
-	String group_id;
+	@SerializedName(value="user_id")
+	String uID;
+	@SerializedName(value="section_id")
+	String sectionID;
+	@SerializedName(value="building_id")
+	String buildingID;
+	@SerializedName(value="group_id")
+	String groupID;
 	
-	int num_comments;
+	@SerializedName(value="num_comments")
+	int numComments;
 	
 	//TODO: ?with_attachments=true must be specified, but then info such as the realm will may be missing
 	SchoologyAttachments attachments;

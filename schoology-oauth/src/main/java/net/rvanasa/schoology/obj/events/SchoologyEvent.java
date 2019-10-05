@@ -2,6 +2,8 @@ package net.rvanasa.schoology.obj.events;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.impl.SchoologyRealmEnum;
 import net.rvanasa.schoology.obj.SchoologyLinks;
@@ -13,22 +15,29 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public class SchoologyEvent
 {
 	
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String title;
 	String description;
 	Date start;
-	boolean has_end;
+	@SerializedName(value="has_end")
+	boolean hasEnd;
 	Date end;
-	boolean all_day;
+	@SerializedName(value="all_day")
+	boolean allDay;
 	boolean editable;
 	SchoologyRSVPType rsvp;
-	boolean comments_enabled;
+	@SerializedName(value="comments_enabled")
+	boolean commentsEnabled;
 	SchoologyEventType type;
 	SchoologyRealmEnum realm;
 	//Depends on realm
-	String school_id;
-	String group_id;
-	String section_id;
+	@SerializedName(value="school_id")
+	String schoolID;
+	@SerializedName(value="group_id")
+	String groupID;
+	@SerializedName(value="section_id")
+	String sectionID;
 	
 	SchoologyLinks links;
 	

@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.schools;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
@@ -11,18 +13,21 @@ import net.rvanasa.schoology.obj.SchoologyLinks;
 public abstract class SchoologyInstitution
 {
 	
-	String id;
+	@SerializedName(value="id")
+	String ID;
 	String title;
 	String address1;
 	String address2;
 	String city;
 	String state;
-	String postal_code;
+	@SerializedName(value="postal_code")
+	String postalCode;
 	String country;
 	String website;
 	String phone;
 	String fax;
-	String picture_url;
+	@SerializedName(value="picture_url")
+	String pictureURL;
 	
 	SchoologyLinks links;
 	
