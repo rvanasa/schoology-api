@@ -18,7 +18,6 @@ import org.scribe.oauth.OAuthService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.rvanasa.schoology.ISchoologyContentType;
 import net.rvanasa.schoology.ISchoologyRequestHandler;
 import net.rvanasa.schoology.adapters.SchoologyAttachmentTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
@@ -81,7 +80,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	
 	private Gson gson;
 	
-	private ISchoologyContentType contentType = SchoologyContentTypeEnum.JSON;
+	private SchoologyContentTypeEnum contentType = SchoologyContentTypeEnum.JSON;
 	
 	private Token accessToken;
 	
@@ -126,12 +125,12 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		return service;
 	}
 	
-	public ISchoologyContentType getContentType()
+	public SchoologyContentTypeEnum getContentType()
 	{
 		return contentType;
 	}
 	
-	public void setContentType(ISchoologyContentType contentType)
+	public void setContentType(SchoologyContentTypeEnum contentType)
 	{
 		this.contentType = contentType;
 	}

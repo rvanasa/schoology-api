@@ -1,11 +1,10 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.ISchoologyContentType;
 import net.rvanasa.schoology.ISchoologyNodeParser;
 import net.rvanasa.schoology.impl.json.JsonSchoologyResponseHandler;
 import net.rvanasa.schoology.impl.xml.XmlSchoologyResponseHandler;
 
-public enum SchoologyContentTypeEnum implements ISchoologyContentType
+public enum SchoologyContentTypeEnum
 {
 	JSON("application/json", "JSON", JsonSchoologyResponseHandler.DEFAULT),
 	XML("text/xml", "XML", XmlSchoologyResponseHandler.DEFAULT);
@@ -21,19 +20,16 @@ public enum SchoologyContentTypeEnum implements ISchoologyContentType
 		this.parser = parser;
 	}
 	
-	@Override
 	public String getID()
 	{
 		return id;
 	}
 	
-	@Override
 	public String getName()
 	{
 		return name;
 	}
 	
-	@Override
 	public ISchoologyNodeParser getParser()
 	{
 		return parser;
