@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.impl;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,12 +10,18 @@ import lombok.Getter;
 public enum SchoologyRealmEnum
 {	
 	
+	@SerializedName(value="school", alternate = {"schools"})
 	SCHOOL("school", "schools"),
 	//TODO: building endpoint? 'schools/{id}/buildings
+	@SerializedName(value="building", alternate = {"buildings"})
 	BUILDING("building", "buildings"),
+	@SerializedName(value="user", alternate = {"users"})
 	USER("user", "users"),
+	@SerializedName(value="group", alternate = {"groups"})
 	GROUP("group", "groups"),
+	@SerializedName(value="course", alternate = {"courses"})
 	COURSE("course", "courses"),
+	@SerializedName(value="section", alternate = {"sections"})
 	COURSE_SECTION("section", "sections"),
 	
 	;

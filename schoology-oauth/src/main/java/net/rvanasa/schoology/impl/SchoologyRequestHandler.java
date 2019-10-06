@@ -20,7 +20,6 @@ import com.google.gson.GsonBuilder;
 
 import net.rvanasa.schoology.ISchoologyRequestHandler;
 import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
-import net.rvanasa.schoology.adapters.SchoologyRealmEnumAdapter;
 import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
@@ -84,7 +83,6 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		gson = new GsonBuilder()
 		.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter())
 		.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter())
-		.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter())
 		.create();
 	}
 	
