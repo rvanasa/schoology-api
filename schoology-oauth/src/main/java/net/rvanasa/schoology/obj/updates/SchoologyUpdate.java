@@ -5,7 +5,7 @@ import java.util.Date;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
-import net.rvanasa.schoology.impl.SchoologyRealmEnum;
+import net.rvanasa.schoology.impl.SchoologyRealm;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachments;
 
@@ -25,7 +25,7 @@ public class SchoologyUpdate
 	Date created;
 	@SerializedName(value="last_updated")
 	Date lastUpdated;
-	SchoologyRealmEnum realm;
+	SchoologyRealm realm;
 	int likes;
 	@SerializedName(value="user_like_action")
 	boolean userLikeAction;

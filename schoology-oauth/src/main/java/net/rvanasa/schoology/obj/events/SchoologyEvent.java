@@ -5,7 +5,7 @@ import java.util.Date;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
-import net.rvanasa.schoology.impl.SchoologyRealmEnum;
+import net.rvanasa.schoology.impl.SchoologyRealm;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 
 /*
@@ -30,7 +30,7 @@ public class SchoologyEvent
 	@SerializedName(value="comments_enabled")
 	boolean commentsEnabled;
 	SchoologyEventType type;
-	SchoologyRealmEnum realm;
+	SchoologyRealm realm;
 	//Depends on realm
 	@SerializedName(value="school_id")
 	String schoolID;

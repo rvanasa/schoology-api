@@ -2,12 +2,10 @@ package net.rvanasa.schoology.impl;
 
 import com.google.gson.annotations.SerializedName;
 
-import lombok.Getter;
-
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1#Realms
  */
-public enum SchoologyRealmEnum
+public enum SchoologyRealm
 {	
 	
 	@SerializedName(value="school", alternate = {"schools"})
@@ -27,23 +25,27 @@ public enum SchoologyRealmEnum
 	;
 	
 	//What the type is referred to
-	@Getter
 	String name;
 	//Endpoint used
-	@Getter
 	String endpoint;
 	
-	private SchoologyRealmEnum(String name, String endpoint)
+	private SchoologyRealm(String name, String endpoint)
 	{
 		this.name = name;
 		this.endpoint = endpoint;
 	}
 	
-	public static SchoologyRealmEnum getRealm(String apiValue)
+	public static SchoologyRealm getRealm(String apiValue)
 	{
-		for(SchoologyRealmEnum realm : values()) if(realm.name.equalsIgnoreCase(apiValue) || realm.endpoint.equalsIgnoreCase(apiValue)) return realm;
+		for(SchoologyRealm realm : values()) if(realm.name.equalsIgnoreCase(apiValue) || realm.endpoint.equalsIgnoreCase(apiValue)) return realm;
 		
 		return null;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return endpoint + "/";
 	}
 	
 }

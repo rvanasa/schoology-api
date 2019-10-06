@@ -248,7 +248,9 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyUser getUser(String uid)
 	{
-		SchoologyResponse response = get("users/" + uid + "?extended=true").requireSuccess();
+		String test = SchoologyRealm.USER + uid + "?extended=true";
+		System.out.println(test);
+		SchoologyResponse response = get(SchoologyRealm.USER + uid + "?extended=true").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUser.class);
 	}
@@ -264,7 +266,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyGroup getGroup(String group_id)
 	{
-		SchoologyResponse response = get("groups/" + group_id).requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.GROUP + group_id).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroup.class);
 	}
@@ -280,7 +282,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyCourse getCourse(String course_id)
 	{
-		SchoologyResponse response = get("courses/" + course_id).requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.COURSE + course_id).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourse.class);
 	}
@@ -288,7 +290,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id)
 	{
-		SchoologyResponse response = get("courses/" + course_id + "/sections").requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.COURSE + course_id + "/sections").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSectionsPage.class);
 	}
@@ -296,7 +298,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyCourseSection getCourseSection(String section_id)
 	{
-		SchoologyResponse response = get("sections/" + section_id).requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.COURSE_SECTION + section_id).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSection.class);
 	}
@@ -312,7 +314,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologySchool getSchool(String school_id)
 	{
-		SchoologyResponse response = get("schools/" + school_id).requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.SCHOOL + school_id).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologySchool.class);
 	}
@@ -320,7 +322,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyBuilding[] getBuildings(String school_id)
 	{
-		SchoologyResponse response = get("schools/" + school_id + "/buildings").requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.SCHOOL + school_id + "/buildings").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("building").asRawData(), SchoologyBuilding[].class);
 	}
@@ -339,7 +341,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	public SchoologyUpdateComment[] getUpdateComments(SchoologyUpdate update)
 	{
 		
-		SchoologyRealmEnum realm = update.getRealm();
+		SchoologyRealm realm = update.getRealm();
 		
 		if(realm == null) return new SchoologyUpdateComment[] {};
 		
@@ -350,10 +352,10 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 			endpoint = "schools/" + update.getBuildingID() + "/buildings";
 			break;
 		case COURSE_SECTION:
-			endpoint = "course/" + update.getSectionID();
+			endpoint = SchoologyRealm.COURSE + update.getSectionID();
 			break;
 		case GROUP:
-			endpoint = "group/" + update.getGroupID();
+			endpoint = SchoologyRealm.GROUP + update.getGroupID();
 			break;
 		default:
 			break;
