@@ -1,8 +1,6 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.SchoologyResponseStatus;
-
-public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
+public enum SchoologyResponseStatusEnum
 {
 	SUCCESS_OK(200, "OK"),
 	SUCCESS_CREATED(201, "Create"),
@@ -11,7 +9,9 @@ public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 	UNAUTHORIZED(401, "Unauthorized"),
 	PERMISSION(403, "Insufficient permission level"),
 	NOT_FOUND(404, "Resource not found"),
-	NOT_ALLOWED(405, "Method not allowed");
+	NOT_ALLOWED(405, "Method not allowed"),
+	
+	UNKNOWN(-1, "Unknown status");
 	
 	private final int code;
 	private final String message;
@@ -22,25 +22,22 @@ public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 		this.message = message;
 	}
 	
-	@Override
 	public int getCode()
 	{
 		return code;
 	}
 	
-	@Override
 	public String getMessage()
 	{
 		return message;
 	}
 	
-	@Override
 	public boolean isSuccess()
 	{
 		return this.name().startsWith("SUCCESS");
 	}
 	
-	public static SchoologyResponseStatus getStatus(int code)
+	public static SchoologyResponseStatusEnum getStatus(int code)
 	{
 		for(SchoologyResponseStatusEnum status : values())
 		{
@@ -49,6 +46,6 @@ public enum SchoologyResponseStatusEnum implements SchoologyResponseStatus
 				return status;
 			}
 		}
-		return new BasicSchoologyResponseStatus(code, "Unknown status", false);
+		return UNKNOWN;
 	}
 }

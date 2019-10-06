@@ -7,11 +7,21 @@ Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](htt
  
 ## Example Usage:
 
-#### 3-Legged Auth:
+You can generate a user API key & secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
+
+### 2-Legged Auth:
 
 ```java
 
-SchoologyFlow flow = new OAuthSchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK_URL);
+SchoologyRequestHandler schoology = new SchoologyRequestHandler(DISTRICT_PREFIX, API_KEY, API_SECRET);
+
+```
+
+### 3-Legged Auth:
+
+```java
+
+SchoologyFlow flow = new SchoologyFlow(DISTRICT_PREFIX, API_KEY, API_SECRET, CALLBACK_URL);
 
 SchoologyToken token = flow.createRequestToken();
 
@@ -25,26 +35,30 @@ SchoologyRequestHandler schoology = token.createRequestHandler(verifier);
 
 ```
 
-#### 2-Legged Auth:
+### Sending a Request:
 
-You can generate a user API key/secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
+Requests can be send and parsed manually, or by using the premade methods provided with the SchoologyRequestHandler.
 
+#### Manually:
 ```java
 
-SchoologyRequestHandler schoology = new OAuthSchoologyRequestHandler(DISTRICT_PREFIX, API_KEY, API_SECRET);
+// {UID} represents the target user ID
+SchoologyResponseBody response = schoology.get("users/{UID}?extended=true").requireSuccess().getBody();
+
+System.out.println(response.getRawData()); // raw JSON string
+
+SchoologyNode node = response.parse();
+System.out.println(node.get("name_display").asString()); // get display name of user
 
 ```
 
-#### Sending a Request:
-
+#### Using premade methods & objects:
 ```java
 
-SchoologyResponseBody response = schoology.get("sections/123456789").requireSuccess().getBody();
+// {UID} represents the target user ID
+SchoologyUser user = schoology.getUser("{UID}");
 
-System.out.println(response.getRawData()); // JSON string
-
-SchoologyNode node = response.parse();
-System.out.println(node.get("JSON_KEY").get(1).asString()); // index 1 of some JSON_KEY property
+System.out.println(user.getNameDisplay()); // get display name of user
 
 ```
 

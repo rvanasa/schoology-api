@@ -4,7 +4,7 @@ import org.scribe.builder.api.DefaultApi10a;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 
-public class OAuthSchoologyApi extends DefaultApi10a
+class OAuthSchoologyApi extends DefaultApi10a
 {
 	private final SchoologyResourceLocator resourceLocator;
 	
