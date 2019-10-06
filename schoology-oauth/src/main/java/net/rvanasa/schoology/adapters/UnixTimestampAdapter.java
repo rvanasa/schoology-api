@@ -10,7 +10,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-public class SchoologyUnixTimestampAdapter implements JsonDeserializer<Date>
+public class UnixTimestampAdapter implements JsonDeserializer<Date>
 {
 	
 	private final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");

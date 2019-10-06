@@ -19,8 +19,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.rvanasa.schoology.ISchoologyRequestHandler;
-import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
-import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
+import net.rvanasa.schoology.adapters.BooleanAdapter;
+import net.rvanasa.schoology.adapters.UnixTimestampAdapter;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
 import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
@@ -81,8 +81,8 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		this.service = service;
 		
 		gson = new GsonBuilder()
-		.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter())
-		.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter())
+		.registerTypeAdapter(boolean.class, new BooleanAdapter())
+		.registerTypeAdapter(Date.class, new UnixTimestampAdapter())
 		.create();
 	}
 	
