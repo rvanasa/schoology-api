@@ -272,7 +272,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("users").requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyUsersPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUsersPage.class);
 	}
 	
 	@Override
@@ -280,7 +280,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("users/" + uid + "?extended=true").requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyUser.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUser.class);
 	}
 	
 	@Override
@@ -288,7 +288,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("groups").requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyGroupsPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroupsPage.class);
 	}
 			
 	@Override
@@ -296,7 +296,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("groups/" + group_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyGroup.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroup.class);
 	}
 	
 	@Override
@@ -304,7 +304,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("courses").requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyCoursesPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCoursesPage.class);
 	}
 	
 	@Override
@@ -312,7 +312,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("courses/" + course_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyCourse.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourse.class);
 	}
 	
 	@Override
@@ -320,7 +320,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("courses/" + course_id + "/sections").requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyCourseSectionsPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSectionsPage.class);
 	}
 	
 	@Override
@@ -328,7 +328,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("sections/" + section_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologyCourseSection.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSection.class);
 	}
 	
 	@Override
@@ -344,7 +344,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get("schools/" + school_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().getRawData(), SchoologySchool.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologySchool.class);
 	}
 	
 	@Override
