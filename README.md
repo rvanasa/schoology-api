@@ -47,7 +47,7 @@ SchoologyResponseBody response = schoology.get("users/{UID}?extended=true").requ
 
 System.out.println(response.getRawData()); // raw JSON string
 
-ISchoologyNode node = response.parse();
+SchoologyNode node = response.parse();
 System.out.println(node.get("name_display").asString()); // get display name of user
 
 ```

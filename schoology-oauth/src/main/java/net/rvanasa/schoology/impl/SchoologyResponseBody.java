@@ -1,6 +1,6 @@
 package net.rvanasa.schoology.impl;
 
-import net.rvanasa.schoology.ISchoologyNode;
+import net.rvanasa.schoology.SchoologyNode;
 
 public class SchoologyResponseBody
 {
@@ -23,7 +23,7 @@ public class SchoologyResponseBody
 		return rawData;
 	}
 	
-	public ISchoologyNode parse()
+	public SchoologyNode parse()
 	{
 		return getContentType().getParser().parseNode(getRawData());
 	}

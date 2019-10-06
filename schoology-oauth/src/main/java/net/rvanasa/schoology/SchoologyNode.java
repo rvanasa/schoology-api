@@ -3,11 +3,11 @@ package net.rvanasa.schoology;
 import java.util.List;
 import java.util.Map;
 
-public interface ISchoologyNode
+public interface SchoologyNode
 {
-	public ISchoologyNode get(String key);
+	public SchoologyNode get(String key);
 	
-	public ISchoologyNode get(int index);
+	public SchoologyNode get(int index);
 	
 	public boolean isNull();
 	
@@ -19,9 +19,9 @@ public interface ISchoologyNode
 	
 	public boolean isMapValue();
 	
-	public List<ISchoologyNode> asListValue();
+	public List<SchoologyNode> asListValue();
 	
-	public Map<String, ISchoologyNode> asMapValue();
+	public Map<String, SchoologyNode> asMapValue();
 	
 	public String asRawData();
 	
