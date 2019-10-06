@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.events;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,8 +10,11 @@ import lombok.Getter;
 public enum SchoologyRSVPType
 {
 	
+	@SerializedName(value="0")
 	NO_ONE(0, "No one can RSVP"),
+	@SerializedName(value="1")
 	INVITE_ONLY(1, "Only people who have been invited to the event"),
+	@SerializedName(value="2")
 	EVERYONE(2, "Anyone can RSVP");
 	
 	@Getter

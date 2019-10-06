@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.enrollment;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,10 +10,15 @@ import lombok.Getter;
 public enum SchoologyEnrollmentStatus
 {
 	
+	@SerializedName(value="1")
 	ACTIVE(1, "Active"),
+	@SerializedName(value="2")
 	EXPIRED(2, "Expired"),
+	@SerializedName(value="3")
 	INVITE_PENDING(3, "Invite pending"),
+	@SerializedName(value="4")
 	REQUEST_PENDING(4, "Request pending"),
+	@SerializedName(value="5")
 	ARCHIVED(5, "Archived");
 	
 	@Getter

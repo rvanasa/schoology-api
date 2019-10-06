@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.attachments;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,10 +10,15 @@ import lombok.Getter;
 public enum SchoologyConvertedTypeEnum
 {
 	
+	@SerializedName(value="1")
 	VIDEO(1, "Video"),
+	@SerializedName(value="2")
 	AUDIO(2, "Audio"),
+	@SerializedName(value="3")
 	IMAGE(3, "Image"),
+	@SerializedName(value="4")
 	DOCUMENT(4, "Document"),
+	@SerializedName(value="5")
 	UNKNOWN(5, "Unknown");
 	
 	@Getter

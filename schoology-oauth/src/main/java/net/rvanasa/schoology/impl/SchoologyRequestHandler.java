@@ -19,37 +19,20 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.rvanasa.schoology.ISchoologyRequestHandler;
-import net.rvanasa.schoology.adapters.SchoologyAttachmentTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyBooleanAdapter;
-import net.rvanasa.schoology.adapters.SchoologyConvertedStatusAdapter;
-import net.rvanasa.schoology.adapters.SchoologyConvertedTypeAdapter;
-import net.rvanasa.schoology.adapters.SchoologyCourseSubjectAreaAdapter;
-import net.rvanasa.schoology.adapters.SchoologyEnrollmentStatusAdapter;
-import net.rvanasa.schoology.adapters.SchoologyEventTypeAdapter;
-import net.rvanasa.schoology.adapters.SchoologyGenderAdapter;
-import net.rvanasa.schoology.adapters.SchoologyGradeRangeAdapter;
-import net.rvanasa.schoology.adapters.SchoologyRSVPTypeAdapter;
 import net.rvanasa.schoology.adapters.SchoologyRealmEnumAdapter;
 import net.rvanasa.schoology.adapters.SchoologyUnixTimestampAdapter;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
 import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
-import net.rvanasa.schoology.obj.attachments.SchoologyAttachmentTypeEnum;
-import net.rvanasa.schoology.obj.attachments.SchoologyConvertedStatusEnum;
-import net.rvanasa.schoology.obj.attachments.SchoologyConvertedTypeEnum;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
 import net.rvanasa.schoology.obj.courses.SchoologyCourse;
-import net.rvanasa.schoology.obj.courses.SchoologyCourseSubjectAreaEnum;
 import net.rvanasa.schoology.obj.courses.SchoologyCoursesPage;
-import net.rvanasa.schoology.obj.courses.SchoologyGradeRangeEnum;
 import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionRepliesPage;
 import net.rvanasa.schoology.obj.discussions.SchoologyDiscussionsPage;
-import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentStatus;
 import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentsPage;
-import net.rvanasa.schoology.obj.events.SchoologyEventType;
 import net.rvanasa.schoology.obj.events.SchoologyEventsPage;
-import net.rvanasa.schoology.obj.events.SchoologyRSVPType;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.groups.SchoologyGroupsPage;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
@@ -58,7 +41,6 @@ import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSectionsPage;
 import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
 import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
-import net.rvanasa.schoology.obj.users.SchoologyGenderEnum;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
 import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
 
@@ -101,17 +83,8 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		
 		gson = new GsonBuilder()
 		.registerTypeAdapter(boolean.class, new SchoologyBooleanAdapter())
-		.registerTypeAdapter(SchoologyCourseSubjectAreaEnum.class, new SchoologyCourseSubjectAreaAdapter())
-		.registerTypeAdapter(SchoologyGradeRangeEnum.class, new SchoologyGradeRangeAdapter())
-		.registerTypeAdapter(SchoologyGenderEnum.class, new SchoologyGenderAdapter())
 		.registerTypeAdapter(Date.class, new SchoologyUnixTimestampAdapter())
-		.registerTypeAdapter(SchoologyConvertedTypeEnum.class, new SchoologyConvertedTypeAdapter())
-		.registerTypeAdapter(SchoologyConvertedStatusEnum.class, new SchoologyConvertedStatusAdapter())
-		.registerTypeAdapter(SchoologyAttachmentTypeEnum.class, new SchoologyAttachmentTypeAdapter())
 		.registerTypeAdapter(SchoologyRealmEnum.class, new SchoologyRealmEnumAdapter())
-		.registerTypeAdapter(SchoologyEventType.class, new SchoologyEventTypeAdapter())
-		.registerTypeAdapter(SchoologyRSVPType.class, new SchoologyRSVPTypeAdapter())
-		.registerTypeAdapter(SchoologyEnrollmentStatus.class, new SchoologyEnrollmentStatusAdapter())
 		.create();
 	}
 	

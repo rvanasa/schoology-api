@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.users;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,7 +10,9 @@ import lombok.Getter;
 public enum SchoologyGenderEnum
 {
 	
+	@SerializedName(value="M")
 	MALE("M", "Male"),
+	@SerializedName(value="F")
 	FEMALE("F", "Female");
 	
 	@Getter

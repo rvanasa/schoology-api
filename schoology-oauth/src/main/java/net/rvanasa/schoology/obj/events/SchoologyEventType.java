@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.events;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -8,8 +10,11 @@ import lombok.Getter;
 public enum SchoologyEventType
 {
 	
+	@SerializedName(value="event")
 	EVENT("event", "Normal event"),
+	@SerializedName(value="assignment")
 	ASSIGNMENT("assignment", "Due event for an assignment"),
+	@SerializedName(value="discussion")
 	DISCUSSION("discussion", "Due event for a discussion");
 	
 	@Getter

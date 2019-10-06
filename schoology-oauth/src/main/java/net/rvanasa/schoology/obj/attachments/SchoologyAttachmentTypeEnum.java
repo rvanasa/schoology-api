@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.attachments;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 /*
@@ -9,9 +11,13 @@ import lombok.Getter;
 public enum SchoologyAttachmentTypeEnum
 {
 	
+	@SerializedName(value="file")
 	FILE("file"),
+	@SerializedName(value="link")
 	LINK("link"),
+	@SerializedName(value="video")
 	VIDEO("video"),
+	@SerializedName(value="embed")
 	EMBED("embed");
 	
 	@Getter
