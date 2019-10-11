@@ -4,13 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyLinks;
+import net.rvanasa.schoology.obj.SchoologyReference;
 
 /*
  * As per API documentation, buildings and schools have the same fields:
  * https://developers.schoology.com/api-documentation/rest-api-v1/building 
  */
 @Getter
-public abstract class SchoologyInstitution
+public abstract class SchoologyInstitution extends SchoologyReference<SchoologyInstitution>
 {
 	
 	@SerializedName(value="id")

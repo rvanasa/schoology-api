@@ -5,6 +5,7 @@ import java.util.Date;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
+import net.rvanasa.schoology.obj.SchoologyReference;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/media-album#create_2
@@ -12,7 +13,7 @@ import lombok.Getter;
  * withcontent=1
  */
 @Getter
-public class SchoologyMediaAlbumContent
+public class SchoologyMediaAlbumContent extends SchoologyReference<SchoologyMediaAlbumContent>
 {
 	
 	@SerializedName(value="id")

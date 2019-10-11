@@ -3,7 +3,7 @@ package net.rvanasa.schoology;
 import net.rvanasa.schoology.impl.SchoologyRealm;
 import net.rvanasa.schoology.impl.SchoologyResponse;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
-import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumsPage;
 import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
@@ -63,6 +63,8 @@ public interface ISchoologyRequestHandler
 	public SchoologySchool getSchool(String school_id);
 	
 	public SchoologyBuilding[] getBuildings(String school_id);
+	
+	public SchoologyBuilding getBuilding(String building_id);
 	
 	public SchoologyUpdatesPage getUpdates(String realm);
 	
@@ -225,16 +227,16 @@ public interface ISchoologyRequestHandler
 		return getDiscussionRepliesPage(SchoologyRealm.GROUP + group_id, discussion_id);
 	}
 	
-	public SchoologyMediaAlbums getMediaAlbums(String realm);
+	public SchoologyMediaAlbumsPage getMediaAlbumsPage(String realm);
 	
-	default public SchoologyMediaAlbums getSectionMediaAlbums(String section_id)
+	default public SchoologyMediaAlbumsPage getSectionMediaAlbums(String section_id)
 	{
-		return getMediaAlbums(SchoologyRealm.COURSE_SECTION + section_id);
+		return getMediaAlbumsPage(SchoologyRealm.COURSE_SECTION + section_id);
 	}
 	
-	default public SchoologyMediaAlbums getGroupMediaAlbums(String group_id)
+	default public SchoologyMediaAlbumsPage getGroupMediaAlbums(String group_id)
 	{
-		return getMediaAlbums(SchoologyRealm.GROUP + group_id);
+		return getMediaAlbumsPage(SchoologyRealm.GROUP + group_id);
 	}
 	
 	public SchoologyMediaAlbumContent[] getMediaAlbumContent(String realm, String album_id);

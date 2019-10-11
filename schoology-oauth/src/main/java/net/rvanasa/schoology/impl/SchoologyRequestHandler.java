@@ -24,7 +24,7 @@ import net.rvanasa.schoology.ISchoologyRequestHandler;
 import net.rvanasa.schoology.adapters.BooleanAdapter;
 import net.rvanasa.schoology.adapters.UnixTimestampAdapter;
 import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumContent;
-import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbums;
+import net.rvanasa.schoology.obj.albums.SchoologyMediaAlbumsPage;
 import net.rvanasa.schoology.obj.albums.comments.SchoologyMediaAlbumComment;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPost;
 import net.rvanasa.schoology.obj.blog.SchoologyBlogPostComment;
@@ -222,7 +222,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.USER.toString()).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUsersPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUsersPage.class).reference(this);
 	}
 	
 	@Override
@@ -238,7 +238,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.GROUP.toString()).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroupsPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroupsPage.class).reference(this);
 	}
 			
 	@Override
@@ -246,7 +246,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.GROUP + group_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroup.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroup.class).reference(this);
 	}
 	
 	@Override
@@ -254,7 +254,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.COURSE.toString()).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCoursesPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCoursesPage.class).reference(this);
 	}
 	
 	@Override
@@ -262,7 +262,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.COURSE + course_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourse.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourse.class).reference(this);
 	}
 	
 	@Override
@@ -270,7 +270,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.COURSE + course_id + "/sections").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSectionsPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSectionsPage.class).reference(this);
 	}
 	
 	@Override
@@ -278,7 +278,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.COURSE_SECTION + section_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSection.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSection.class).reference(this);
 	}
 	
 	@Override
@@ -294,7 +294,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(SchoologyRealm.SCHOOL + school_id).requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologySchool.class);
+		return (SchoologySchool) gson.fromJson(response.getBody().parse().asRawData(), SchoologySchool.class).reference(this);
 	}
 	
 	@Override
@@ -303,6 +303,15 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		SchoologyResponse response = get(SchoologyRealm.SCHOOL + school_id + "/buildings").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("building").asRawData(), SchoologyBuilding[].class);
+	}
+	
+	//TODO: Fix schools/{id}/buildings
+	@Override
+	public SchoologyBuilding getBuilding(String building_id)
+	{
+		SchoologyResponse response = get(SchoologyRealm.BUILDING + building_id).requireSuccess();
+		
+		return (SchoologyBuilding) gson.fromJson(response.getBody().parse().asRawData(), SchoologyBuilding.class).reference(this);
 	}
 	
 	@Override
@@ -349,7 +358,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(realm + "/events").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEventsPage.class);
+		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEventsPage.class).reference(this);
 	}
 
 	@Override
@@ -357,7 +366,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(realm + "/enrollments").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEnrollmentsPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEnrollmentsPage.class).reference(this);
 	}
 
 	@Override
@@ -380,7 +389,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(realm + "/discussions").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussionsPage.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussionsPage.class).reference(this);
 	}
 	
 	@Override
@@ -388,15 +397,15 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(realm + "/discussions/" + discussion_id + "/comments").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionRepliesPage.class);
+		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionRepliesPage.class).reference(this);
 	}
 
 	@Override
-	public SchoologyMediaAlbums getMediaAlbums(String realm)
+	public SchoologyMediaAlbumsPage getMediaAlbumsPage(String realm)
 	{
 		SchoologyResponse response = get(realm + "/albums").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyMediaAlbums.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyMediaAlbumsPage.class).reference(this);
 	}
 	
 	//TODO: Schoology documentation says =1, but should it be =true?
