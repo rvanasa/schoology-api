@@ -3,8 +3,6 @@ package net.rvanasa.schoology.obj.users;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
-import net.rvanasa.schoology.impl.SchoologyRequestHandler;
-import net.rvanasa.schoology.obj.SchoologyLinks;
 import net.rvanasa.schoology.obj.SchoologyReference;
 
 /*
@@ -90,17 +88,6 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 	//Missing from schoology documentation
 	boolean admin;
 	boolean status;
-	
-	SchoologyLinks links;
-	
-	private SchoologyRequestHandler schoology;
-	
-	@Override
-	public SchoologyUser reference(SchoologyRequestHandler schoology) {
-		this.schoology = schoology;
-		
-		return this;
-	}
 	
 }
 
