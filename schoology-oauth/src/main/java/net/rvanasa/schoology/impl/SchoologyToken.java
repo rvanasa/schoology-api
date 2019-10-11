@@ -4,27 +4,20 @@ import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+import lombok.Getter;
 import net.rvanasa.schoology.ISchoologyRequestHandler;
 
 public class SchoologyToken
 {
+	@Getter
 	private final SchoologyFlow flow;
+	@Getter
 	private final Token token;
 	
 	public SchoologyToken(SchoologyFlow flow, Token token)
 	{
 		this.flow = flow;
 		this.token = token;
-	}
-	
-	public SchoologyFlow getFlow()
-	{
-		return flow;
-	}
-	
-	public Token getToken()
-	{
-		return token;
 	}
 	
 	public OAuthService getService()

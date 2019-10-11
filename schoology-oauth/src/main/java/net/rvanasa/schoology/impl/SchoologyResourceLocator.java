@@ -1,17 +1,15 @@
 package net.rvanasa.schoology.impl;
 
+import lombok.Getter;
+
 class SchoologyResourceLocator
 {
+	@Getter
 	private final String domain;
 	
 	public SchoologyResourceLocator(String domain)
 	{
 		this.domain = domain;
-	}
-	
-	public String getDomain()
-	{
-		return domain;
 	}
 	
 	public String getRequestUrlBase()

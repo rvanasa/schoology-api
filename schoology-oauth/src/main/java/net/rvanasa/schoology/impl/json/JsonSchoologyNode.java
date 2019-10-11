@@ -9,12 +9,14 @@ import java.util.Map.Entry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 
+import lombok.Getter;
 import net.rvanasa.schoology.SchoologyNode;
 
 public class JsonSchoologyNode implements SchoologyNode
 {
 	public static final JsonSchoologyNode NULL = new JsonSchoologyNode(null);
 	
+	@Getter
 	private final JsonElement element;
 	
 	public JsonSchoologyNode(JsonElement element)
@@ -25,11 +27,6 @@ public class JsonSchoologyNode implements SchoologyNode
 		}
 		
 		this.element = element;
-	}
-	
-	public JsonElement getElement()
-	{
-		return element;
 	}
 	
 	@Override
