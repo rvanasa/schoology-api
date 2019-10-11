@@ -8,7 +8,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
  * Represents a page of events
  */
 @Getter
-public class SchoologyEventsPage extends SchoologyPage
+public class SchoologyEventsPage extends SchoologyPage<SchoologyEventsPage>
 {
 	
 	SchoologyEvent[] event;

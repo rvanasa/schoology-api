@@ -18,6 +18,8 @@ import org.scribe.oauth.OAuthService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.rvanasa.schoology.ISchoologyRequestHandler;
 import net.rvanasa.schoology.adapters.BooleanAdapter;
 import net.rvanasa.schoology.adapters.UnixTimestampAdapter;
@@ -39,6 +41,7 @@ import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSectionsPage;
 import net.rvanasa.schoology.obj.updates.SchoologyUpdate;
+import net.rvanasa.schoology.obj.updates.SchoologyUpdatesPage;
 import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 import net.rvanasa.schoology.obj.users.SchoologyUser;
 import net.rvanasa.schoology.obj.users.SchoologyUsersPage;
@@ -55,14 +58,21 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 				.build();
 	}
 	
+	@Getter
 	private final SchoologyResourceLocator resourceLocator;
 	
-	private final OAuthService service;
+	@Getter
+	private final OAuthService OAuthService;
 	
-	private Gson gson;
+	@Getter
+	public Gson gson;
 	
+	@Getter
+	@Setter
 	private SchoologyContentTypeEnum contentType = SchoologyContentTypeEnum.JSON;
 	
+	@Getter
+	@Setter
 	private Token accessToken;
 	
 	public SchoologyRequestHandler(SchoologyResourceLocator locator, String key, String secret)
@@ -78,42 +88,12 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	public SchoologyRequestHandler(SchoologyResourceLocator locator, OAuthService service)
 	{
 		this.resourceLocator = locator;
-		this.service = service;
+		this.OAuthService = service;
 		
 		gson = new GsonBuilder()
 		.registerTypeAdapter(boolean.class, new BooleanAdapter())
 		.registerTypeAdapter(Date.class, new UnixTimestampAdapter())
 		.create();
-	}
-	
-	public SchoologyResourceLocator getResourceLocator()
-	{
-		return resourceLocator;
-	}
-	
-	public OAuthService getOAuthService()
-	{
-		return service;
-	}
-	
-	public SchoologyContentTypeEnum getContentType()
-	{
-		return contentType;
-	}
-	
-	public void setContentType(SchoologyContentTypeEnum contentType)
-	{
-		this.contentType = contentType;
-	}
-	
-	public Token getAccessToken()
-	{
-		return accessToken;
-	}
-	
-	public void setAccessToken(Token accessToken)
-	{
-		this.accessToken = accessToken;
 	}
 	
 	public OAuthRequest prepareRequest(Verb verb, String resource)
@@ -150,7 +130,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	/*
 	 * Modified method of separating query parameters provided by https://stackoverflow.com/a/13592567
 	 */
-	private Map<String, String> splitQuery(String query)
+	public Map<String, String> splitQuery(String query)
 	{
 		return Arrays.stream(query.split("&"))
 	            .map(this::splitQueryParameter).collect(Collectors.toMap(SimpleImmutableEntry::getKey, SimpleImmutableEntry::getValue));
@@ -240,7 +220,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyUsersPage getUsersPage()
 	{
-		SchoologyResponse response = get("users").requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.USER.toString()).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUsersPage.class);
 	}
@@ -248,17 +228,15 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyUser getUser(String uid)
 	{
-		String test = SchoologyRealm.USER + uid + "?extended=true";
-		System.out.println(test);
 		SchoologyResponse response = get(SchoologyRealm.USER + uid + "?extended=true").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUser.class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUser.class).reference(this);
 	}
 	
 	@Override
 	public SchoologyGroupsPage getGroupsPage()
 	{
-		SchoologyResponse response = get("groups").requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.GROUP.toString()).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyGroupsPage.class);
 	}
@@ -274,7 +252,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologyCoursesPage getCoursesPage()
 	{
-		SchoologyResponse response = get("courses").requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.COURSE.toString()).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCoursesPage.class);
 	}
@@ -306,7 +284,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	@Override
 	public SchoologySchool[] getSchools()
 	{
-		SchoologyResponse response = get("schools").requireSuccess();
+		SchoologyResponse response = get(SchoologyRealm.SCHOOL.toString()).requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().get("school").asRawData(), SchoologySchool[].class);
 	}
@@ -328,13 +306,13 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	}
 	
 	@Override
-	public SchoologyUpdate[] getUpdates(String realm)
+	public SchoologyUpdatesPage getUpdates(String realm)
 	{
 		if(!realm.equalsIgnoreCase("recent")) realm += "/updates";
 		
 		SchoologyResponse response = get(realm + "?with_attachments=true").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("update").asRawData(), SchoologyUpdate[].class);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyUpdatesPage.class).reference(this);
 	}
 	
 	@Override

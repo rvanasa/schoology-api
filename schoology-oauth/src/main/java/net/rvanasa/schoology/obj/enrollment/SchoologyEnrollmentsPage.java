@@ -8,7 +8,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
  * Represents a page of enrollments
  */
 @Getter
-public class SchoologyEnrollmentsPage extends SchoologyPage
+public class SchoologyEnrollmentsPage extends SchoologyPage<SchoologyEnrollmentsPage>
 {
 	
 	SchoologyEnrollment[] enrollment;

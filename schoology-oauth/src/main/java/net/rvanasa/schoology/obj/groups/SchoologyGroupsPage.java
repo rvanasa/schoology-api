@@ -8,7 +8,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
  * Represents a page of groups 
  */
 @Getter
-public class SchoologyGroupsPage extends SchoologyPage
+public class SchoologyGroupsPage extends SchoologyPage<SchoologyGroupsPage>
 {
 	
 	SchoologyGroup[] group;

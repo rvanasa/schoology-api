@@ -8,7 +8,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
  * Represents a page of discussions
  */
 @Getter
-public class SchoologyDiscussionsPage extends SchoologyPage
+public class SchoologyDiscussionsPage extends SchoologyPage<SchoologyDiscussionsPage>
 {
 	
 	SchoologyDiscussionThread[] discussion;

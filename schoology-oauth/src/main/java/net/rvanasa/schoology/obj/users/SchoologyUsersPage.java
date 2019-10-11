@@ -9,7 +9,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
  * Provides link to next as well as size of users listed on current page.
  */
 @Getter
-public class SchoologyUsersPage extends SchoologyPage
+public class SchoologyUsersPage extends SchoologyPage<SchoologyUsersPage>
 {
 	
 	SchoologyUser[] user;

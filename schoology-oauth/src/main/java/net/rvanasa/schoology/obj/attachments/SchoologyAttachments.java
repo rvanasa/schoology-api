@@ -1,10 +1,10 @@
 package net.rvanasa.schoology.obj.attachments;
 
 import lombok.Getter;
-import net.rvanasa.schoology.obj.attachments.attachment.SchoologyEmbed;
-import net.rvanasa.schoology.obj.attachments.attachment.SchoologyFile;
-import net.rvanasa.schoology.obj.attachments.attachment.SchoologyLink;
-import net.rvanasa.schoology.obj.attachments.attachment.SchoologyVideo;
+import net.rvanasa.schoology.obj.attachments.attachment.SchoologyEmbedWrapper;
+import net.rvanasa.schoology.obj.attachments.attachment.SchoologyFileWrapper;
+import net.rvanasa.schoology.obj.attachments.attachment.SchoologyLinkWrapper;
+import net.rvanasa.schoology.obj.attachments.attachment.SchoologyVideoWrapper;
 
 /*
  * https://developers.schoology.com/api/retrieving-attachments
@@ -14,9 +14,9 @@ import net.rvanasa.schoology.obj.attachments.attachment.SchoologyVideo;
 public class SchoologyAttachments
 {
 	
-	SchoologyFile[] files;
-	SchoologyLink[] links;
-	SchoologyVideo[] videos;
-	SchoologyEmbed[] embeds;
+	SchoologyFileWrapper files;
+	SchoologyLinkWrapper links;
+	SchoologyVideoWrapper videos;
+	SchoologyEmbedWrapper embeds;
 	
 }

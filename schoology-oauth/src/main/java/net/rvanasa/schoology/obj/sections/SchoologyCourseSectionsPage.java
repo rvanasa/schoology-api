@@ -8,7 +8,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
  * Represents a page of sections for given course
  */
 @Getter
-public class SchoologyCourseSectionsPage extends SchoologyPage
+public class SchoologyCourseSectionsPage extends SchoologyPage<SchoologyCourseSectionsPage>
 {
 	
 	SchoologyCourseSection[] section;
