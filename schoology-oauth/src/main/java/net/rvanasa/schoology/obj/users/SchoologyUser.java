@@ -1,8 +1,11 @@
 package net.rvanasa.schoology.obj.users;
 
+import org.json.JSONObject;
+
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
+import net.rvanasa.schoology.impl.SchoologyRealm;
 import net.rvanasa.schoology.obj.SchoologyReference;
 
 /*
@@ -88,6 +91,13 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 	//Missing from schoology documentation
 	boolean admin;
 	boolean status;
+	
+	public void setNameFirstPreferred(String nameFirstPreferred)
+	{
+		schoology.put(SchoologyRealm.USER + ID, new JSONObject().put("name_first_preferred", nameFirstPreferred).toString()).requireSuccess();
+		
+		this.nameFirstPreferred = nameFirstPreferred;
+	}
 	
 }
 
