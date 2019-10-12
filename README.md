@@ -3,7 +3,7 @@ Java API and implementation for Schoology (https://schoology.com)
 
 Behold, a straightforward two- and three-legged authentication wrapper for the Schoology REST API. 
 
-Make sure to use the `schoology-oauth` module for the actual OAuth ([Scribe](https://github.com/scribejava/scribejava)) implementation. 
+Make sure to use the `schoology-impl` module for the actual OAuth ([Scribe](https://github.com/scribejava/scribejava)) implementation. 
  
 ## Example Usage:
 
@@ -50,6 +50,8 @@ System.out.println(response.getRawData()); // raw JSON string
 SchoologyNode node = response.parse();
 System.out.println(node.get("name_display").asString()); // get display name of user
 
+schoology.put("users/{UID}", "{\"name_first_preferred\": \"NewName\"}"); // set preferred first name
+
 ```
 
 #### Using premade methods & objects:
@@ -59,6 +61,8 @@ System.out.println(node.get("name_display").asString()); // get display name of 
 SchoologyUser user = schoology.getUser("{UID}");
 
 System.out.println(user.getNameDisplay()); // get display name of user
+
+user.setNameFirstPreferred("NewName"); // set preferred first name
 
 ```
 
