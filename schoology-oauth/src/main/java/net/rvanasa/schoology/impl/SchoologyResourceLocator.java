@@ -12,13 +12,13 @@ class SchoologyResourceLocator
 		this.domain = domain;
 	}
 	
-	public String getRequestUrlBase()
+	public String getRequestURLBase()
 	{
 		return "https://api.schoology.com/v1/";
 	}
 	
-	public String getRequestUrl(String resource)
+	public String getRequestURL(String resource)
 	{
-		return getRequestUrlBase() + resource;
+		return getRequestURLBase() + resource;
 	}
 }

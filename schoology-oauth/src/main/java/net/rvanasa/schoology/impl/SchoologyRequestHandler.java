@@ -109,7 +109,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 			URL = URL.substring(0, qIndex);
 		}
 		
-		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestUrl(URL));
+		OAuthRequest request = new OAuthRequest(verb, getResourceLocator().getRequestURL(URL));
 		
 		if(query != null) for(Entry<String, String> e : splitQuery(query).entrySet()) request.addQuerystringParameter(e.getKey(), e.getValue());
 		

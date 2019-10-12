@@ -21,19 +21,19 @@ class OAuthSchoologyApi extends DefaultApi10a
 	@Override
 	public String getRequestTokenEndpoint()
 	{
-		return getResourceLocator().getRequestUrl("oauth/request_token");
+		return getResourceLocator().getRequestURL("oauth/request_token");
 	}
 	
 	@Override
 	public String getAccessTokenEndpoint()
 	{
-		return getResourceLocator().getRequestUrl("oauth/access_token");
+		return getResourceLocator().getRequestURL("oauth/access_token");
 	}
 	
 	@Override
 	public String getAuthorizationUrl(Token token)
 	{
-		return getResourceLocator().getRequestUrl("oauth/authorize?oauth_token=" + token);
+		return getResourceLocator().getRequestURL("oauth/authorize?oauth_token=" + token);
 	}
 	
 	@Override
