@@ -339,7 +339,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 			endpoint = "schools/" + update.getBuildingID() + "/buildings";
 			break;
 		case COURSE_SECTION:
-			endpoint = SchoologyRealm.COURSE + update.getSectionID();
+			endpoint = SchoologyRealm.COURSE_SECTION + update.getSectionID();
 			break;
 		case GROUP:
 			endpoint = SchoologyRealm.GROUP + update.getGroupID();
