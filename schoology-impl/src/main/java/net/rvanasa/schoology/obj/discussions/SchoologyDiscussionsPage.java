@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.discussions;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyPage;
 
@@ -11,6 +13,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 public class SchoologyDiscussionsPage extends SchoologyPage<SchoologyDiscussionsPage>
 {
 	
-	SchoologyDiscussionThread[] discussion;
+	@SerializedName(value="discussion")
+	SchoologyDiscussionThread[] discussions;
 	
 }

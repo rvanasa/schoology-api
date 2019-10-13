@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.albums;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyPage;
 
@@ -9,7 +11,8 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 @Getter
 public class SchoologyMediaAlbumsPage extends SchoologyPage<SchoologyMediaAlbumsPage>
 {
-	
-	SchoologyMediaAlbum[] album;
+
+	@SerializedName(value="album")
+	SchoologyMediaAlbum[] albums;
 	
 }

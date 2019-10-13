@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.enrollment;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyPage;
 
@@ -11,6 +13,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 public class SchoologyEnrollmentsPage extends SchoologyPage<SchoologyEnrollmentsPage>
 {
 	
-	SchoologyEnrollment[] enrollment;
+	@SerializedName(value="enrollment")
+	SchoologyEnrollment[] enrollments;
 	
 }
