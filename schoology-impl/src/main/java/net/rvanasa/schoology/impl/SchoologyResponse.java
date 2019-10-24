@@ -23,7 +23,8 @@ public class SchoologyResponse
 	{
 		if(!getStatus().isSuccess())
 		{
-			throw new SchoologyException(getStatus(), getBody().getRawData());
+			if(getBody().getRawData() != null) throw new SchoologyException(getStatus(), getBody().getRawData());
+			else throw new SchoologyException(getStatus());
 		}
 		
 		return this;

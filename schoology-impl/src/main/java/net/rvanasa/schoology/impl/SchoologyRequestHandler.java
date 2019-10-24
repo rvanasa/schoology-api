@@ -123,7 +123,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		return new SchoologyResponse(
 				SchoologyResponseStatusEnum.getStatus(response.getCode()),
-				new SchoologyResponseBody(getContentType(), response.getBody()),
+				new SchoologyResponseBody(getContentType(), response.isSuccessful() ? response.getBody() : null),
 				new SchoologyResponseHeaders(response.getHeaders()));
 	}
 	
