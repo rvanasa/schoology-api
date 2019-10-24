@@ -44,7 +44,7 @@ public abstract class SchoologyPage<T> extends SchoologyReference<T>
 		if(!hasNext()) return null;
 		
 		final String next = getLinks().getNext();
-		final String resource = next.substring(next.lastIndexOf('/') + 1);
+		final String resource = next.substring(schoology.getResourceLocator().getRequestURLBase().length());
 		
 		SchoologyResponse response = schoology.get(resource).requireSuccess();
 		
@@ -70,7 +70,7 @@ public abstract class SchoologyPage<T> extends SchoologyReference<T>
 		if(!hasPrevious()) return null;
 		
 		final String previous = getLinks().getPrevious();
-		final String resource = previous.substring(previous.lastIndexOf('/') + 1);
+		final String resource = previous.substring(schoology.getResourceLocator().getRequestURLBase().length());
 		
 		SchoologyResponse response = schoology.get(resource).requireSuccess();
 		

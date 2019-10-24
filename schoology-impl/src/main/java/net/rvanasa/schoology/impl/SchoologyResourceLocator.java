@@ -2,7 +2,7 @@ package net.rvanasa.schoology.impl;
 
 import lombok.Getter;
 
-class SchoologyResourceLocator
+public class SchoologyResourceLocator
 {
 	@Getter
 	private final String domain;
