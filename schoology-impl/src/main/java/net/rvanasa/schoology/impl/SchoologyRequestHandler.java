@@ -123,7 +123,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		return new SchoologyResponse(
 				SchoologyResponseStatusEnum.getStatus(response.getCode()),
-				new SchoologyResponseBody(getContentType(), response.getBody()),
+				new SchoologyResponseBody(getContentType(), response.isSuccessful() ? response.getBody() : null),
 				new SchoologyResponseHeaders(response.getHeaders()));
 	}
 	
@@ -266,9 +266,9 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	}
 	
 	@Override
-	public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id)
+	public SchoologyCourseSectionsPage getSectionsPage(String realm)
 	{
-		SchoologyResponse response = get(SchoologyRealm.COURSE + course_id + "/sections").requireSuccess();
+		SchoologyResponse response = get(realm + "/sections").requireSuccess();
 		
 		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyCourseSectionsPage.class).reference(this);
 	}

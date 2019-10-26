@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.updates;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyPage;
 
@@ -11,6 +13,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 public class SchoologyUpdatesPage extends SchoologyPage<SchoologyUpdatesPage>
 {
 	
-	SchoologyUpdate[] update;
+	@SerializedName(value="update")
+	SchoologyUpdate[] updates;
 	
 }

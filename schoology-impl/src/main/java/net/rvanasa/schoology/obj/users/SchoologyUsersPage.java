@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.users;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyPage;
 
@@ -12,6 +14,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 public class SchoologyUsersPage extends SchoologyPage<SchoologyUsersPage>
 {
 	
-	SchoologyUser[] user;
+	@SerializedName(value="user")
+	SchoologyUser[] users;
 	
 }

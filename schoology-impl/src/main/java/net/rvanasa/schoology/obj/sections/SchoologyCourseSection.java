@@ -50,7 +50,7 @@ public class SchoologyCourseSection extends SchoologyReference<SchoologyCourseSe
 	String profileURL;
 	String location;
 	@SerializedName(value="meeting_days")
-	int[] meetingDays;
+	String[] meetingDays;
 	@SerializedName(value="start_time")
 	String startTime;
 	@SerializedName(value="end_time")
@@ -68,15 +68,15 @@ class SchoologyCourseSectionOptions
 {
 	
 	@SerializedName(value="weighted_grading_categories")
-	boolean weightedGradingCategories;
+	String weightedGradingCategories;
 	@SerializedName(value="upload_documents")
-	boolean uploadDocuments;
+	String uploadDocuments;
 	@SerializedName(value="create_discussion")
-	boolean createDiscussion;
+	String createDiscussion;
 	@SerializedName(value="member_post")
-	boolean memberPost;
+	String memberPost;
 	@SerializedName(value="member_post_comment")
-	boolean memberPostComment;
+	String memberPostComment;
 	@SerializedName(value="default_grading_scale_id")
 	boolean defaultGradingScaleID;
 	@SerializedName(value="content_index_visibility")

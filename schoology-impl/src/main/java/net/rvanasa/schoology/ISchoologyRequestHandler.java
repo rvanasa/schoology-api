@@ -54,7 +54,17 @@ public interface ISchoologyRequestHandler
 	
 	public SchoologyCourse getCourse(String course_id);
 	
-	public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id);
+	public SchoologyCourseSectionsPage getSectionsPage(String realm);
+	
+	default public SchoologyCourseSectionsPage getCourseSectionsPage(String course_id)
+	{
+		return getSectionsPage(SchoologyRealm.COURSE + course_id);
+	}
+	
+	default public SchoologyCourseSectionsPage getUserSectionsPage(String user_id)
+	{
+		return getSectionsPage(SchoologyRealm.USER + user_id);
+	}
 	
 	public SchoologyCourseSection getCourseSection(String section_id);
 	

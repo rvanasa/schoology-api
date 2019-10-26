@@ -1,5 +1,7 @@
 package net.rvanasa.schoology.obj.discussions;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import net.rvanasa.schoology.obj.SchoologyPage;
 
@@ -11,6 +13,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 public class SchoologyDiscussionRepliesPage extends SchoologyPage<SchoologyDiscussionRepliesPage>
 {
 	
-	SchoologyDiscussionReply[] comment;
+	@SerializedName(value="comment")
+	SchoologyDiscussionReply[] comments;
 	
 }
