@@ -58,8 +58,8 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 	int roleID;
 	@SerializedName(value="email_login_info")
 	boolean emailLoginInfo;
-	@SerializedName(value="profile_url")
-	String profileURL;
+	@SerializedName(value="picture_url")
+	String pictureURL;
 	@SerializedName(value="tz_name")
 	String tzName;
 	// 'View user parents' permission required from schoology API to access this information
