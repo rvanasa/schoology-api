@@ -2,10 +2,13 @@ package net.rvanasa.schoology.obj.updates;
 
 import java.util.Date;
 
+import org.json.JSONObject;
+
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
 import net.rvanasa.schoology.impl.SchoologyRealm;
+import net.rvanasa.schoology.impl.SchoologyResponse;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 import net.rvanasa.schoology.obj.SchoologyReference;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachments;
@@ -51,6 +54,45 @@ public class SchoologyUpdate extends SchoologyReference<SchoologyUpdate>
 	SchoologyPoll polls;
 	
 	SchoologyLinks links;
+	
+	/**
+	 * Depending on the realm, a different ID field is used
+	 * 
+	 * @return the ID based on realm of this update
+	 */
+	private String getRealmID()
+	{
+		switch (realm) {
+		case USER:
+			return uID;
+		case COURSE_SECTION:
+			return sectionID;
+		case BUILDING:
+			return buildingID;
+		case GROUP:
+			return groupID;
+		default:
+			return null;
+		}
+	}
+	
+	/**
+	 * Post a comment to this update
+	 * 
+	 * @param comment
+	 * @return comment object if success, else null
+	 */
+	public SchoologyUpdate postComment(String comment)
+	{
+		try {
+			SchoologyResponse response = schoology.post(realm + "/" + getRealmID() + "/updates/" + ID + "/comments", new JSONObject().put("comment", comment).toString()).requireSuccess();
+			
+			return schoology.getGson().fromJson(response.getBody().parse().asRawData(), SchoologyUpdate.class).reference(schoology);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 }
 

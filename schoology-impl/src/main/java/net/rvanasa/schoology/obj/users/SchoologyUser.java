@@ -92,11 +92,18 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 	boolean admin;
 	boolean status;
 	
-	public void setNameFirstPreferred(String nameFirstPreferred)
+	public boolean setNameFirstPreferred(String nameFirstPreferred)
 	{
-		schoology.put(SchoologyRealm.USER + ID, new JSONObject().put("name_first_preferred", nameFirstPreferred).toString()).requireSuccess();
-		
-		this.nameFirstPreferred = nameFirstPreferred;
+		try {
+			schoology.put(SchoologyRealm.USER + ID, new JSONObject().put("name_first_preferred", nameFirstPreferred).toString()).requireSuccess();
+			
+			this.nameFirstPreferred = nameFirstPreferred;
+			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }
