@@ -58,8 +58,8 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 	int roleID;
 	@SerializedName(value="email_login_info")
 	boolean emailLoginInfo;
-	@SerializedName(value="profile_url")
-	String profileURL;
+	@SerializedName(value="picture_url")
+	String pictureURL;
 	@SerializedName(value="tz_name")
 	String tzName;
 	// 'View user parents' permission required from schoology API to access this information
@@ -92,11 +92,18 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 	boolean admin;
 	boolean status;
 	
-	public void setNameFirstPreferred(String nameFirstPreferred)
+	public boolean setNameFirstPreferred(String nameFirstPreferred)
 	{
-		schoology.put(SchoologyRealm.USER + ID, new JSONObject().put("name_first_preferred", nameFirstPreferred).toString()).requireSuccess();
-		
-		this.nameFirstPreferred = nameFirstPreferred;
+		try {
+			schoology.put(SchoologyRealm.USER + ID, new JSONObject().put("name_first_preferred", nameFirstPreferred).toString()).requireSuccess();
+			
+			this.nameFirstPreferred = nameFirstPreferred;
+			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }
