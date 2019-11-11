@@ -16,4 +16,7 @@ public class SchoologyPrivateMessagesPage extends SchoologyPage<SchoologyPrivate
 	@SerializedName(value="message")
 	SchoologyPrivateMessage[] messages;
 	
+	@SerializedName(value="unread_count")
+	int unreadCount;
+	
 }
