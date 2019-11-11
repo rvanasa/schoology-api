@@ -36,6 +36,8 @@ import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentsPage;
 import net.rvanasa.schoology.obj.events.SchoologyEventsPage;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.groups.SchoologyGroupsPage;
+import net.rvanasa.schoology.obj.messages.SchoologyPrivateMessage;
+import net.rvanasa.schoology.obj.messages.SchoologyPrivateMessagesPage;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
@@ -358,7 +360,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(realm + "/events").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("event").asRawData(), SchoologyEventsPage.class).reference(this);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyEventsPage.class).reference(this);
 	}
 
 	@Override
@@ -397,7 +399,7 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 	{
 		SchoologyResponse response = get(realm + "/discussions/" + discussion_id + "/comments").requireSuccess();
 		
-		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyDiscussionRepliesPage.class).reference(this);
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyDiscussionRepliesPage.class).reference(this);
 	}
 
 	@Override
