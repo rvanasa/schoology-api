@@ -22,10 +22,12 @@ public class SchoologyPrivateMessage extends SchoologyReference<SchoologyPrivate
 	String recipientIDs;
 	@SerializedName(value="last_updated")
 	Date lastUpdated;
+	//mid is undocumented
 	String mid;
 	@SerializedName(value="author_id")
 	String authorID;
-	SchoologyMessageStatus message_status;
+	@SerializedName(value="message_status")
+	SchoologyMessageStatus messageStatus;
 	String message;
 	
 	SchoologyLinks links;
