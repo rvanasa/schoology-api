@@ -424,5 +424,21 @@ public class SchoologyRequestHandler implements ISchoologyRequestHandler
 		
 		return gson.fromJson(response.getBody().parse().get("comment").asRawData(), SchoologyMediaAlbumComment[].class);
 	}
+	
+	@Override
+	public SchoologyPrivateMessage getPrivateMessage(String folder, String message_id)
+	{
+		SchoologyResponse response = get("messages/" + folder + "/" + message_id).requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyPrivateMessage.class).reference(this);
+	}
+	
+	@Override
+	public SchoologyPrivateMessagesPage getPrivateMessagesPage(String folder)
+	{
+		SchoologyResponse response = get("messages/" + folder).requireSuccess();
+		
+		return gson.fromJson(response.getBody().parse().asRawData(), SchoologyPrivateMessagesPage.class).reference(this);
+	}
 
 }
