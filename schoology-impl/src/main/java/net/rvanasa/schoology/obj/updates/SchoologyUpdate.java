@@ -12,6 +12,7 @@ import net.rvanasa.schoology.impl.SchoologyResponse;
 import net.rvanasa.schoology.obj.SchoologyLinks;
 import net.rvanasa.schoology.obj.SchoologyReference;
 import net.rvanasa.schoology.obj.attachments.SchoologyAttachments;
+import net.rvanasa.schoology.obj.updates.comments.SchoologyUpdateComment;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/updates
@@ -82,12 +83,12 @@ public class SchoologyUpdate extends SchoologyReference<SchoologyUpdate>
 	 * @param comment
 	 * @return comment object if success, else null
 	 */
-	public SchoologyUpdate postComment(String comment)
+	public SchoologyUpdateComment postComment(String comment)
 	{
 		try {
-			SchoologyResponse response = schoology.post(realm + "/" + getRealmID() + "/updates/" + ID + "/comments", new JSONObject().put("comment", comment).toString()).requireSuccess();
+			SchoologyResponse response = schoology.post(realm + getRealmID() + "/updates/" + ID + "/comments", new JSONObject().put("comment", comment).toString()).requireSuccess();
 			
-			return schoology.getGson().fromJson(response.getBody().parse().asRawData(), SchoologyUpdate.class).reference(schoology);
+			return schoology.getGson().fromJson(response.getBody().parse().asRawData(), SchoologyUpdateComment.class).reference(schoology);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

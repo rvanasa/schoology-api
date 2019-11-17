@@ -7,7 +7,7 @@ import net.rvanasa.schoology.obj.SchoologyPage;
 
 /*
  * https://developers.schoology.com/api-documentation/rest-api-v1/group
- * Represents a page of groups 
+ * Represents a page of groups
  */
 @Getter
 public class SchoologyGroupsPage extends SchoologyPage<SchoologyGroupsPage>

@@ -15,6 +15,9 @@ import net.rvanasa.schoology.obj.enrollment.SchoologyEnrollmentsPage;
 import net.rvanasa.schoology.obj.events.SchoologyEventsPage;
 import net.rvanasa.schoology.obj.groups.SchoologyGroup;
 import net.rvanasa.schoology.obj.groups.SchoologyGroupsPage;
+import net.rvanasa.schoology.obj.messages.SchoologyMessageStatus;
+import net.rvanasa.schoology.obj.messages.SchoologyPrivateMessage;
+import net.rvanasa.schoology.obj.messages.SchoologyPrivateMessagesPage;
 import net.rvanasa.schoology.obj.schools.SchoologySchool;
 import net.rvanasa.schoology.obj.schools.buildings.SchoologyBuilding;
 import net.rvanasa.schoology.obj.sections.SchoologyCourseSection;
@@ -271,6 +274,30 @@ public interface ISchoologyRequestHandler
 	default public SchoologyMediaAlbumComment[] getGroupMediaAlbumContentComment(String group_id, String album_id, String content_id)
 	{
 		return getMediaAlbumContentComment(SchoologyRealm.GROUP + group_id, album_id, content_id);
+	}
+	
+	public SchoologyPrivateMessage getPrivateMessage(String folder, String message_id);
+	
+	default public SchoologyPrivateMessage getPrivateMessageInbox(String message_id)
+	{
+		return getPrivateMessage("inbox", message_id);
+	}
+	
+	default public SchoologyPrivateMessage getPrivateMessageSent(String message_id)
+	{
+		return getPrivateMessage("sent", message_id);
+	}
+	
+	public SchoologyPrivateMessagesPage getPrivateMessagesPage(String folder);
+	
+	default public SchoologyPrivateMessagesPage getPrivateMessagesInboxPage()
+	{
+		return getPrivateMessagesPage("inbox");
+	}
+	
+	default public SchoologyPrivateMessagesPage getPrivateMessagesSentPage()
+	{
+		return getPrivateMessagesPage("sent");
 	}
 	
 }
