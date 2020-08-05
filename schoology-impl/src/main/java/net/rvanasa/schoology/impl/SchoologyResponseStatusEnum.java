@@ -15,7 +15,7 @@ public enum SchoologyResponseStatusEnum
 	
 	UNKNOWN(-1, "Unknown status");
 	
-	@Getter
+	@Getter 
 	private final int code;
 	@Getter
 	private final String message;

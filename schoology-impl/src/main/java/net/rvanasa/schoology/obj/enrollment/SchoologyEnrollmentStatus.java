@@ -22,19 +22,19 @@ public enum SchoologyEnrollmentStatus
 	ARCHIVED(5, "Archived");
 	
 	@Getter
-	private final int apiVaule;
+	private final int apiValue;
 	@Getter
 	private final String description;
 	
 	private SchoologyEnrollmentStatus(int apiValue, String description)
 	{
-		this.apiVaule = apiValue;
+		this.apiValue = apiValue;
 		this.description = description;
 	}
 	
 	public static SchoologyEnrollmentStatus getEnrollmentStatus(int apiValue)
 	{
-		for(SchoologyEnrollmentStatus status : values()) if(status.getApiVaule() == apiValue) return status;
+		for(SchoologyEnrollmentStatus status : values()) if(status.getApiValue() == apiValue) return status;
 		
 		return null;
 	}

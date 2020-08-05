@@ -32,7 +32,11 @@ public interface ISchoologyRequestHandler
 {
 	public SchoologyResponse get(String resource);
 	
+	public <T> T get(Class<T> type, String resource);
+	
 	public SchoologyResponse multiget(String... resources);
+	
+	public <T> T[] multiget(Class<T[]> type, String... resources);
 	
 	public SchoologyResponse post(String resource, String body);
 	

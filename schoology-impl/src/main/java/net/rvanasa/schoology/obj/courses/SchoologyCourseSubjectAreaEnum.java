@@ -32,19 +32,19 @@ public enum SchoologyCourseSubjectAreaEnum
 	ARTS(9, "Arts");
 	
 	@Getter
-	private final int apiVaule;
+	private final int apiValue;
 	@Getter
 	private final String subjectArea;
 	
 	private SchoologyCourseSubjectAreaEnum(int apiValue, String subjectArea)
 	{
-		this.apiVaule = apiValue;
+		this.apiValue = apiValue;
 		this.subjectArea = subjectArea;
 	}
 	
 	public static SchoologyCourseSubjectAreaEnum getCourseSubjectArea(int apiValue)
 	{
-		for(SchoologyCourseSubjectAreaEnum subjectArea : values()) if(subjectArea.getApiVaule() == apiValue) return subjectArea;
+		for(SchoologyCourseSubjectAreaEnum subjectArea : values()) if(subjectArea.getApiValue() == apiValue) return subjectArea;
 		
 		return null;
 	}

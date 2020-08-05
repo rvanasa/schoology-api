@@ -4,14 +4,6 @@ import lombok.Getter;
 
 public class SchoologyResourceLocator
 {
-	@Getter
-	private final String domain;
-	
-	public SchoologyResourceLocator(String domain)
-	{
-		this.domain = domain;
-	}
-	
 	public String getRequestURLBase()
 	{
 		return "https://api.schoology.com/v1/";

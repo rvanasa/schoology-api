@@ -14,7 +14,47 @@ import net.rvanasa.schoology.obj.SchoologyReference;
 @Getter
 public class SchoologyUser extends SchoologyReference<SchoologyUser>
 {
-	
+  /*
+   * https://developers.schoology.com/api-documentation/rest-api-v1/user
+   * Must request extended user info to receive
+   */
+  @Getter
+  public static class SchoologyProfileInfo
+  {
+    
+    //Teacher only
+    @SerializedName(value="subjects_taught")
+    String subjectsTaught;
+    @SerializedName(value="grades_taught")
+    String gradesTaught;
+    String position;
+    String department;
+    
+    //All users (teachers + students)
+    String bio;
+    String phone;
+    String website;
+    String address;
+    String interests;
+    String activities;
+    @SerializedName(value="birthday_date")
+    String birthdayDate;
+    String birthday;
+  }
+  
+  /*
+   * No documentation available
+   */
+  @Getter
+  public static class SchoologyPermissions
+  {
+
+    @SerializedName(value="is_directory_public")
+    boolean isDirectoryPublic;
+    @SerializedName(value="allow_connections")
+    boolean allowConnection;
+  }
+
 	//Same as uid
 	@SerializedName(value="id")
 	String ID;
@@ -105,48 +145,4 @@ public class SchoologyUser extends SchoologyReference<SchoologyUser>
 			return false;
 		}
 	}
-	
-}
-
-/*
- * https://developers.schoology.com/api-documentation/rest-api-v1/user
- * Must request extended user info to receive
- */
-@Getter
-class SchoologyProfileInfo
-{
-	
-	//Teacher only
-	@SerializedName(value="subjects_taught")
-	String subjectsTaught;
-	@SerializedName(value="grades_taught")
-	String gradesTaught;
-	String position;
-	String department;
-	
-	//All users (teachers + students)
-	String bio;
-	String phone;
-	String website;
-	String address;
-	String interests;
-	String activities;
-	@SerializedName(value="birthday_date")
-	String birthdayDate;
-	String birthday;
-	
-}
-
-/*
- * No documentation available
- */
-@Getter
-class SchoologyPermissions
-{
-
-	@SerializedName(value="is_directory_public")
-	boolean isDirectoryPublic;
-	@SerializedName(value="allow_connections")
-	boolean allowConnection;
-	
 }
