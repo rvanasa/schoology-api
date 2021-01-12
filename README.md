@@ -1,5 +1,5 @@
 # schoology-api
-Java API and implementation for Schoology (https://schoology.com)
+Java implementation for the [Schoology API](https://developers.schoology.com/api).
 
 Behold, a straightforward two- and three-legged authentication wrapper for the Schoology REST API. 
 
@@ -57,8 +57,8 @@ schoology.put("users/{UID}", "{\"name_first_preferred\": \"NewName\"}"); // set 
 #### Using premade methods & objects:
 ```java
 
-// {UID} represents the target user ID
-SchoologyUser user = schoology.getUser("{UID}");
+// [UID] represents the target user ID
+SchoologyUser user = schoology.getUser("[UID]");
 
 System.out.println(user.getNameDisplay()); // get display name of user
 
