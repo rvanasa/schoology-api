@@ -4,8 +4,28 @@ Java implementation for the [Schoology API](https://developers.schoology.com/api
 Behold, a straightforward two- and three-legged authentication wrapper for the Schoology REST API. 
 
 Make sure to use the `schoology-impl` module for the actual OAuth ([Scribe](https://github.com/scribejava/scribejava)) implementation. 
- 
-## Example Usage:
+
+## Setup:
+
+Run the following commands to install the package in your local Maven repository:
+
+```sh
+$ git clone https://github.com/rvanasa/schoology-api
+$ cd schoology-api/schoology-impl
+$ mvn clean install
+```
+
+Then, paste the following snippet into your project's POM.xml dependencies:
+
+```xml
+<dependency>
+    <groupId>net.rvanasa</groupId>
+    <artifactId>schoology-impl</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+## Usage:
 
 You can generate a user API key & secret by going to `https://{DISTRICT_PREFIX}.schoology.com/api`
 
