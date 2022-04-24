@@ -77,8 +77,8 @@ schoology.put("users/{UID}", "{\"name_first_preferred\": \"NewName\"}"); // set 
 #### Using premade methods & objects:
 ```java
 
-// [UID] represents the target user ID
-SchoologyUser user = schoology.getUser("[UID]");
+// {UID} represents the target user ID
+SchoologyUser user = schoology.getUser("{UID}");
 
 System.out.println(user.getNameDisplay()); // get display name of user
 
