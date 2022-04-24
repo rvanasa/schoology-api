@@ -70,7 +70,7 @@ System.out.println(response.getRawData()); // raw JSON string
 SchoologyNode node = response.parse();
 System.out.println(node.get("name_display").asString()); // get display name of user
 
-schoology.put("users/{UID}", "{\"name_first_preferred\": \"NewName\"}"); // set preferred first name
+schoology.put("users/[UID]", "{\"name_first_preferred\": \"NewName\"}"); // set preferred first name
 
 ```
 
